@@ -10,7 +10,7 @@ const About: React.FC = () => {
           I'm a Computer Engineering student @ University of Waterloo with a passion for building hardware that feels like software, and software that feels like hardware.
         </p>
         <p>
-          My engineering story began with a fascination for how physical inputs translate into digital actions. This led me into the world of embedded systems, firmware, and custom PCB design. I love the challenge of optimizing performance on constrained hardware while maintaining a high-quality user experience.
+          My interest in engineering really clicked at a hardware hackathon in Toronto, where my team built a disco ball that could detect motion, spin up music, and light up in sync. Watching something we wired and coded react instantly to people in the room made everything feel real in a way classes hadn’t yet. That experience pulled me into embedded systems, firmware, and PCB design, and I’ve been hooked on building things that connect physical inputs to responsive, interactive outputs ever since.
         </p>
         <p>
           Beyond the classroom, I'm an active participant in hackathons and student organizations, where I focus on shipping tangible products that solve real problems. I aim for "builder" energy in everything I create.
