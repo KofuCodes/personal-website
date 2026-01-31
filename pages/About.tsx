@@ -24,7 +24,7 @@ const About: React.FC = () => {
             Photography isn't just a side hobby for me, it's how I document the world, a dictionary of the world from my lens. It all started when i got flown out to San Francisco for a hackathon. 
           </p>
           <p>
-            In a moment of pure inspiration (and probably extreme sleep deprivation), I made my biggest impulsive purchase yet: my first dedicated digital camera. Since then, I've been obsessed with capturing urban architecture, the beauty of nature, and details that most people overlook.
+            In a moment of pure inspiration (and probably extreme sleep deprivation), I made my biggest impulsive purchase yet: my first dedicated digital camera. Since then, I've been obsessed with capturing urban architecture, the beauty of nature, details that most people overlook, and just memories for me to look back on.
           </p>
           <div className="p-6 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-100 dark:border-zinc-800 rounded-2xl italic text-sm">
             "The best hardware is the one you have with you—especially when it's built as beautifully as a Sony Cybershot DSC-W130."
