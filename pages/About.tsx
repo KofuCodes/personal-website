@@ -57,13 +57,6 @@ const About: React.FC = () => {
           </div>
         </div>
       </section>
-
-      <section className="mt-24">
-        <h2 className="text-2xl font-heading font-bold mb-6 text-zinc-900 dark:text-zinc-100">Interests</h2>
-        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-          When I'm not coding or soldering, you can find me tinkering with mechanical keyboards, taking photos of random things, or trying to achieve the perfect 40-line Tetris sprint(i'm awful at tetris but im learning :P). I have a deep appreciation for art of any form.
-        </p>
-      </section>
     </div>
   );
 };
