@@ -93,11 +93,11 @@ const Home: React.FC = () => {
         <ul className={`text-sm md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl mb-12 transition-all duration-1000 delay-300 space-y-3 ${isTypingDone ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <li className="flex gap-3">
             <span className="text-black dark:text-white font-semibold flex-shrink-0">•</span>
-            <span>Passionate about building hardware and firmware that solve real-world problems</span>
+            <span>Hello! I’m a Computer Engineering student passionate about building impactful software and hardware solutions. Take your time looking around</span>
           </li>
           <li className="flex gap-3">
             <span className="text-black dark:text-white font-semibold flex-shrink-0">•</span>
-            <span>Work spans embedded systems, firmware, hardware design, product dev, hackathon organizing, and more</span>
+            <span>Currently I enjoy doing hardware/software projects, hackathons, and taking pictures of the beautiful scenery.</span>
           </li>
           <li className="flex gap-3">
             <span className="text-black dark:text-white font-semibold flex-shrink-0">•</span>
