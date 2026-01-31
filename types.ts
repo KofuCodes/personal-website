@@ -5,7 +5,7 @@ export interface Project {
   slug: string;
   title: string;
   year: string;
-  category: Category;
+  category: Category | Category[];
   summary: string;
   description: string;
   bullets: string[];

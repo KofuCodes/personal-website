@@ -11,7 +11,7 @@ const ProjectsPage: React.FC = () => {
 
   const filteredProjects = useMemo(() => {
     return projects.filter(p => {
-      const matchesFilter = filter === 'All' || p.category === filter;
+      const matchesFilter = filter === 'All' || (Array.isArray(p.category) ? p.category.includes(filter) : p.category === filter);
       const matchesSearch = p.title.toLowerCase().includes(search.toLowerCase()) || 
                            p.tags.some(t => t.toLowerCase().includes(search.toLowerCase()));
       return matchesFilter && matchesSearch;
