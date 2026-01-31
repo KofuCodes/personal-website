@@ -410,13 +410,6 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '47',
-    url: '/photography/Selena_s Bday/DSC03890.JPG',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
     id: '48',
     url: '/photography/Selena_s Bday/DSC03895.JPG',
     location: 'Hamilton, Ontario',
