@@ -48,31 +48,49 @@ const Home: React.FC = () => {
   const displayPhotos = randomPhotos;
 
   return (
-    <div className="space-y-16 py-24">
+    <div className="space-y-16 py-12 md:py-24">
       {/* Triho-style Hero */}
-      <section className="max-w-4xl pt-8 md:pt-0 min-h-[70vh] flex flex-col justify-start">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-start mb-8">
-          <div className={`hidden md:flex items-start justify-start transition-opacity duration-1000 delay-300 ${isTypingDone ? 'opacity-100' : 'opacity-0'}`}>
+      <section className="max-w-4xl pt-0 md:pt-0 min-h-[70vh] flex flex-col justify-start">
+        {/* Mobile: Name and headshot side by side */}
+        <div className="md:hidden flex items-start justify-between gap-4 mb-8">
+          <div className="flex-1">
+            <h1 className="text-4xl font-heading font-bold tracking-tighter leading-none mb-3 min-h-[1.2em]">
+              {displayName}
+              {!isTypingDone && <span className="cursor"></span>}
+            </h1>
+            <div className={`flex flex-col gap-1 text-zinc-500 dark:text-zinc-400 font-medium text-sm transition-opacity duration-1000 ${isTypingDone ? 'opacity-100' : 'opacity-0'}`}>
+              <span className="mono">Computer Engineering @ <a href="https://uwaterloo.ca" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition-colors underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-2">University of Waterloo</a></span>
+              <span className="mono text-zinc-400 dark:text-zinc-500">Waterloo, Ontario</span>
+            </div>
+          </div>
+          <div className={`flex-shrink-0 transition-opacity duration-1000 delay-300 ${isTypingDone ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="w-36 h-36 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
+              <img src="/headshot.jpg" alt="Ethan Tran" className="w-full h-full object-cover" />
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop layout */}
+        <div className="hidden md:grid md:grid-cols-5 gap-4 items-start mb-8">
+          {/* Desktop headshot */}
+          <div className={`flex items-start justify-start transition-opacity duration-1000 delay-300 ${isTypingDone ? 'opacity-100' : 'opacity-0'}`}>
             <div className="w-48 h-48 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
               <img src="/headshot.jpg" alt="Ethan Tran" className="w-full h-full object-cover" />
             </div>
           </div>
-          <div className="col-span-1 md:col-span-3 h-[80px] md:h-[120px]">
-            <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tighter leading-none mb-4 min-h-[1.2em]">
+          <div className="col-span-3 h-[120px]">
+            <h1 className="text-7xl font-heading font-bold tracking-tighter leading-none mb-4 min-h-[1.2em]">
               {displayName}
               {!isTypingDone && <span className="cursor"></span>}
             </h1>
-            <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-zinc-500 dark:text-zinc-400 font-medium text-sm md:text-base transition-opacity duration-1000 ${isTypingDone ? 'opacity-100' : 'opacity-0'}`}>
-              <a href="https://uwaterloo.ca" target="_blank" rel="noopener noreferrer" className="mono hover:text-black dark:hover:text-white transition-colors underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-2">CompEng @UWaterloo</a>
-              <span className="text-zinc-200 dark:text-zinc-800">•</span>
-              <span className="mono">Firmware</span>
-              <span className="text-zinc-200 dark:text-zinc-800">•</span>
-              <span className="mono">Product</span>
+            <div className={`flex flex-col gap-1 text-zinc-500 dark:text-zinc-400 font-medium text-base transition-opacity duration-1000 ${isTypingDone ? 'opacity-100' : 'opacity-0'}`}>
+              <span className="mono">Computer Engineering @ <a href="https://uwaterloo.ca" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition-colors underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-2">University of Waterloo</a></span>
+              <span className="mono text-zinc-400 dark:text-zinc-500">Waterloo, Ontario</span>
             </div>
           </div>
         </div>
         
-        <ul className={`text-lg md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl mb-12 transition-all duration-1000 delay-300 space-y-3 ${isTypingDone ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        <ul className={`text-sm md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl mb-12 transition-all duration-1000 delay-300 space-y-3 ${isTypingDone ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <li className="flex gap-3">
             <span className="text-black dark:text-white font-semibold flex-shrink-0">•</span>
             <span>Passionate about building hardware and firmware that solve real-world problems</span>
@@ -117,7 +135,51 @@ const Home: React.FC = () => {
       <section className={`transition-all duration-1000 delay-700 ${isTypingDone ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <div className="mb-6">
           <h2 className="text-[11px] font-bold tracking-[0.2em] text-zinc-400 dark:text-zinc-600 uppercase mb-8 mono">Gallery</h2>
-          <div className="flex items-center gap-4">
+          
+          {/* Mobile: Single photo view */}
+          <div className="md:hidden">
+            <div className="relative">
+              <div className="rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
+                <img
+                  src={displayPhotos[currentPhotoIndex]?.url}
+                  alt={displayPhotos[currentPhotoIndex]?.location}
+                  className="w-full h-64 object-cover"
+                />
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 p-3 font-heading">
+                  {displayPhotos[currentPhotoIndex]?.location}
+                </p>
+              </div>
+              
+              <div className="flex items-center justify-between mt-4">
+                <button
+                  onClick={() => setCurrentPhotoIndex((prev) => prev <= 0 ? displayPhotos.length - 1 : prev - 1)}
+                  className="p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+                  aria-label="Previous photo"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                
+                <span className="text-sm text-zinc-500 dark:text-zinc-400 mono">
+                  {currentPhotoIndex + 1} / {displayPhotos.length}
+                </span>
+                
+                <button
+                  onClick={() => setCurrentPhotoIndex((prev) => prev >= displayPhotos.length - 1 ? 0 : prev + 1)}
+                  className="p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+                  aria-label="Next photo"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop: Carousel view */}
+          <div className="hidden md:flex items-center gap-4">
             <button
               onClick={prevPhoto}
               className="flex-shrink-0 w-10 h-10 rounded-full border border-zinc-200 dark:border-zinc-800 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
