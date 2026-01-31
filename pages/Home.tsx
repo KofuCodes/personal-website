@@ -134,7 +134,15 @@ const Home: React.FC = () => {
       </section>
       <section className={`transition-all duration-1000 delay-700 ${isTypingDone ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <div className="mb-6">
-          <h2 className="text-[11px] font-bold tracking-[0.2em] text-zinc-400 dark:text-zinc-600 uppercase mb-8 mono">Gallery</h2>
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-[11px] font-bold tracking-[0.2em] text-zinc-400 dark:text-zinc-600 uppercase mono">Gallery</h2>
+            <Link to="/photography" className="group flex items-center gap-2 text-sm font-bold tracking-tight dark:text-zinc-100">
+              <span className="font-heading">VIEW GALLERY</span>
+              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
           
           {/* Mobile: Single photo view */}
           <div className="md:hidden">
