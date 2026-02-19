@@ -75,17 +75,27 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
       {/* Enlarged polaroid with flip capability - rendered in portal */}
       {isEnlarged && typeof document !== 'undefined' && createPortal(
         <div 
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
           onClick={handleBackdropClick}
         >
           <div 
-            className="relative"
+            className="relative w-full"
             style={{ 
               perspective: '2000px',
-              maxWidth: '90vw',
+              maxWidth: 'min(90vw, 800px)',
               maxHeight: '90vh'
             }}
           >
+            {/* Close button - top-left corner of the polaroid */}
+            <button
+              className="absolute -top-3 -left-3 z-10 text-red-500 hover:text-red-400 transition-colors"
+              onClick={handleBackdropClick}
+              aria-label="Close"
+            >
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
             <div 
               className="transition-transform duration-700 ease-in-out cursor-pointer"
               style={{ 
@@ -96,10 +106,10 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
             >
               {/* Front of polaroid */}
               <div 
-                className="bg-white dark:bg-[#f5f5dc] p-6 pb-20 shadow-[12px_12px_40px_rgba(0,0,0,0.5)]"
+                className="bg-white dark:bg-[#f5f5dc] p-4 md:p-6 pb-14 md:pb-20 shadow-[12px_12px_40px_rgba(0,0,0,0.5)] mx-auto"
                 style={{ 
                   backfaceVisibility: 'hidden',
-                  width: 'clamp(400px, 80vw, 800px)',
+                  maxWidth: '100%',
                   height: 'auto'
                 }}
               >
@@ -108,11 +118,11 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
                     src={photo.url}
                     alt={photo.location}
                     className="w-full h-auto object-cover sepia-[0.2] contrast-[1.1]"
-                    style={{ maxHeight: '70vh' }}
+                    style={{ maxHeight: '65vh' }}
                   />
                 </div>
-                <div className="mt-4 text-center">
-                  <p className="handwritten text-3xl text-[#2a2318] opacity-70">
+                <div className="mt-3 md:mt-4 text-center">
+                  <p className="handwritten text-2xl md:text-3xl text-[#2a2318] opacity-70">
                     {photo.location}
                   </p>
                 </div>
@@ -120,14 +130,14 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
 
               {/* Back of polaroid */}
               <div 
-                className="absolute inset-0 bg-white dark:bg-[#f5f5dc] p-6 pb-20 shadow-[12px_12px_40px_rgba(0,0,0,0.5)]"
+                className="absolute inset-0 bg-white dark:bg-[#f5f5dc] p-4 md:p-6 shadow-[12px_12px_40px_rgba(0,0,0,0.5)]"
                 style={{ 
                   backfaceVisibility: 'hidden',
                   transform: 'rotateY(180deg)'
                 }}
               >
                 <div className="w-full h-full border-2 border-[#c4a882] dark:border-[#8B7355] border-dashed rounded flex items-center justify-center">
-                  <div className="text-center text-[#2a2318] dark:text-[#3d2f1f] handwritten text-2xl px-8">
+                  <div className="text-center text-[#2a2318] dark:text-[#3d2f1f] handwritten text-xl md:text-2xl px-6">
                     {backText || ''}
                   </div>
                 </div>
@@ -135,8 +145,8 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
             </div>
           </div>
           
-          {/* Close hint */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 text-sm mono">
+          {/* Close hint - hidden on mobile */}
+          <div className="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 text-sm mono">
             Click outside to close • Click photo to flip
           </div>
         </div>,

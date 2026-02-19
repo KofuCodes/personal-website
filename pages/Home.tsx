@@ -147,6 +147,7 @@ const Home: React.FC = () => {
               <InteractivePolaroid
                 photo={displayPhotos[currentPhotoIndex]}
                 rotation={polaroidRotations[currentPhotoIndex]}
+                imageClassName="w-full aspect-square object-cover sepia-[0.2] contrast-[1.1]"
               />
               
               <div className="flex items-center justify-between mt-4">
