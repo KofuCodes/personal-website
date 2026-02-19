@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import FilmBackground from './components/FilmBackground';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import ProjectsPage from './pages/ProjectsPage';
@@ -22,7 +23,8 @@ const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen bg-white dark:bg-[#0a0a0a] text-zinc-900 dark:text-zinc-300 flex flex-col transition-colors duration-500 selection:bg-zinc-100 dark:selection:bg-zinc-800">
+      <div className="min-h-screen bg-[#f5e6d3] dark:bg-[#2a2318] text-[#2a2318] dark:text-[#e8dcc8] flex flex-col transition-colors duration-500 selection:bg-[#d4a574] dark:selection:bg-[#8B7355]">
+        <FilmBackground />
         <Navbar />
         <main className="flex-grow max-w-4xl mx-auto px-6 pt-16 w-full">
           <Routes>
@@ -33,9 +35,9 @@ const App: React.FC = () => {
             <Route path="/photography" element={<Photography />} />
             <Route path="*" element={
               <div className="py-40 text-center">
-                <h1 className="text-4xl font-heading font-bold mb-4 text-zinc-900 dark:text-zinc-100">404</h1>
-                <p className="text-zinc-500 dark:text-zinc-500 mb-8 mono text-sm">Page not found</p>
-                <a href="/" className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest mono">Home</a>
+                <h1 className="text-4xl font-heading font-bold mb-4 text-[#2a2318] dark:text-[#f5e6d3]">404</h1>
+                <p className="text-[#6b5744] dark:text-[#a1785d] mb-8 mono text-sm">Page not found</p>
+                <a href="/" className="bg-[#2a2318] dark:bg-[#f5e6d3] text-[#f5e6d3] dark:text-[#2a2318] px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest mono">Home</a>
               </div>
             } />
           </Routes>
