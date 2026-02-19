@@ -75,15 +75,14 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
       {/* Enlarged polaroid with flip capability - rendered in portal */}
       {isEnlarged && typeof document !== 'undefined' && createPortal(
         <div 
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-6"
           onClick={handleBackdropClick}
         >
           <div 
-            className="relative w-full"
+            className="relative"
             style={{ 
               perspective: '2000px',
-              maxWidth: 'min(90vw, 800px)',
-              maxHeight: '90vh'
+              width: 'min(85vw, 480px)',
             }}
           >
             {/* Close button - top-left corner of the polaroid */}
@@ -106,23 +105,18 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
             >
               {/* Front of polaroid */}
               <div 
-                className="bg-white dark:bg-[#f5f5dc] p-4 md:p-6 pb-14 md:pb-20 shadow-[12px_12px_40px_rgba(0,0,0,0.5)] mx-auto"
-                style={{ 
-                  backfaceVisibility: 'hidden',
-                  maxWidth: '100%',
-                  height: 'auto'
-                }}
+                className="bg-white dark:bg-[#f5f5dc] p-3 pb-14 shadow-[12px_12px_40px_rgba(0,0,0,0.5)]"
+                style={{ backfaceVisibility: 'hidden' }}
               >
-                <div className="bg-zinc-100 dark:bg-zinc-200 overflow-hidden">
+                <div className="w-full aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-200">
                   <img
                     src={photo.url}
                     alt={photo.location}
-                    className="w-full h-auto object-cover sepia-[0.2] contrast-[1.1]"
-                    style={{ maxHeight: '65vh' }}
+                    className="w-full h-full object-cover sepia-[0.2] contrast-[1.1]"
                   />
                 </div>
-                <div className="mt-3 md:mt-4 text-center">
-                  <p className="handwritten text-2xl md:text-3xl text-[#2a2318] opacity-70">
+                <div className="mt-3 text-center">
+                  <p className="handwritten text-2xl text-[#2a2318] opacity-70">
                     {photo.location}
                   </p>
                 </div>
@@ -130,7 +124,7 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
 
               {/* Back of polaroid */}
               <div 
-                className="absolute inset-0 bg-white dark:bg-[#f5f5dc] p-4 md:p-6 shadow-[12px_12px_40px_rgba(0,0,0,0.5)]"
+                className="absolute inset-0 bg-white dark:bg-[#f5f5dc] p-4 shadow-[12px_12px_40px_rgba(0,0,0,0.5)]"
                 style={{ 
                   backfaceVisibility: 'hidden',
                   transform: 'rotateY(180deg)'
