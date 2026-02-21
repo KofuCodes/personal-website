@@ -43,6 +43,7 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
     // Close if clicking the backdrop
     setIsEnlarged(false);
     setIsFlipped(false);
+    setIsHovered(false);
   };
 
   return (

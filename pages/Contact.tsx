@@ -8,7 +8,7 @@ const Contact: React.FC = () => {
       <ReactBitsBackground />
       <div className="py-20 max-w-2xl mx-auto relative z-10">
         <header className="mb-16">
-          <h1 className="text-4xl font-bold tracking-tight mb-6 text-[#2a2318] dark:text-[#f5e6d3] font-heading">Let's connect</h1>
+          <h1 className="text-4xl tracking-tight mb-6 text-[#2a2318] dark:text-[#f5e6d3] handwritten">Let's connect</h1>
           <p className="text-[#6b5744] dark:text-[#a1785d] text-lg">
             Whether you want to talk about embedded systems, recruitment, or just say hi, feel free to reach out.
           </p>
@@ -27,7 +27,7 @@ const Contact: React.FC = () => {
           </div>
 
           <div className="p-8 border-2 border-[#c4a882] dark:border-[#6b5744] rounded-lg shadow-md bg-white dark:bg-[#3d2f1f]">
-            <h2 className="text-lg font-bold mb-6 text-[#2a2318] dark:text-[#f5e6d3] font-heading">Send a quick message</h2>
+            <h2 className="text-lg mb-6 text-[#2a2318] dark:text-[#f5e6d3] handwritten">Send a quick message</h2>
             <form className="space-y-4" action="mailto:e64tran@uwaterloo.ca" method="get" encType="text/plain">
               <div>
                 <label className="block text-xs mono uppercase tracking-widest text-[#8B7355] dark:text-[#a1785d] mb-2 font-medium">Message</label>

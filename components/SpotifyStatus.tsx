@@ -98,9 +98,11 @@ const SpotifyStatus: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center gap-3 py-2 px-3 bg-[#f5f5dc] dark:bg-[#3d2f1f] border border-[#c4a882] dark:border-[#6b5744] rounded-full">
-        <div className="h-2 w-2 rounded-full bg-[#c4a882] dark:bg-[#6b5744] animate-pulse"></div>
-        <span className="text-[11px] font-medium text-[#6b5744] dark:text-[#a1785d] uppercase tracking-wider">
+      <div className="flex items-center gap-2.5 py-1.5 px-2">
+        <div className="w-8 h-9 bg-white dark:bg-[#f5f5dc] flex-shrink-0 shadow-[2px_2px_6px_rgba(0,0,0,0.2)] animate-pulse" style={{ padding: '2px', paddingBottom: '6px' }}>
+          <div className="w-full h-full bg-[#d4a574]/30 dark:bg-[#6b5744]/30" />
+        </div>
+        <span className="text-[10px] mono text-[#8B7355] dark:text-[#a1785d] uppercase tracking-wider">
           Loading...
         </span>
       </div>
@@ -115,10 +117,10 @@ const SpotifyStatus: React.FC = () => {
       return null; // Hide errors in production
     }
     return (
-      <div className="flex flex-col gap-2 py-2 px-3 bg-[#f5f5dc] dark:bg-[#3d2f1f] border border-[#c4a882] dark:border-[#6b5744] rounded-full">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col gap-2 py-1.5 px-2">
+        <div className="flex items-center gap-2.5">
           <div className="h-2 w-2 rounded-full bg-red-400 dark:bg-red-600"></div>
-          <span className="text-[11px] font-medium text-[#6b5744] dark:text-[#a1785d] uppercase tracking-wider">
+          <span className="text-[10px] mono text-[#8B7355] dark:text-[#a1785d] uppercase tracking-wider">
             {is404 ? 'Discord ID Not Found' : 'Error'}
           </span>
         </div>
@@ -143,40 +145,37 @@ const SpotifyStatus: React.FC = () => {
           href={`https://open.spotify.com/track/${track_id}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-3 py-2 px-3 bg-[#f5f5dc] dark:bg-[#3d2f1f] border border-[#c4a882] dark:border-[#6b5744] rounded-full group transition-all hover:bg-[#e8dcc8] dark:hover:bg-[#2a2318]"
+          className="flex items-center gap-2.5 group transition-all py-1.5 px-2 hover:opacity-80"
         >
-          <div className="relative flex items-center justify-center">
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+          {/* Album art as tiny polaroid */}
+          <div className="relative w-8 h-9 bg-white dark:bg-[#f5f5dc] flex-shrink-0 shadow-[2px_2px_6px_rgba(0,0,0,0.2)] group-hover:shadow-[3px_3px_8px_rgba(0,0,0,0.3)] transition-all group-hover:-rotate-3" style={{ padding: '2px', paddingBottom: '6px' }}>
+            <img src={album_art_url} alt="Album Art" className="w-full h-full object-cover sepia-[0.1]" />
           </div>
 
-          <div className="flex items-center gap-2 overflow-hidden max-w-[200px]">
-            <span className="text-[11px] font-semibold text-[#2a2318] dark:text-[#e8dcc8] truncate">
-              {song} <span className="text-[#6b5744] dark:text-[#a1785d] font-normal">by</span> {artist}
+          <div className="flex flex-col overflow-hidden max-w-[140px]">
+            <span className="text-[10px] font-semibold text-[#2a2318] dark:text-[#f5e6d3] truncate handwritten leading-tight">
+              {song}
+            </span>
+            <span className="text-[8px] mono text-[#8B7355] dark:text-[#a1785d] truncate uppercase tracking-wider">
+              {artist}
             </span>
           </div>
 
-          <div className="w-5 h-5 overflow-hidden rounded-full border border-[#c4a882] dark:border-[#6b5744] group-hover:scale-110 transition-transform flex-shrink-0">
-            <img src={album_art_url} alt="Album Art" className="w-full h-full object-cover" />
-          </div>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500 flex-shrink-0"></span>
         </a>
       );
     }
     // Show offline state with Spotify logo when no last played data
     return (
-      <div className="flex items-center gap-3 py-2 px-3 bg-[#f5f5dc] dark:bg-[#3d2f1f] border border-[#c4a882] dark:border-[#6b5744] rounded-full">
-        <div className="relative flex items-center justify-center">
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#2a2318] dark:bg-[#f5e6d3]"></span>
-        </div>
-
-        <span className="text-[11px] font-medium text-[#6b5744] dark:text-[#a1785d] uppercase tracking-wider">
-          Offline
-        </span>
-
-        <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
-          <svg className="w-4 h-4 text-[#8B7355] dark:text-[#a1785d]" viewBox="0 0 24 24" fill="currentColor">
+      <div className="flex items-center gap-2.5 py-1.5 px-2">
+        <div className="w-8 h-9 bg-white dark:bg-[#f5f5dc] flex-shrink-0 shadow-[2px_2px_6px_rgba(0,0,0,0.15)] flex items-center justify-center" style={{ padding: '2px', paddingBottom: '6px' }}>
+          <svg className="w-4 h-4 text-[#c4a882] dark:text-[#6b5744]" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
           </svg>
         </div>
+        <span className="text-[10px] mono text-[#8B7355] dark:text-[#a1785d] uppercase tracking-wider">
+          Offline
+        </span>
       </div>
     );
   }
@@ -188,24 +187,27 @@ const SpotifyStatus: React.FC = () => {
       href={`https://open.spotify.com/track/${track_id}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-3 py-2 px-3 bg-[#f5f5dc] dark:bg-[#3d2f1f] border border-[#c4a882] dark:border-[#6b5744] rounded-full group transition-all hover:bg-[#e8dcc8] dark:hover:bg-[#2a2318]"
+      className="flex items-center gap-2.5 group transition-all py-1.5 px-2 hover:opacity-80"
     >
-      <div className="relative flex items-center justify-center">
-        <span className="flex h-2 w-2 relative">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+      {/* Album art as tiny polaroid */}
+      <div className="relative w-8 h-9 bg-white dark:bg-[#f5f5dc] flex-shrink-0 shadow-[2px_2px_6px_rgba(0,0,0,0.2)] group-hover:shadow-[3px_3px_8px_rgba(0,0,0,0.3)] transition-all group-hover:-rotate-3" style={{ padding: '2px', paddingBottom: '6px' }}>
+        <img src={album_art_url} alt="Album Art" className="w-full h-full object-cover sepia-[0.1]" />
+      </div>
+
+      <div className="flex flex-col overflow-hidden max-w-[140px]">
+        <span className="text-[10px] font-semibold text-[#2a2318] dark:text-[#f5e6d3] truncate handwritten leading-tight">
+          {song}
+        </span>
+        <span className="text-[8px] mono text-[#8B7355] dark:text-[#a1785d] truncate uppercase tracking-wider">
+          {artist}
         </span>
       </div>
 
-      <div className="flex items-center gap-2 overflow-hidden max-w-[200px]">
-        <span className="text-[11px] font-semibold text-[#2a2318] dark:text-[#e8dcc8] truncate">
-          {song} <span className="text-[#6b5744] dark:text-[#a1785d] font-normal">by</span> {artist}
-        </span>
-      </div>
-
-      <div className="w-5 h-5 overflow-hidden rounded-full border border-[#c4a882] dark:border-[#6b5744] group-hover:scale-110 transition-transform flex-shrink-0">
-        <img src={album_art_url} alt="Album Art" className="w-full h-full object-cover" />
-      </div>
+      {/* Green pulse for currently playing */}
+      <span className="flex h-2 w-2 relative flex-shrink-0">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+      </span>
     </a>
   );
 };
