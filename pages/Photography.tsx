@@ -8,6 +8,15 @@ const Photography: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   const [currentIndices, setCurrentIndices] = useState<{ [key: string]: number }>({});
 
+  // Pre-compute stable random rotations for each photo to avoid jitter on re-render
+  const photoRotations = useMemo(() => {
+    const rotations: { [key: string]: number } = {};
+    photos.forEach(photo => {
+      rotations[photo.id] = (Math.random() - 0.5) * 6;
+    });
+    return rotations;
+  }, []);
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -22,7 +31,7 @@ const Photography: React.FC = () => {
   // Group photos by location and year
   const groupedPhotos = useMemo(() => {
     const groups: { [key: string]: typeof photos } = {};
-    
+
     photos.forEach(photo => {
       const key = `${photo.location} - ${photo.year}`;
       if (!groups[key]) {
@@ -30,19 +39,19 @@ const Photography: React.FC = () => {
       }
       groups[key].push(photo);
     });
-    
+
     // Custom sort order: Waterloo first, then San Francisco, then others by year
     const priorityOrder = ['Waterloo, Ontario', 'San Francisco, California'];
-    
+
     const sortedKeys = Object.keys(groups).sort((a, b) => {
       const locationA = a.split(' - ')[0];
       const locationB = b.split(' - ')[0];
       const yearA = a.split(' - ')[1];
       const yearB = b.split(' - ')[1];
-      
+
       const priorityA = priorityOrder.indexOf(locationA);
       const priorityB = priorityOrder.indexOf(locationB);
-      
+
       // If both have priority, sort by priority then year
       if (priorityA !== -1 && priorityB !== -1) {
         if (priorityA !== priorityB) return priorityA - priorityB;
@@ -56,7 +65,7 @@ const Photography: React.FC = () => {
       if (yearA !== yearB) return yearB.localeCompare(yearA);
       return a.localeCompare(b);
     });
-    
+
     return sortedKeys.map(key => ({
       title: key,
       photos: groups[key]
@@ -80,7 +89,7 @@ const Photography: React.FC = () => {
               <h2 className="text-2xl handwritten font-bold mb-8 text-[#3d2f1f] dark:text-[#d4a574]">
                 {group.title}
               </h2>
-              
+
               {/* Mobile: Single photo carousel */}
               <div className="md:hidden">
                 {(() => {
@@ -88,16 +97,16 @@ const Photography: React.FC = () => {
                   const photo = group.photos[currentIndex];
                   return (
                     <div className="relative">
-                      <div 
+                      <div
                         className={`${mounted ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'} transition-all duration-500 ease-out`}
                       >
                         <InteractivePolaroid
                           photo={photo}
-                          rotation={(Math.random() - 0.5) * 6}
+                          rotation={photoRotations[photo.id] || 0}
                           imageClassName="w-full aspect-square object-cover sepia-[0.2] contrast-[1.1]"
                         />
                       </div>
-                      
+
                       {/* Navigation */}
                       <div className="flex items-center justify-between mt-6">
                         <button
@@ -109,11 +118,11 @@ const Photography: React.FC = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                           </svg>
                         </button>
-                        
+
                         <span className="text-sm text-[#6b5744] dark:text-[#a1785d] mono">
                           {currentIndex + 1} / {group.photos.length}
                         </span>
-                        
+
                         <button
                           onClick={() => goToPhoto(group.title, currentIndex + 1, group.photos.length)}
                           className="p-2 rounded-full bg-[#d4a574] dark:bg-[#8B7355] text-[#2a2318] dark:text-[#f5e6d3] hover:bg-[#c4a882] dark:hover:bg-[#6b5744] transition-colors shadow-md"
@@ -134,12 +143,12 @@ const Photography: React.FC = () => {
                 {group.photos.map((photo, index) => {
                   const delay = Math.min(index * 30, 300);
                   // Random slight rotation for each Polaroid
-                  const rotation = (Math.random() - 0.5) * 6;
+                  const rotation = photoRotations[photo.id] || 0;
                   return (
-                    <div 
-                      key={photo.id} 
+                    <div
+                      key={photo.id}
                       className={`${mounted ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'} transition-all duration-500 ease-out`}
-                      style={{ 
+                      style={{
                         transitionDelay: `${delay}ms`
                       }}
                     >

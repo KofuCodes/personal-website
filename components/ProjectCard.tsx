@@ -9,7 +9,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
-    <Link 
+    <Link
       to={`/projects/${project.slug}`}
       className="group flex flex-col sm:flex-row sm:items-center justify-between p-5 md:p-6 rounded-lg border-2 border-transparent hover:border-[#c4a882] dark:hover:border-[#6b5744] hover:bg-[#f5f5dc] dark:hover:bg-[#3d2f1f] transition-all duration-500 w-full overflow-hidden shadow-md hover:shadow-[4px_4px_12px_rgba(0,0,0,0.2)]"
     >

@@ -13,8 +13,8 @@ const ProjectsPage: React.FC = () => {
   const filteredProjects = useMemo(() => {
     return projects.filter(p => {
       const matchesFilter = filter === 'All' || (Array.isArray(p.category) ? p.category.includes(filter) : p.category === filter);
-      const matchesSearch = p.title.toLowerCase().includes(search.toLowerCase()) || 
-                           p.tags.some(t => t.toLowerCase().includes(search.toLowerCase()));
+      const matchesSearch = p.title.toLowerCase().includes(search.toLowerCase()) ||
+        p.tags.some(t => t.toLowerCase().includes(search.toLowerCase()));
       return matchesFilter && matchesSearch;
     });
   }, [filter, search]);
@@ -36,11 +36,10 @@ const ProjectsPage: React.FC = () => {
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all mono shadow-sm ${
-                  filter === cat 
-                  ? 'bg-[#2a2318] dark:bg-[#f5e6d3] text-[#f5e6d3] dark:text-[#2a2318]' 
-                  : 'bg-white dark:bg-[#3d2f1f] text-[#6b5744] dark:text-[#a1785d] hover:text-[#2a2318] dark:hover:text-[#f5e6d3] hover:bg-[#f5f5dc] dark:hover:bg-[#2a2318] border border-[#c4a882] dark:border-[#6b5744]'
-                }`}
+                className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all mono shadow-sm ${filter === cat
+                    ? 'bg-[#2a2318] dark:bg-[#f5e6d3] text-[#f5e6d3] dark:text-[#2a2318]'
+                    : 'bg-white dark:bg-[#3d2f1f] text-[#6b5744] dark:text-[#a1785d] hover:text-[#2a2318] dark:hover:text-[#f5e6d3] hover:bg-[#f5f5dc] dark:hover:bg-[#2a2318] border border-[#c4a882] dark:border-[#6b5744]'
+                  }`}
               >
                 {cat}
               </button>
@@ -51,24 +50,24 @@ const ProjectsPage: React.FC = () => {
               type="text"
               placeholder="Search projects..."
               className="w-full px-4 py-2.5 bg-white dark:bg-[#3d2f1f] border border-[#c4a882] dark:border-[#6b5744] rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-[#c4a882]/30 dark:focus:ring-[#6b5744]/30 transition-all placeholder:text-[#6b5744] dark:placeholder:text-[#a1785d] text-[#2a2318] dark:text-[#e8dcc8] shadow-sm"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          {filteredProjects.length > 0 ? (
+            filteredProjects.map(project => (
+              <ProjectCard key={project.slug} project={project} />
+            ))
+          ) : (
+            <div className="text-center py-20 border-2 border-dashed border-[#c4a882] dark:border-[#6b5744] rounded-2xl">
+              <p className="text-[#6b5744] dark:text-[#a1785d] text-sm mono">No matches found for your search.</p>
+            </div>
+          )}
         </div>
       </div>
-
-      <div className="flex flex-col gap-4">
-        {filteredProjects.length > 0 ? (
-          filteredProjects.map(project => (
-            <ProjectCard key={project.slug} project={project} />
-          ))
-        ) : (
-          <div className="text-center py-20 border-2 border-dashed border-[#c4a882] dark:border-[#6b5744] rounded-2xl">
-            <p className="text-[#6b5744] dark:text-[#a1785d] text-sm mono">No matches found for your search.</p>
-          </div>
-        )}
-      </div>
-    </div>
     </>
   );
 };

@@ -31,7 +31,7 @@ const Contact: React.FC = () => {
             <form className="space-y-4" action="mailto:e64tran@uwaterloo.ca" method="get" encType="text/plain">
               <div>
                 <label className="block text-xs mono uppercase tracking-widest text-[#8B7355] dark:text-[#a1785d] mb-2 font-medium">Message</label>
-                <textarea 
+                <textarea
                   name="body"
                   rows={4}
                   className="w-full px-4 py-3 bg-[#f5f5dc] dark:bg-[#2a2318] border border-[#c4a882] dark:border-[#6b5744] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#c4a882] dark:focus:ring-[#6b5744] resize-none transition-all text-[#2a2318] dark:text-[#e8dcc8] placeholder:text-[#6b5744] dark:placeholder:text-[#a1785d]"
@@ -39,8 +39,8 @@ const Contact: React.FC = () => {
                   required
                 ></textarea>
               </div>
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="w-full bg-[#2a2318] dark:bg-[#f5e6d3] text-[#f5e6d3] dark:text-[#2a2318] py-3 rounded-xl text-sm font-semibold hover:bg-[#3d2f1f] dark:hover:bg-[#e8dcc8] transition-colors shadow-md"
               >
                 Send via Email Client
@@ -51,7 +51,6 @@ const Contact: React.FC = () => {
       </div>
     </>
   );
-};
 };
 
 export default Contact;

@@ -64,7 +64,7 @@ const ReactBitsBackground: React.FC = () => {
     }
 
     const isDark = () => document.documentElement.classList.contains('dark');
-    
+
     // Draw Polaroid frame
     const drawPolaroid = (x: number, y: number, size: number, rotation: number, opacity: number) => {
       ctx.save();
@@ -81,7 +81,7 @@ const ReactBitsBackground: React.FC = () => {
       const width = size * 0.8;
       const height = size;
       ctx.strokeRect(-width / 2, -height / 2, width, height);
-      
+
       // Image area (smaller rectangle inside)
       ctx.strokeRect(-width / 2 + 4, -height / 2 + 4, width - 8, height * 0.75 - 4);
 
@@ -102,12 +102,12 @@ const ReactBitsBackground: React.FC = () => {
 
       // Camera body
       ctx.strokeRect(-size / 2, -size / 3, size, size * 0.6);
-      
+
       // Lens
       ctx.beginPath();
       ctx.arc(0, 0, size / 5, 0, 2 * Math.PI);
       ctx.stroke();
-      
+
       // Viewfinder
       ctx.fillRect(-size / 3, -size / 2, size / 6, size / 8);
 
@@ -128,17 +128,17 @@ const ReactBitsBackground: React.FC = () => {
 
       const width = size * 1.2;
       const height = size * 0.6;
-      
+
       // Film strip outline
       ctx.strokeRect(-width / 2, -height / 2, width, height);
-      
+
       // Sprocket holes
       for (let i = 0; i < 4; i++) {
         const xPos = -width / 2 + width / 5 + (i * width / 5);
         ctx.fillRect(xPos - 3, -height / 2 + 2, 6, 4);
         ctx.fillRect(xPos - 3, height / 2 - 6, 6, 4);
       }
-      
+
       // Frames
       for (let i = 0; i < 3; i++) {
         const xPos = -width / 2 + width / 6 + (i * width / 3);
@@ -149,6 +149,7 @@ const ReactBitsBackground: React.FC = () => {
     };
 
     // Animation loop
+    let animId: number;
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -190,12 +191,13 @@ const ReactBitsBackground: React.FC = () => {
         }
       });
 
-      requestAnimationFrame(animate);
+      animId = requestAnimationFrame(animate);
     };
 
     animate();
 
     return () => {
+      cancelAnimationFrame(animId);
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', handleMouseMove);
     };
