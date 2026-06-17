@@ -1,125 +1,151 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { photos } from '../data/photography';
-import InteractivePolaroid from '../components/InteractivePolaroid';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { createPortal } from 'react-dom';
+import { photos as allPhotos, Photo } from '../data/photography';
+import Aperture from '../components/Aperture';
 
 const Photography: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
-  const [currentIndices, setCurrentIndices] = useState<{ [key: string]: number }>({});
+  const [active, setActive] = useState<number | null>(null);
 
-  const photoRotations = useMemo(() => {
-    const rotations: { [key: string]: number } = {};
-    photos.forEach(photo => {
-      rotations[photo.id] = (Math.random() - 0.5) * 6;
+  // Group by "location - year", with a stable priority order.
+  const { groups, flat } = useMemo(() => {
+    const map: { [key: string]: Photo[] } = {};
+    allPhotos.forEach((photo) => {
+      const key = `${photo.location} — ${photo.year}`;
+      (map[key] ||= []).push(photo);
     });
-    return rotations;
+
+    const priority = ['Waterloo, Ontario', 'San Francisco, California'];
+    const keys = Object.keys(map).sort((a, b) => {
+      const [locA, yearA] = a.split(' — ');
+      const [locB, yearB] = b.split(' — ');
+      const pa = priority.indexOf(locA);
+      const pb = priority.indexOf(locB);
+      if (pa !== -1 && pb !== -1) return pa !== pb ? pa - pb : yearB.localeCompare(yearA);
+      if (pa !== -1) return -1;
+      if (pb !== -1) return 1;
+      return yearA !== yearB ? yearB.localeCompare(yearA) : a.localeCompare(b);
+    });
+
+    const flat: Photo[] = [];
+    const groups = keys.map((title) => {
+      const start = flat.length;
+      flat.push(...map[title]);
+      return { title, photos: map[title], start };
+    });
+    return { groups, flat };
   }, []);
+
+  const close = useCallback(() => setActive(null), []);
+  const next = useCallback(() => setActive((i) => (i === null ? i : (i + 1) % flat.length)), [flat.length]);
+  const prev = useCallback(() => setActive((i) => (i === null ? i : (i - 1 + flat.length) % flat.length)), [flat.length]);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (active === null) return;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [active, close, next, prev]);
 
-  const goToPhoto = (groupTitle: string, index: number, total: number) => {
-    setCurrentIndices(prev => ({
-      ...prev,
-      [groupTitle]: (index + total) % total
-    }));
-  };
-
-  const groupedPhotos = useMemo(() => {
-    const groups: { [key: string]: typeof photos } = {};
-    photos.forEach(photo => {
-      const key = `${photo.location} - ${photo.year}`;
-      if (!groups[key]) groups[key] = [];
-      groups[key].push(photo);
-    });
-
-    const priorityOrder = ['Waterloo, Ontario', 'San Francisco, California'];
-    const sortedKeys = Object.keys(groups).sort((a, b) => {
-      const locationA = a.split(' - ')[0];
-      const locationB = b.split(' - ')[0];
-      const yearA = a.split(' - ')[1];
-      const yearB = b.split(' - ')[1];
-      const priorityA = priorityOrder.indexOf(locationA);
-      const priorityB = priorityOrder.indexOf(locationB);
-      if (priorityA !== -1 && priorityB !== -1) {
-        if (priorityA !== priorityB) return priorityA - priorityB;
-        return yearB.localeCompare(yearA);
-      }
-      if (priorityA !== -1) return -1;
-      if (priorityB !== -1) return 1;
-      if (yearA !== yearB) return yearB.localeCompare(yearA);
-      return a.localeCompare(b);
-    });
-
-    return sortedKeys.map(key => ({ title: key, photos: groups[key] }));
-  }, []);
+  const current = active !== null ? flat[active] : null;
 
   return (
-    <div className="py-24 max-w-6xl mx-auto px-4 relative z-10">
-      <header className="mb-20">
-        <h1 className="text-4xl md:text-5xl handwritten tracking-tight mb-4 text-[#2a2318] dark:text-[#f5e6d3]">Gallery</h1>
-        <p className="text-[#6b5744] dark:text-[#a1785d] handwritten text-2xl leading-relaxed max-w-xl">
-          My story, through my lens.
-        </p>
+    <div className="max-w-5xl mx-auto px-6 pt-28 pb-12">
+      <header className="mb-12 reveal">
+        <h1 className="text-2xl font-semibold tracking-tight flex items-center gap-2.5">
+          <Aperture className="w-5 h-5 text-neutral-400" /> Gallery
+        </h1>
+        <p className="text-[15px] text-neutral-500 dark:text-neutral-400 mt-2">My story, through a lens.</p>
       </header>
 
-      <div className="space-y-20">
-        {groupedPhotos.map((group) => (
-          <section key={group.title}>
-            <h2 className="text-2xl handwritten font-bold mb-8 text-[#3d2f1f] dark:text-[#d4a574]">
+      <div className="space-y-14">
+        {groups.map((group) => (
+          <section key={group.title} className="reveal">
+            <h2 className="mono text-[12px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-4">
               {group.title}
             </h2>
-
-            {/* Mobile: Single photo carousel */}
-            <div className="md:hidden">
-              {(() => {
-                const currentIndex = currentIndices[group.title] || 0;
-                const photo = group.photos[currentIndex];
-                return (
-                  <div className="relative">
-                    <div className={`${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-500`}>
-                      <InteractivePolaroid
-                        photo={photo}
-                        rotation={photoRotations[photo.id] || 0}
-                        imageClassName="w-full aspect-square object-cover sepia-[0.2] contrast-[1.1]"
-                      />
-                    </div>
-                    <div className="flex items-center justify-between mt-6">
-                      <button onClick={() => goToPhoto(group.title, currentIndex - 1, group.photos.length)} className="p-2 rounded-full bg-[#d4a574] dark:bg-[#8B7355] text-[#2a2318] dark:text-[#f5e6d3] shadow-md">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                      </button>
-                      <span className="text-sm text-[#6b5744] dark:text-[#a1785d] mono">{currentIndex + 1} / {group.photos.length}</span>
-                      <button onClick={() => goToPhoto(group.title, currentIndex + 1, group.photos.length)} className="p-2 rounded-full bg-[#d4a574] dark:bg-[#8B7355] text-[#2a2318] dark:text-[#f5e6d3] shadow-md">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                      </button>
-                    </div>
-                  </div>
-                );
-              })()}
-            </div>
-
-            {/* Desktop: Grid layout */}
-            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {group.photos.map((photo, index) => (
-                <div
+            <div className="columns-2 md:columns-3 gap-3 [&>*]:mb-3">
+              {group.photos.map((photo, i) => (
+                <button
                   key={photo.id}
-                  className={`${mounted ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'} transition-all duration-500 ease-out`}
-                  style={{ transitionDelay: `${Math.min(index * 30, 300)}ms` }}
+                  onClick={() => setActive(group.start + i)}
+                  className="block w-full overflow-hidden rounded-lg ring-1 ring-inset ring-black/5 dark:ring-white/10 break-inside-avoid group"
                 >
-                  <InteractivePolaroid
-                    photo={photo}
-                    rotation={photoRotations[photo.id] || 0}
-                    imageClassName="w-full aspect-square object-cover sepia-[0.2] contrast-[1.1]"
+                  <img
+                    src={photo.url}
+                    alt={photo.location}
+                    loading="lazy"
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
-                </div>
+                </button>
               ))}
             </div>
           </section>
         ))}
       </div>
 
-      <footer className="mt-32 text-center py-12 border-t-2 border-[#c4a882] dark:border-[#6b5744]">
-        <p className="text-[#8B7355] dark:text-[#a1785d] handwritten text-2xl tracking-wide">End of Collection</p>
+      {current &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 sm:p-8"
+            onClick={close}
+          >
+            <button
+              className="absolute top-4 right-4 w-10 h-10 grid place-items-center text-white/70 hover:text-white transition-colors"
+              onClick={close}
+              aria-label="Close"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <button
+              className="absolute left-2 sm:left-6 w-11 h-11 grid place-items-center rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+              onClick={(e) => { e.stopPropagation(); prev(); }}
+              aria-label="Previous"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <figure className="max-w-full max-h-full flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
+              <img
+                src={current.url}
+                alt={current.location}
+                className="max-w-full max-h-[80vh] object-contain rounded-lg"
+              />
+              <figcaption className="mono text-[12px] text-white/60 mt-4 text-center">
+                {current.location} · {current.year}
+                <span className="ml-3 text-white/40">{active! + 1} / {flat.length}</span>
+              </figcaption>
+            </figure>
+
+            <button
+              className="absolute right-2 sm:right-6 w-11 h-11 grid place-items-center rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+              onClick={(e) => { e.stopPropagation(); next(); }}
+              aria-label="Next"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>,
+          document.body
+        )}
+
+      <footer className="mt-20 pt-8 border-t border-neutral-200 dark:border-neutral-800 text-center">
+        <p className="mono text-[12px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
+          End of collection
+        </p>
       </footer>
     </div>
   );

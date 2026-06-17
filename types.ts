@@ -33,4 +33,8 @@ export interface Experience {
   company: string;
   period: string;
   bullets: string[];
+  /** Optional logo: a website domain (favicon) or a local /public/logos asset. */
+  domain?: string;
+  logo?: string;
+  link?: string;
 }

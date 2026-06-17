@@ -1,25 +1,32 @@
-
 import React from 'react';
+
+const social = [
+  { name: 'GitHub', href: 'https://github.com/kofucodes' },
+  { name: 'LinkedIn', href: 'https://linkedin.com/in/ethantrann' },
+  { name: 'Instagram', href: 'https://www.instagram.com/ethan.trrann/' },
+  { name: 'Email', href: 'mailto:e64tran@uwaterloo.ca' },
+];
 
 const Footer: React.FC = () => {
   return (
-    <footer className="py-20 border-t-2 border-[#c4a882] dark:border-[#6b5744]">
-      <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-        <div className="flex flex-col items-center md:items-start gap-2">
-          <div className="text-[#2a2318] dark:text-[#f5e6d3] font-bold tracking-tight handwritten text-xl">Ethan Tran</div>
-          <div className="text-[#6b5744] dark:text-[#a1785d] text-xs mono uppercase tracking-widest">
-            © {new Date().getFullYear()} — Waterloo, ON
-          </div>
+    <footer className="mt-24 border-t border-neutral-200 dark:border-neutral-800 relative z-10 bg-white dark:bg-neutral-950">
+      <div className="max-w-2xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div className="text-[13px] text-neutral-500 dark:text-neutral-400">
+          <span className="text-neutral-700 dark:text-neutral-200 font-medium">Ethan Tran</span>
+          <span className="mono text-[12px] ml-2">© {new Date().getFullYear()} · Waterloo, ON</span>
         </div>
-
-        <div className="flex flex-col items-center md:items-end gap-4">
-          <a href="mailto:e64tran@uwaterloo.ca" className="text-sm font-bold tracking-tight text-[#2a2318] dark:text-[#f5e6d3] hover:opacity-50 transition-opacity handwritten text-lg">
-            e64tran@uwaterloo.ca
-          </a>
-          <div className="flex space-x-8">
-            <a href="https://github.com/kofucodes" target="_blank" rel="noopener noreferrer" className="text-[#8B7355] dark:text-[#a1785d] hover:text-[#2a2318] dark:hover:text-[#f5e6d3] transition-colors text-[11px] font-bold uppercase tracking-widest">GitHub</a>
-            <a href="https://linkedin.com/in/ethantrann" target="_blank" rel="noopener noreferrer" className="text-[#8B7355] dark:text-[#a1785d] hover:text-[#2a2318] dark:hover:text-[#f5e6d3] transition-colors text-[11px] font-bold uppercase tracking-widest">LinkedIn</a>
-          </div>
+        <div className="flex items-center gap-5">
+          {social.map((s) => (
+            <a
+              key={s.name}
+              href={s.href}
+              target={s.href.startsWith('http') ? '_blank' : undefined}
+              rel="noopener noreferrer"
+              className="text-[13px] text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+            >
+              {s.name}
+            </a>
+          ))}
         </div>
       </div>
     </footer>

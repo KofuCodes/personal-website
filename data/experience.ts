@@ -18,6 +18,8 @@ export const experiences: Experience[] = [
     role: 'Organizer / Software Developer',
     company: 'HammerHacks',
     period: 'Jun 2024 – Dec 2024',
+    domain: 'hammerhacks2024.wcagas.com',
+    link: 'https://hammerhacks2024.wcagas.com',
     bullets: [
       'Created the HammerHacks landing page, attracting 150+ participants and securing $12,000 in sponsorships.',
       'Managed infrastructure and provided technical support for a 12-hour collegiate hackathon.',
@@ -37,9 +39,10 @@ export const experiences: Experience[] = [
   },
   {
     id: '4',
-    role: 'Camera Operator Director',
+    role: 'Camera Operator / Director',
     company: 'OFSAA',
     period: 'Feb 2024 – Mar 2024',
+    domain: 'ofsaa.on.ca',
     bullets: [
       'Ensured high-quality production for OFSAA basketball, broadcasted to 7,000+ viewers.',
       'Optimized live stream operations and improved infrastructure reliability by 40%.',

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import FilmBackground from './components/FilmBackground';
 import Footer from './components/Footer';
+import SensorField from './components/SensorField';
 import Home from './pages/Home';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetail from './pages/ProjectDetail';
@@ -23,10 +23,10 @@ const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen bg-[#f5e6d3] dark:bg-[#2a2318] text-[#2a2318] dark:text-[#e8dcc8] flex flex-col transition-colors duration-500 selection:bg-[#d4a574] dark:selection:bg-[#8B7355]">
-        <FilmBackground />
+      <div className="min-h-screen bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 flex flex-col">
+        <SensorField />
         <Navbar />
-        <main className="flex-grow max-w-4xl mx-auto px-6 pt-16 w-full">
+        <main className="flex-grow w-full relative z-10">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -34,10 +34,12 @@ const App: React.FC = () => {
             <Route path="/projects/:slug" element={<ProjectDetail />} />
             <Route path="/photography" element={<Photography />} />
             <Route path="*" element={
-              <div className="py-40 text-center">
-                <h1 className="text-4xl font-heading font-bold mb-4 text-[#2a2318] dark:text-[#f5e6d3]">404</h1>
-                <p className="text-[#6b5744] dark:text-[#a1785d] mb-8 mono text-sm">Page not found</p>
-                <a href="/" className="bg-[#2a2318] dark:bg-[#f5e6d3] text-[#f5e6d3] dark:text-[#2a2318] px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest mono">Home</a>
+              <div className="max-w-2xl mx-auto px-6 py-40 text-center">
+                <h1 className="text-3xl font-semibold mb-3 tracking-tight">404</h1>
+                <p className="text-neutral-500 dark:text-neutral-400 mb-8 mono text-sm">Page not found</p>
+                <Link to="/" className="inline-block border border-neutral-300 dark:border-neutral-700 px-5 py-2 rounded-full text-sm font-medium hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors">
+                  Back home
+                </Link>
               </div>
             } />
           </Routes>
