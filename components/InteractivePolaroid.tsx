@@ -16,9 +16,9 @@ interface InteractivePolaroidProps {
   backText?: string;
 }
 
-const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({ 
-  photo, 
-  rotation = 0, 
+const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
+  photo,
+  rotation = 0,
   customCaption,
   imageClassName = "w-full h-48 object-cover sepia-[0.2] contrast-[1.1]",
   backText
@@ -50,7 +50,7 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
     <>
       {/* Normal polaroid in carousel */}
       {!isEnlarged && (
-        <div 
+        <div
           className="bg-white dark:bg-[#f5f5dc] p-2 pb-10 shadow-[4px_4px_12px_rgba(0,0,0,0.3)] relative cursor-pointer transition-all duration-300"
           style={{
             transform: `rotate(${rotation}deg) scale(${isHovered ? 1.08 : 1})`,
@@ -75,13 +75,13 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
 
       {/* Enlarged polaroid with flip capability - rendered in portal */}
       {isEnlarged && typeof document !== 'undefined' && createPortal(
-        <div 
+        <div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-6"
           onClick={handleBackdropClick}
         >
-          <div 
+          <div
             className="relative"
-            style={{ 
+            style={{
               perspective: '2000px',
               width: 'min(85vw, 480px)',
             }}
@@ -96,16 +96,16 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <div 
+            <div
               className="transition-transform duration-700 ease-in-out cursor-pointer"
-              style={{ 
+              style={{
                 transformStyle: 'preserve-3d',
                 transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
               }}
               onClick={handleClick}
             >
               {/* Front of polaroid */}
-              <div 
+              <div
                 className="bg-white dark:bg-[#f5f5dc] p-3 pb-14 shadow-[12px_12px_40px_rgba(0,0,0,0.5)]"
                 style={{ backfaceVisibility: 'hidden' }}
               >
@@ -124,9 +124,9 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
               </div>
 
               {/* Back of polaroid */}
-              <div 
+              <div
                 className="absolute inset-0 bg-white dark:bg-[#f5f5dc] p-4 shadow-[12px_12px_40px_rgba(0,0,0,0.5)]"
-                style={{ 
+                style={{
                   backfaceVisibility: 'hidden',
                   transform: 'rotateY(180deg)'
                 }}
@@ -139,7 +139,7 @@ const InteractivePolaroid: React.FC<InteractivePolaroidProps> = ({
               </div>
             </div>
           </div>
-          
+
           {/* Close hint - hidden on mobile */}
           <div className="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 text-sm mono">
             Click outside to close • Click photo to flip

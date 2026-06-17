@@ -1,79 +1,57 @@
-
 import React from 'react';
 import { experiences } from '../data/experience';
-
-const tapeColors = [
-  { color: '#e8a0c8', angle: -8 },   // pink
-  { color: '#a0d840', angle: 5 },     // green
-  { color: '#4080e0', angle: -12 },   // blue
-  { color: '#e8a020', angle: 7 },     // orange
-];
+import { BrandLogo } from './Brand';
 
 const ExperienceTimeline: React.FC = () => {
-  const rotations = [-0.6, 0.4, -0.3, 0.5];
-
   return (
-    <div className="space-y-6">
-      {experiences.map((exp, index) => {
-        const tape = tapeColors[index % tapeColors.length];
+    <ul className="divide-y divide-neutral-200 dark:divide-neutral-800">
+      {experiences.map((exp) => {
+        const Wrapper: React.ElementType = exp.link ? 'a' : 'div';
+        const wrapperProps = exp.link
+          ? { href: exp.link, target: '_blank', rel: 'noopener noreferrer' }
+          : {};
+
         return (
-        <div
-          key={exp.id}
-          className="group relative"
-          style={{ transform: `rotate(${rotations[index % rotations.length]}deg)` }}
-        >
-          <div className="bg-[#fffef8] dark:bg-[#f5f0e0] border border-[#d4c4a8]/60 dark:border-[#8B7355]/30 shadow-[3px_4px_14px_rgba(0,0,0,0.12)] dark:shadow-[3px_4px_14px_rgba(0,0,0,0.35)] relative overflow-visible">
+          <li key={exp.id}>
+            <Wrapper
+              {...wrapperProps}
+              className={`group flex gap-4 py-6 ${exp.link ? 'cursor-pointer' : ''}`}
+            >
+              <BrandLogo
+                name={exp.company}
+                domain={exp.domain}
+                src={exp.logo}
+                className="w-9 h-9 mt-0.5 p-1.5"
+              />
 
-            {/* Colored tape */}
-            <div
-              className="absolute -top-3 z-10 w-12 h-5 opacity-70"
-              style={{
-                left: index % 2 === 0 ? '20px' : 'auto',
-                right: index % 2 === 1 ? '20px' : 'auto',
-                transform: `rotate(${tape.angle}deg)`,
-                backgroundColor: tape.color,
-                clipPath: 'polygon(3% 0%, 97% 0%, 100% 45%, 96% 100%, 4% 100%, 0% 55%)',
-              }}
-            />
-
-            <div className="p-5 md:p-6">
-              {/* Header row: role + period */}
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
-                <div>
-                  <h3 className="text-base font-bold tracking-tight text-[#2a2318] leading-tight">{exp.role}</h3>
-                  <p className="handwritten text-sm text-[#6b5744] dark:text-[#8B7355] mt-0.5">{exp.company}</p>
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-x-4 gap-y-0.5">
+                  <h3 className="text-[15px] font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+                    {exp.role}
+                    {exp.link && (
+                      <span className="inline-block ml-1.5 text-neutral-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                    )}
+                  </h3>
+                  <span className="mono text-[11px] text-neutral-400 dark:text-neutral-500 whitespace-nowrap">
+                    {exp.period}
+                  </span>
                 </div>
-                {/* Date stamp */}
-                <span className="mono text-[9px] uppercase tracking-[0.15em] text-[#5c3d2e] dark:text-[#5c4a38] whitespace-nowrap self-start mt-1 sm:mt-0">
-                  {exp.period}
-                </span>
+                <p className="text-[13px] text-neutral-500 dark:text-neutral-400 mt-0.5">{exp.company}</p>
+
+                <ul className="mt-3 space-y-1.5">
+                  {exp.bullets.map((bullet, idx) => (
+                    <li key={idx} className="flex gap-2.5 text-[13px] leading-relaxed text-neutral-600 dark:text-neutral-300">
+                      <span className="text-neutral-300 dark:text-neutral-600 select-none">–</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              {/* Bullets */}
-              <ul className="space-y-2 mt-3">
-                {exp.bullets.map((bullet, idx) => (
-                  <li key={idx} className="flex gap-2 text-[12px] text-[#3d2f1f] dark:text-[#5c4a38] leading-relaxed">
-                    <span className="text-[#c4a882] dark:text-[#8B7355] mt-0.5 flex-shrink-0">—</span>
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Bottom edge */}
-            <div className="h-[2px] w-full bg-[#c4a882]/20 dark:bg-[#6b5744]/20" />
-          </div>
-
-          {/* Connecting thread */}
-          {index < experiences.length - 1 && (
-            <div className="flex justify-center py-0">
-              <div className="w-[1px] h-6 bg-[#c4a882]/30 dark:bg-[#6b5744]/30" />
-            </div>
-          )}
-        </div>
+            </Wrapper>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };
 
