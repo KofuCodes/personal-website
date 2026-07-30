@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LinkPreview from './LinkPreview';
 
 /**
  * Small inline brand/company/school logo that sits next to its name in prose.
@@ -55,7 +56,9 @@ interface BrandProps extends BrandLogoProps {
 
 /** Logo + name rendered inline, kept on one line, optionally linked. */
 const Brand: React.FC<BrandProps> = ({ name, label, href, domain, src, className = '' }) => {
-  const inner = (
+  // Text decoration doesn't propagate into atomic inline boxes (the inline-flex
+  // wrapper), so the underline must live on the span that holds the text.
+  const inner = (underline: boolean) => (
     <span className={`inline-flex items-baseline gap-1.5 whitespace-nowrap ${className}`}>
       <BrandLogo
         name={name}
@@ -63,24 +66,32 @@ const Brand: React.FC<BrandProps> = ({ name, label, href, domain, src, className
         src={src}
         className="w-[1.05em] h-[1.05em] translate-y-[0.16em]"
       />
-      <span>{label ?? name}</span>
+      <span
+        className={
+          underline
+            ? 'underline decoration-neutral-300 dark:decoration-neutral-600 underline-offset-[3px] group-hover/lp:decoration-neutral-900 dark:group-hover/lp:decoration-neutral-100 transition-colors'
+            : undefined
+        }
+      >
+        {label ?? name}
+      </span>
     </span>
   );
 
   if (href) {
     return (
-      <a
+      <LinkPreview
         href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="font-medium text-neutral-900 dark:text-neutral-100 underline decoration-neutral-300 dark:decoration-neutral-600 underline-offset-[3px] hover:decoration-neutral-900 dark:hover:decoration-neutral-100 transition-colors"
+        title={name}
+        domain={domain}
+        className="font-medium text-neutral-900 dark:text-neutral-100"
       >
-        {inner}
-      </a>
+        {inner(true)}
+      </LinkPreview>
     );
   }
 
-  return <span className="font-medium text-neutral-900 dark:text-neutral-100">{inner}</span>;
+  return <span className="font-medium text-neutral-900 dark:text-neutral-100">{inner(false)}</span>;
 };
 
 export default Brand;

@@ -1,11 +1,15 @@
 import React from 'react';
+import LinkPreview from './LinkPreview';
 
 const social = [
-  { name: 'GitHub', href: 'https://github.com/kofucodes' },
-  { name: 'LinkedIn', href: 'https://linkedin.com/in/ethantrann' },
-  { name: 'Instagram', href: 'https://www.instagram.com/ethan.trrann/' },
+  { name: 'GitHub', href: 'https://github.com/kofucodes', domain: 'github.com' },
+  { name: 'LinkedIn', href: 'https://linkedin.com/in/ethantrann', domain: 'linkedin.com' },
+  { name: 'Instagram', href: 'https://www.instagram.com/ethan.trrann/', domain: 'instagram.com' },
   { name: 'Email', href: 'mailto:e64tran@uwaterloo.ca' },
 ];
+
+const linkCls =
+  'text-[13px] text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors';
 
 const Footer: React.FC = () => {
   return (
@@ -17,15 +21,9 @@ const Footer: React.FC = () => {
         </div>
         <div className="flex items-center gap-5">
           {social.map((s) => (
-            <a
-              key={s.name}
-              href={s.href}
-              target={s.href.startsWith('http') ? '_blank' : undefined}
-              rel="noopener noreferrer"
-              className="text-[13px] text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
-            >
+            <LinkPreview key={s.name} href={s.href} title={s.name} domain={s.domain} side="top" className={linkCls}>
               {s.name}
-            </a>
+            </LinkPreview>
           ))}
         </div>
       </div>

@@ -6,7 +6,7 @@ import SensorField from './components/SensorField';
 import Home from './pages/Home';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetail from './pages/ProjectDetail';
-import About from './pages/About';
+import Papers from './pages/Papers';
 import Photography from './pages/Photography';
 
 const ScrollToTop: React.FC = () => {
@@ -29,9 +29,9 @@ const App: React.FC = () => {
         <main className="flex-grow w-full relative z-10">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/projects/:slug" element={<ProjectDetail />} />
+            <Route path="/papers" element={<Papers />} />
             <Route path="/photography" element={<Photography />} />
             <Route path="*" element={
               <div className="max-w-2xl mx-auto px-6 py-40 text-center">
