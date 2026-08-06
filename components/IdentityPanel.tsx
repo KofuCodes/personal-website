@@ -22,7 +22,7 @@ const IdentityPanel: React.FC = () => {
   const isHome = pathname === '/';
 
   return (
-    <aside className="flex flex-col p-8 pt-10 lg:p-14 lg:h-full lg:overflow-y-auto lg:[scrollbar-gutter:stable]">
+    <aside className="flex flex-col p-8 pt-10 lg:p-14 lg:h-full lg:overflow-y-auto">
       <div>
         <div className="reveal" style={{ animationDelay: '0s' }}>
           <PagesNav />
@@ -50,31 +50,31 @@ const IdentityPanel: React.FC = () => {
                 from firmware to PCBs to shipped hackathon builds — I love building hardware that
                 feels like software and software that feels like hardware.
               </p>
+
+              {/* External links — underlined, unlike the pages nav above */}
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3.5">
+                <LinkPreview href="https://github.com/kofucodes" title="GitHub" domain="github.com" className={quietLink}>
+                  github
+                </LinkPreview>
+                <LinkPreview href="https://linkedin.com/in/ethantrann" title="LinkedIn" domain="linkedin.com" className={quietLink}>
+                  linkedin
+                </LinkPreview>
+                <LinkPreview href="https://www.instagram.com/ethan.trrann/" title="Instagram" domain="instagram.com" className={quietLink}>
+                  instagram
+                </LinkPreview>
+                <a href="mailto:e64tran@uwaterloo.ca" className={quietLink}>
+                  email
+                </a>
+                <a href="/Ethan_Tran_Resume.pdf" target="_blank" rel="noopener noreferrer" className={quietLink}>
+                  resume
+                </a>
+                <span className="ml-auto opacity-70">
+                  <ThemeToggle />
+                </span>
+              </div>
             </div>
           </div>
         </section>
-
-        {/* External links — underlined, unlike the pages nav above */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-6 reveal" style={{ animationDelay: '0.1s' }}>
-          <LinkPreview href="https://github.com/kofucodes" title="GitHub" domain="github.com" className={quietLink}>
-            github
-          </LinkPreview>
-          <LinkPreview href="https://linkedin.com/in/ethantrann" title="LinkedIn" domain="linkedin.com" className={quietLink}>
-            linkedin
-          </LinkPreview>
-          <LinkPreview href="https://www.instagram.com/ethan.trrann/" title="Instagram" domain="instagram.com" className={quietLink}>
-            instagram
-          </LinkPreview>
-          <a href="mailto:e64tran@uwaterloo.ca" className={quietLink}>
-            email
-          </a>
-          <a href="/Ethan_Tran_Resume.pdf" target="_blank" rel="noopener noreferrer" className={quietLink}>
-            resume
-          </a>
-          <span className="ml-auto opacity-70">
-            <ThemeToggle />
-          </span>
-        </div>
 
         {/* Experience — hidden on mobile subpages so content stays close */}
         <section className={`mt-10 reveal ${isHome ? '' : 'hidden lg:block'}`} style={{ animationDelay: '0.16s' }}>
