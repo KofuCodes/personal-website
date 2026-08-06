@@ -34,14 +34,14 @@ const Hero: React.FC = () => (
       </div>
     </div>
 
-    <div className="h-px bg-stone-200 dark:bg-stone-800 my-6" />
+    <div className="h-px bg-stone-200 dark:bg-stone-800 my-5" />
 
     {/* Headshot with the bio and links beside it (stacked on mobile) */}
     <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
       <img
         src="/headshot.jpg"
         alt="Ethan Tran"
-        className="w-32 h-32 flex-shrink-0 rounded-xl object-cover ring-1 ring-inset ring-black/5 dark:ring-white/10"
+        className="w-28 h-28 flex-shrink-0 rounded-xl object-cover ring-1 ring-inset ring-black/5 dark:ring-white/10"
       />
       {/* Capped so the bio keeps a readable measure on a wide column */}
       <div className="flex-1 min-w-0 max-w-2xl">
@@ -55,7 +55,7 @@ const Hero: React.FC = () => (
         </p>
 
         {/* External links — underlined, unlike the pages nav below */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-4">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3">
           <LinkPreview href="https://github.com/kofucodes" title="GitHub" domain="github.com" className={quietLink}>
             github
           </LinkPreview>

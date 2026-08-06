@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from 'react';
+import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation, Link, Navigate } from 'react-router-dom';
 import SensorField from './components/SensorField';
 import Hero from './components/Hero';
@@ -7,9 +7,6 @@ import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Work from './pages/Work';
 import Photography from './pages/Photography';
-
-// Heavy (three.js) — code-split so it doesn't block the initial page load.
-const ClosedLoopControlTerrain = lazy(() => import('./components/ClosedLoopControlTerrain'));
 
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
@@ -22,40 +19,32 @@ const ScrollToTop: React.FC = () => {
 };
 
 /**
- * Two zones, one column: everything above <main> — identity, pages nav, and
- * the closed-loop terrain — is the shell and never changes. Routes swap only
- * what sits below it.
+ * Two zones, one column: the identity block and the pages nav are the shell
+ * and never change — routes swap only what sits below them.
+ *
+ * The column is a viewport-tall flex box, so the index page can hand its
+ * leftover height to the terrain and fit on one screen; longer pages simply
+ * grow past it and scroll.
  */
 const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen bg-amber-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100">
+      <div className="min-h-[100dvh] bg-amber-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100">
         <SensorField />
 
         {/* --content is this column's inner width, used to size the hero type. */}
         <div
-          className="relative z-10 mx-auto w-full max-w-[46rem] px-6 sm:px-8 pt-8 sm:pt-10 pb-16"
+          className="relative z-10 mx-auto flex min-h-[100dvh] w-full max-w-[46rem] flex-col px-6 sm:px-8 pt-5 sm:pt-6 pb-6"
           style={{ '--content': 'min(100vw - 4rem, 42rem)' } as React.CSSProperties}
         >
           <Hero />
 
-          <div className="mt-10 reveal" style={{ animationDelay: '0.1s' }}>
+          <div className="mt-6 reveal" style={{ animationDelay: '0.1s' }}>
             <PagesNav />
           </div>
 
-          <section className="mt-6 reveal" style={{ animationDelay: '0.14s' }}>
-            <div className="h-[clamp(280px,38vh,400px)] w-full">
-              <Suspense fallback={<div className="h-full w-full" />}>
-                <ClosedLoopControlTerrain />
-              </Suspense>
-            </div>
-            <p className="mt-3 text-center text-[12.5px] italic text-stone-500 dark:text-stone-400">
-              I'm always self-adjusting to the targeted goal
-            </p>
-          </section>
-
-          <main className="mt-14">
+          <main className="mt-6 flex flex-1 flex-col">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/projects" element={<Projects />} />
@@ -75,7 +64,7 @@ const App: React.FC = () => {
             </Routes>
           </main>
 
-          <footer className="mt-16 pt-6 border-t border-stone-200 dark:border-stone-800">
+          <footer className="mt-6 pt-4 border-t border-stone-200 dark:border-stone-800">
             <p className="text-[12.5px] text-stone-500 dark:text-stone-400 select-none">
               © {new Date().getFullYear()} Ethan Tran · Waterloo, ON
             </p>
