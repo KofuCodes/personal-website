@@ -29,15 +29,15 @@ const IdentityPanel: React.FC = () => {
         </div>
 
         <section className="mt-8 reveal" style={{ animationDelay: '0.06s' }}>
-          <img
-            src="/headshot.jpg"
-            alt="Ethan Tran"
-            className="w-24 h-24 rounded-xl object-cover ring-1 ring-inset ring-black/5 dark:ring-white/10 mb-5"
-          />
           {/* nowrap, with the size capped by the panel width so the full "hey, i'm …"
               string (~11.1em in IBM Plex Mono, cursor included) never wraps or overflows */}
           <TypedName className="whitespace-nowrap text-[length:min(clamp(1.5rem,0.9rem+1.75vw,2.4rem),(100vw-72px)/11.1)] lg:text-[length:min(clamp(1.5rem,0.9rem+1.75vw,2.4rem),(40vw-126px)/11.1)]" />
           <div className="w-full max-w-md h-px bg-stone-200 dark:bg-stone-800 my-5" />
+          <img
+            src="/headshot.jpg"
+            alt="Ethan Tran"
+            className="w-32 h-32 rounded-xl object-cover ring-1 ring-inset ring-black/5 dark:ring-white/10 mb-5"
+          />
           <p className="text-[14px] text-stone-600 dark:text-stone-300">
             computer engineering @{' '}
             <Brand name="University of Waterloo" label="UWaterloo" domain="uwaterloo.ca" href="https://uwaterloo.ca" />
