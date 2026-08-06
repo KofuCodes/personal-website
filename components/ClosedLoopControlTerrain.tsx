@@ -37,6 +37,9 @@ const EVAL_FRAMES = 45; // adaptive tuner window (~0.75 s)
 const HOLD_SECONDS = 3; // pause on a locked target before the next one
 const MAX_LOOPS = 2400; // failsafe (40 s of sim time) so a run can never stall
 const ERR_SCALE = 0.6; // vertical range of the error readout
+// Camera orbit — lower these together to make the terrain fill more of the stage.
+const CAM_R = 4.9;
+const CAM_Y = 2.8;
 
 type Hist = { err: number[] };
 type Phase = 'travel' | 'settle' | 'locked';
@@ -363,9 +366,10 @@ function Scene({
     }
 
     // ── slow camera orbit ──
+    // Pulled in from 6.1/3.5 so the terrain fills the stage instead of
+    // floating in it; the look-at angle is unchanged (same ratio).
     const a = state.clock.elapsedTime * 0.11;
-    const R = 6.1;
-    state.camera.position.set(Math.cos(a) * R, 3.5, Math.sin(a) * R);
+    state.camera.position.set(Math.cos(a) * CAM_R, CAM_Y, Math.sin(a) * CAM_R);
     state.camera.lookAt(0, 0.1, 0);
   });
 
@@ -595,11 +599,13 @@ const ClosedLoopControlTerrain: React.FC = () => {
   }, []);
 
   return (
-    <div ref={wrapRef} className="relative w-full h-full">
+    // isolate: keeps the HUD/graph overlays inside this box so they can't
+    // compete with the rest of the page's stacking order.
+    <div ref={wrapRef} className="relative isolate w-full h-full">
       <Canvas
         frameloop={frameloop}
         dpr={[1, 1.6]}
-        camera={{ position: [6.1, 3.5, 6.1], fov: 42 }}
+        camera={{ position: [CAM_R, CAM_Y, CAM_R], fov: 42 }}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         style={{ background: 'transparent' }}
       >

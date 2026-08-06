@@ -14,7 +14,9 @@ const quietLink =
  * shell above the pages nav, so it never changes as routes swap.
  */
 const Hero: React.FC = () => (
-  <section className="reveal" style={{ animationDelay: '0.06s' }}>
+  // relative z-30: .reveal makes this a stacking context, which would otherwise
+  // trap the link-preview cards below later siblings (the terrain HUD is z-10).
+  <section className="relative z-30 reveal" style={{ animationDelay: '0.06s' }}>
     {/* Name left, now playing + theme right. Below sm they stack above the
         name instead, since the two can't share a 360px line. */}
     <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
