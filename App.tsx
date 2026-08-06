@@ -5,7 +5,6 @@ import LoopCursor from './components/LoopCursor';
 import IdentityPanel from './components/IdentityPanel';
 import SpotifyStatus from './components/SpotifyStatus';
 import Home from './pages/Home';
-import Papers from './pages/Papers';
 import Photography from './pages/Photography';
 
 const ScrollToTop: React.FC = () => {
@@ -40,7 +39,6 @@ const App: React.FC = () => {
           >
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/papers" element={<Papers />} />
               <Route path="/photography" element={<Photography />} />
               {/* Old work-page deep links (pre split-layout) land home instead of 404ing */}
               <Route path="/projects/*" element={<Navigate to="/" replace />} />

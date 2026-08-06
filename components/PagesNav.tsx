@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 const pages = [
   { label: 'index', to: '/' },
-  { label: 'papers', to: '/papers' },
   { label: 'gallery', to: '/photography' },
 ];
 

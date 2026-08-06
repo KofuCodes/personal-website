@@ -10,7 +10,7 @@ npm run build    # production build in /dist
 
 The whole site is a split-panel portfolio: the identity panel on the left (name, bio,
 links, experience) **never changes** — routes swap only the right panel (index /
-papers / gallery, via the ➢ pages nav at the top left). Project details open in a
+gallery, via the ➢ pages nav at the top left). Project details open in a
 modal, not a separate route.
 
 All content lives in **`/data`** as plain TypeScript — you never touch a component to
@@ -104,7 +104,6 @@ Drop files in `/public/photography/<Album>/` and register each in
 | About | `data/about.ts` | [`components/About.tsx`](components/About.tsx) |
 | Project cards + filters | `data/projects.ts` | [`components/WorkCards.tsx`](components/WorkCards.tsx), filters in [`pages/Home.tsx`](pages/Home.tsx) |
 | Project detail modal | `data/projects.ts` | [`components/ProjectModal.tsx`](components/ProjectModal.tsx) |
-| Papers | `data/papers.ts` | [`pages/Papers.tsx`](pages/Papers.tsx) |
 | Gallery (+ home preview) | `data/photography.ts` | [`pages/Photography.tsx`](pages/Photography.tsx), [`pages/Home.tsx`](pages/Home.tsx) |
 | PD cursor-chaser dot | — | [`components/LoopCursor.tsx`](components/LoopCursor.tsx) |
 
