@@ -22,7 +22,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ name, domain, src, classNa
   const [current, setCurrent] = useState<string | undefined>(src || favicon);
 
   const base =
-    'inline-block shrink-0 rounded-[4px] object-contain bg-neutral-100 dark:bg-neutral-800 ' +
+    'inline-block shrink-0 rounded-[4px] object-contain bg-stone-100 dark:bg-stone-800 ' +
     'ring-1 ring-inset ring-black/5 dark:ring-white/10';
 
   if (current) {
@@ -42,7 +42,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ name, domain, src, classNa
   return (
     <span
       aria-hidden="true"
-      className={`${base} inline-flex items-center justify-center font-semibold text-neutral-500 dark:text-neutral-400 ${className}`}
+      className={`${base} inline-flex items-center justify-center font-semibold text-stone-500 dark:text-stone-400 ${className}`}
     >
       <span style={{ fontSize: '0.62em' }}>{name.trim().charAt(0).toUpperCase()}</span>
     </span>
@@ -69,7 +69,7 @@ const Brand: React.FC<BrandProps> = ({ name, label, href, domain, src, className
       <span
         className={
           underline
-            ? 'underline decoration-neutral-300 dark:decoration-neutral-600 underline-offset-[3px] group-hover/lp:decoration-neutral-900 dark:group-hover/lp:decoration-neutral-100 transition-colors'
+            ? 'underline decoration-stone-300 dark:decoration-stone-600 underline-offset-[3px] group-hover/lp:decoration-stone-900 dark:group-hover/lp:decoration-stone-100 transition-colors'
             : undefined
         }
       >
@@ -84,14 +84,14 @@ const Brand: React.FC<BrandProps> = ({ name, label, href, domain, src, className
         href={href}
         title={name}
         domain={domain}
-        className="font-medium text-neutral-900 dark:text-neutral-100"
+        className="font-medium text-stone-900 dark:text-stone-100"
       >
         {inner(true)}
       </LinkPreview>
     );
   }
 
-  return <span className="font-medium text-neutral-900 dark:text-neutral-100">{inner(false)}</span>;
+  return <span className="font-medium text-stone-900 dark:text-stone-100">{inner(false)}</span>;
 };
 
 export default Brand;

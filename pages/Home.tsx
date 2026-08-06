@@ -19,12 +19,12 @@ import LinkPreview from '../components/LinkPreview';
 const ClosedLoopControlTerrain = lazy(() => import('../components/ClosedLoopControlTerrain'));
 
 const quietLink =
-  'text-[13px] lowercase text-neutral-500 dark:text-neutral-400 underline decoration-neutral-300 dark:decoration-neutral-700 underline-offset-[3px] hover:text-neutral-900 dark:hover:text-neutral-100 hover:decoration-neutral-500 transition-colors';
+  'text-[13px] lowercase text-stone-500 dark:text-stone-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-[3px] hover:text-stone-900 dark:hover:text-stone-100 hover:decoration-stone-500 transition-colors';
 
 /** Quiet section marker: lowercase mono, muted, trailing em dash. */
 const QuietHeader: React.FC<{ label: string; children?: React.ReactNode }> = ({ label, children }) => (
   <div className="mb-4 flex items-baseline gap-4">
-    <h2 className="mono text-[12px] lowercase tracking-wider text-neutral-400 dark:text-neutral-500">
+    <h2 className="mono text-[12px] lowercase tracking-wider text-stone-400 dark:text-stone-500">
       {label} —
     </h2>
     {children}
@@ -63,8 +63,8 @@ const Home: React.FC = () => {
       onClick={() => setFilter(filter === value ? 'all' : value)}
       className={`mono text-[12px] lowercase transition-colors ${
         filter === value
-          ? 'text-neutral-900 dark:text-neutral-100 underline underline-offset-[3px]'
-          : 'text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100'
+          ? 'text-amber-700 dark:text-amber-500 underline underline-offset-[3px]'
+          : 'text-stone-400 dark:text-stone-500 hover:text-stone-900 dark:hover:text-stone-100'
       }`}
     >
       {value}
@@ -79,12 +79,12 @@ const Home: React.FC = () => {
           <section className="reveal" style={{ animationDelay: '0s' }}>
             {/* nowrap + clamp sized so the full "hey, i'm …" string never wraps mid-animation */}
             <TypedName className="whitespace-nowrap text-[clamp(1.7rem,0.9rem+1.75vw,2.4rem)]" />
-            <div className="w-full max-w-md h-px bg-neutral-200 dark:bg-neutral-800 my-5" />
-            <p className="text-[14px] text-neutral-600 dark:text-neutral-300">
+            <div className="w-full max-w-md h-px bg-stone-200 dark:bg-stone-800 my-5" />
+            <p className="text-[14px] text-stone-600 dark:text-stone-300">
               computer engineering @{' '}
               <Brand name="University of Waterloo" label="UWaterloo" domain="uwaterloo.ca" href="https://uwaterloo.ca" />
             </p>
-            <p className="text-[14px] leading-relaxed text-neutral-600 dark:text-neutral-300 mt-2">
+            <p className="text-[14px] leading-relaxed text-stone-600 dark:text-stone-300 mt-2">
               from firmware to PCBs to shipped hackathon builds — I love building hardware that
               feels like software and software that feels like hardware.
             </p>
@@ -131,14 +131,14 @@ const Home: React.FC = () => {
           <div className="-ml-1.5 mb-3">
             <SpotifyStatus />
           </div>
-          <p className="text-[12.5px] text-neutral-400 dark:text-neutral-500 select-none">
+          <p className="text-[12.5px] text-stone-400 dark:text-stone-500 select-none">
             © {new Date().getFullYear()} Ethan Tran · Waterloo, ON
           </p>
         </div>
       </aside>
 
       {/* ── Right panel: terrain, about, projects, gallery (scrolls) ── */}
-      <div className="p-8 lg:p-14 lg:h-full lg:overflow-y-auto lg:border-l lg:border-neutral-200 dark:lg:border-neutral-800">
+      <div className="p-8 lg:p-14 lg:h-full lg:overflow-y-auto lg:border-l lg:border-stone-200 dark:lg:border-stone-800">
         {/* Terrain masthead */}
         <section className="reveal" style={{ animationDelay: '0.12s' }}>
           <div className="h-[clamp(280px,38vh,400px)] w-full">
@@ -146,8 +146,8 @@ const Home: React.FC = () => {
               <ClosedLoopControlTerrain />
             </Suspense>
           </div>
-          <p className="mt-3 text-center text-[12.5px] italic text-neutral-400 dark:text-neutral-500">
-            a closed loop over shifting ground — always self-adjusting to the targeted goal. me too.
+          <p className="mt-3 text-center text-[12.5px] italic text-stone-400 dark:text-stone-500">
+            I'm always self-adjusting to the targeted goal
           </p>
         </section>
 
@@ -169,7 +169,7 @@ const Home: React.FC = () => {
             {filteredProjects.length > 0 ? (
               <WorkCards projects={filteredProjects} onOpen={setSelectedProject} />
             ) : (
-              <p className="mono text-[12px] text-neutral-400 dark:text-neutral-500 py-8 text-center">
+              <p className="mono text-[12px] text-stone-400 dark:text-stone-500 py-8 text-center">
                 nothing here yet.
               </p>
             )}
@@ -180,10 +180,10 @@ const Home: React.FC = () => {
         <Reveal className="mt-12">
           <section className="group">
             <QuietHeader label="gallery">
-              <Aperture className="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500 self-center" animate />
+              <Aperture className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 self-center" animate />
               <Link
                 to="/photography"
-                className="ml-auto text-[13px] text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                className="ml-auto text-[13px] text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
               >
                 view all →
               </Link>
@@ -208,27 +208,12 @@ const Home: React.FC = () => {
           </section>
         </Reveal>
 
-        {/* Playlist */}
-        <Reveal className="mt-12">
-          <section>
-            <QuietHeader label="on rotation" />
-            <iframe
-              title="Spotify playlist — Ethan Tran"
-              style={{ borderRadius: '12px' }}
-              src="https://open.spotify.com/embed/playlist/4Qs6jHfSEo88GRu8o8pjO3?utm_source=generator&si=8eedc686976d4ab1"
-              width="100%"
-              height={152}
-              frameBorder={0}
-              allowFullScreen
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-            />
-          </section>
-        </Reveal>
-
         {/* Mobile-only footer (the aside footer is hidden below lg) */}
         <div className="lg:hidden mt-12">
-          <p className="text-[12.5px] text-neutral-400 dark:text-neutral-500 select-none">
+          <div className="-ml-1.5 mb-3">
+            <SpotifyStatus />
+          </div>
+          <p className="text-[12.5px] text-stone-400 dark:text-stone-500 select-none">
             © {new Date().getFullYear()} Ethan Tran · Waterloo, ON
           </p>
         </div>

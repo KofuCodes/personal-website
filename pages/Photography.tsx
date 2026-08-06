@@ -60,15 +60,15 @@ const Photography: React.FC = () => {
     <div className="max-w-5xl mx-auto px-6 pt-28 pb-12">
       <header className="mb-12 reveal">
         <h1 className="text-2xl font-semibold tracking-tight flex items-center gap-2.5">
-          <Aperture className="w-5 h-5 text-neutral-400" /> Gallery
+          <Aperture className="w-5 h-5 text-stone-400" /> Gallery
         </h1>
-        <p className="text-[15px] text-neutral-500 dark:text-neutral-400 mt-2">My story, through a lens.</p>
+        <p className="text-[15px] text-stone-500 dark:text-stone-400 mt-2">My story, through a lens.</p>
       </header>
 
       <div className="space-y-14">
         {groups.map((group) => (
           <section key={group.title} className="reveal">
-            <h2 className="mono text-[12px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-4">
+            <h2 className="mono text-[12px] uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-4">
               {group.title}
             </h2>
             <div className="columns-2 md:columns-3 gap-3 [&>*]:mb-3">
@@ -142,8 +142,8 @@ const Photography: React.FC = () => {
           document.body
         )}
 
-      <footer className="mt-20 pt-8 border-t border-neutral-200 dark:border-neutral-800 text-center">
-        <p className="mono text-[12px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
+      <footer className="mt-20 pt-8 border-t border-stone-200 dark:border-stone-800 text-center">
+        <p className="mono text-[12px] uppercase tracking-wider text-stone-400 dark:text-stone-500">
           End of collection
         </p>
       </footer>

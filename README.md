@@ -104,8 +104,13 @@ Drop files in `/public/photography/<Album>/` and register each in
 | Project detail modal | `data/projects.ts` | [`components/ProjectModal.tsx`](components/ProjectModal.tsx) |
 | Papers | `data/papers.ts` | [`pages/Papers.tsx`](pages/Papers.tsx) |
 | Gallery (+ home preview) | `data/photography.ts` | [`pages/Photography.tsx`](pages/Photography.tsx), [`pages/Home.tsx`](pages/Home.tsx) |
-| "on rotation" playlist | — | [`pages/Home.tsx`](pages/Home.tsx) (Spotify embed) |
+| PD cursor-chaser dot | — | [`components/LoopCursor.tsx`](components/LoopCursor.tsx) |
 
 Scroll animations are [`components/Reveal.tsx`](components/Reveal.tsx) (right-panel
 sections below the masthead) and the `.reveal` CSS classes in [`index.html`](index.html)
 (load-time stagger for the left panel, the terrain masthead, and subpages).
+
+**Theme**: warm stone palette with a single amber "target" accent — the ✦ about
+markers, active filter, typing cursor, focus rings, the terrain's goal marker, and
+the cursor-chaser dot all wear it. The chaser is a real underdamped PD controller
+(cursor = setpoint), matching the terrain caption.

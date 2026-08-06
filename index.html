@@ -25,7 +25,7 @@
   <meta name="twitter:description"
     content="Computer Engineering student at the University of Waterloo — embedded systems, firmware, and hardware that feels like software.">
   <meta name="twitter:image" content="https://www.ethantran.ca/og.png">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#fafaf9">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -43,6 +43,7 @@
   <script>
     if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark')
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0c0a09')
     } else {
       document.documentElement.classList.remove('dark')
     }
@@ -65,13 +66,13 @@
     }
 
     ::selection {
-      background-color: #111111;
-      color: #ffffff;
+      background-color: #1c1917;
+      color: #fafaf9;
     }
 
     .dark ::selection {
-      background-color: #ededed;
-      color: #0a0a0a;
+      background-color: #e7e5e4;
+      color: #0c0a09;
     }
 
     ::-webkit-scrollbar {
@@ -83,14 +84,14 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background: #d4d4d4;
+      background: #d6d3d1;
       border-radius: 10px;
       border: 3px solid transparent;
       background-clip: content-box;
     }
 
     .dark ::-webkit-scrollbar-thumb {
-      background: #404040;
+      background: #44403c;
       background-clip: content-box;
       border: 3px solid transparent;
     }
@@ -127,6 +128,20 @@
     .sreveal.is-visible {
       opacity: 1;
       transform: none;
+    }
+
+    /* Experience accordion — quick ease-out expand, slow settle on collapse.
+       Explicit CSS (not utility classes) so duration/easing can't be lost to
+       stylesheet ordering. */
+    .accordion {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .accordion.open {
+      grid-template-rows: 1fr;
+      transition-duration: 0.3s;
     }
 
     /* Typing cursor for the hero name */
@@ -177,8 +192,7 @@
       }
 
       .aperture,
-      .transition-transform,
-      .transition-\[grid-template-rows\] {
+      .transition-transform {
         transition-duration: 0.01ms !important;
       }
 
@@ -224,7 +238,7 @@
 </head>
 
 <body
-  class="bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 overflow-x-hidden antialiased">
+  class="bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 overflow-x-hidden antialiased">
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

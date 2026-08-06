@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
     <nav
       className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
         scrolled
-          ? 'bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200/80 dark:border-neutral-800/80'
+          ? 'bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-md border-b border-stone-200/80 dark:border-stone-800/80'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
@@ -44,8 +44,8 @@ const Navbar: React.FC = () => {
                 to={link.path}
                 className={`px-3 py-1.5 text-[13px] rounded-md transition-colors ${
                   isActive(link.path)
-                    ? 'text-neutral-900 dark:text-neutral-100 font-medium'
-                    : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
+                    ? 'text-stone-900 dark:text-stone-100 font-medium'
+                    : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
                 }`}
               >
                 {link.name}
@@ -61,7 +61,7 @@ const Navbar: React.FC = () => {
             href="/Ethan_Tran_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center text-[13px] font-medium px-3 py-1.5 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors"
+            className="hidden md:inline-flex items-center text-[13px] font-medium px-3 py-1.5 rounded-md border border-stone-300 dark:border-stone-700 hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors"
           >
             Résumé
           </a>
@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
           <ThemeToggle />
 
           <button
-            className="md:hidden w-8 h-8 flex items-center justify-center text-neutral-600 dark:text-neutral-300"
+            className="md:hidden w-8 h-8 flex items-center justify-center text-stone-600 dark:text-stone-300"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -81,15 +81,15 @@ const Navbar: React.FC = () => {
       </div>
 
       {isOpen && (
-        <div className="md:hidden bg-white dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800 px-6 py-5 flex flex-col gap-1">
+        <div className="md:hidden bg-stone-50 dark:bg-stone-950 border-t border-stone-200 dark:border-stone-800 px-6 py-5 flex flex-col gap-1">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.path}
               className={`py-2 text-base ${
                 isActive(link.path)
-                  ? 'text-neutral-900 dark:text-neutral-100 font-medium'
-                  : 'text-neutral-500 dark:text-neutral-400'
+                  ? 'text-stone-900 dark:text-stone-100 font-medium'
+                  : 'text-stone-500 dark:text-stone-400'
               }`}
               onClick={() => setIsOpen(false)}
             >
@@ -100,12 +100,12 @@ const Navbar: React.FC = () => {
             href="/Ethan_Tran_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 inline-flex w-fit items-center text-sm font-medium px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700"
+            className="mt-2 inline-flex w-fit items-center text-sm font-medium px-4 py-2 rounded-md border border-stone-300 dark:border-stone-700"
             onClick={() => setIsOpen(false)}
           >
             Résumé
           </a>
-          <div className="pt-4 mt-2 border-t border-neutral-200 dark:border-neutral-800">
+          <div className="pt-4 mt-2 border-t border-stone-200 dark:border-stone-800">
             <SpotifyStatus />
           </div>
         </div>

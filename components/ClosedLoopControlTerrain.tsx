@@ -296,12 +296,14 @@ function Scene({
       m.prevDark = dark;
       const ink = dark ? '#ededed' : '#1a1a1a';
       const faint = dark ? '#8a8a8a' : '#a6a6a6';
+      // The goal wears the site's amber "target" accent
+      const accent = dark ? '#f59e0b' : '#d97706';
       wireMat.current?.color.set('#9a9a9a');
       fillMat.current?.color.set(dark ? '#ffffff' : '#000000');
       roverMat.current?.color.set(ink);
       haloMat.current?.color.set(ink);
-      ringMat.current?.color.set(ink);
-      pulseMat.current?.color.set(ink);
+      ringMat.current?.color.set(accent);
+      pulseMat.current?.color.set(accent);
       beaconMat.current?.color.set(faint);
       actualLine.material.color.set(ink);
       errorLine.material.color.set(ink);
@@ -401,7 +403,7 @@ function Scene({
         </mesh>
         {/* low zIndexRange keeps the in-scene label under the HUD and any open preview card */}
         <Html center position={[0, 0.74, 0]} pointerEvents="none" zIndexRange={[5, 0]}>
-          <div ref={goalLabelRef} className={`${labelCls} text-neutral-500 dark:text-neutral-400`}>
+          <div ref={goalLabelRef} className={`${labelCls} text-stone-500 dark:text-stone-400`}>
             target
           </div>
         </Html>
@@ -461,10 +463,10 @@ const MiniGraph: React.FC<{ histRef: React.MutableRefObject<Hist>; className?: s
         const pad = 3;
         const mapY = (v: number) => H / 2 - (v / ERR_SCALE) * (H / 2 - pad);
 
-        // goal zone: ±BAND
+        // goal zone: ±BAND — amber, matching the goal marker in the scene
         const bandTop = mapY(BAND);
         const bandBot = mapY(-BAND);
-        ctx.fillStyle = `rgba(${ink},0.07)`;
+        ctx.fillStyle = dark ? 'rgba(245,158,11,0.13)' : 'rgba(217,119,6,0.11)';
         ctx.fillRect(0, bandTop, W, bandBot - bandTop);
 
         // zero line
@@ -509,7 +511,7 @@ const MiniGraph: React.FC<{ histRef: React.MutableRefObject<Hist>; className?: s
 
   return (
     <div className={`pointer-events-none select-none ${className ?? ''}`}>
-      <div className="mono text-[9px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-1">
+      <div className="mono text-[9px] uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-1">
         error · goal ±{BAND}
       </div>
       <canvas ref={canvasRef} className="w-full h-[42px]" />
@@ -555,12 +557,12 @@ const Hud: React.FC<{ statusRef: React.MutableRefObject<Status> }> = ({ statusRe
 
   return (
     <div className="absolute top-2 left-1 z-10 pointer-events-none select-none max-w-[15rem]">
-      <div className="text-[14px] font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">closed-loop</div>
-      <div className="mono text-[11px] text-neutral-400 dark:text-neutral-500 mt-0.5 leading-snug">
+      <div className="text-[14px] font-semibold tracking-tight text-stone-800 dark:text-stone-100">closed-loop</div>
+      <div className="mono text-[11px] text-stone-400 dark:text-stone-500 mt-0.5 leading-snug">
         goal: reach the marker, hold error within ±{BAND}
       </div>
-      <div ref={statusEl} className="mono text-[11px] text-neutral-600 dark:text-neutral-300 mt-1.5" />
-      <div ref={gainsEl} className="mono text-[10px] text-neutral-400 dark:text-neutral-500 mt-0.5" />
+      <div ref={statusEl} className="mono text-[11px] text-stone-600 dark:text-stone-300 mt-1.5" />
+      <div ref={gainsEl} className="mono text-[10px] text-stone-400 dark:text-stone-500 mt-0.5" />
     </div>
   );
 };

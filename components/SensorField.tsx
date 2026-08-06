@@ -53,7 +53,7 @@ const SensorField: React.FC = () => {
 
     const render = (interactive: boolean) => {
       const dark = isDark();
-      const rgb = dark ? '255,255,255' : '20,20,20';
+      const rgb = dark ? '250,250,249' : '28,25,23';
       const baseA = dark ? 0.05 : 0.045;
       const peakA = dark ? 0.45 : 0.4;
 

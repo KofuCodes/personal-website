@@ -9,14 +9,14 @@ const social = [
 ];
 
 const linkCls =
-  'text-[13px] text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors';
+  'text-[13px] text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="mt-24 border-t border-neutral-200 dark:border-neutral-800 relative z-10 bg-white dark:bg-neutral-950">
+    <footer className="mt-24 border-t border-stone-200 dark:border-stone-800 relative z-10 bg-stone-50 dark:bg-stone-950">
       <div className="max-w-2xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div className="text-[13px] text-neutral-500 dark:text-neutral-400">
-          <span className="text-neutral-700 dark:text-neutral-200 font-medium">Ethan Tran</span>
+        <div className="text-[13px] text-stone-500 dark:text-stone-400">
+          <span className="text-stone-700 dark:text-stone-200 font-medium">Ethan Tran</span>
           <span className="mono text-[12px] ml-2">© {new Date().getFullYear()} · Waterloo, ON</span>
         </div>
         <div className="flex items-center gap-5">

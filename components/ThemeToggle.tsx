@@ -11,6 +11,10 @@ const ThemeToggle: React.FC<{ className?: string }> = ({ className = '' }) => {
     setIsDark(dark);
     document.documentElement.classList.toggle('dark', dark);
     localStorage.setItem('theme', dark ? 'dark' : 'light');
+    // Keep browser chrome (mobile address bar etc.) matching the surface
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', dark ? '#0c0a09' : '#fafaf9');
   };
 
   const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -55,7 +59,7 @@ const ThemeToggle: React.FC<{ className?: string }> = ({ className = '' }) => {
   return (
     <button
       onClick={toggleTheme}
-      className={`w-8 h-8 flex items-center justify-center rounded-md text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors ${className}`}
+      className={`w-8 h-8 flex items-center justify-center rounded-md text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors ${className}`}
       aria-label="Toggle theme"
     >
       {isDark ? (

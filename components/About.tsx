@@ -15,7 +15,7 @@ const Part: React.FC<{ part: AboutPart }> = ({ part }) => {
     return (
       <Link
         to={part.to}
-        className="font-medium underline decoration-neutral-300 dark:decoration-neutral-600 underline-offset-[3px] hover:decoration-neutral-900 dark:hover:decoration-neutral-100 transition-colors"
+        className="font-medium underline decoration-stone-300 dark:decoration-stone-600 underline-offset-[3px] hover:decoration-stone-900 dark:hover:decoration-stone-100 transition-colors"
       >
         {part.text}
       </Link>
@@ -37,9 +37,9 @@ const PartList: React.FC<{ parts: AboutPart[] }> = ({ parts }) => (
 const About: React.FC = () => (
   <ul className="space-y-2.5">
     {aboutItems.map((item, i) => (
-      <li key={i} className="text-[14.5px] leading-relaxed text-neutral-700 dark:text-neutral-300">
+      <li key={i} className="text-[14.5px] leading-relaxed text-stone-700 dark:text-stone-300">
         <div className="flex gap-2.5">
-          <span className="text-[9px] leading-[2.4] text-neutral-300 dark:text-neutral-600 select-none" aria-hidden="true">
+          <span className="text-[9px] leading-[2.4] text-amber-600/70 dark:text-amber-500/60 select-none" aria-hidden="true">
             ✦
           </span>
           <span>
@@ -47,7 +47,7 @@ const About: React.FC = () => (
           </span>
         </div>
         {item.sub && (
-          <div className="flex gap-2 pl-6 mt-0.5 text-[13.5px] text-neutral-500 dark:text-neutral-400">
+          <div className="flex gap-2 pl-6 mt-0.5 text-[13.5px] text-stone-500 dark:text-stone-400">
             <span className="select-none" aria-hidden="true">↳</span>
             <span>
               <PartList parts={item.sub} />

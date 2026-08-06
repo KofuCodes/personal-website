@@ -11,7 +11,7 @@ const ExperienceTimeline: React.FC = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   return (
-    <ul className="divide-y divide-neutral-200 dark:divide-neutral-800">
+    <ul className="divide-y divide-stone-200 dark:divide-stone-800">
       {experiences.map((exp) => {
         const isExpanded = expandedId === exp.id;
         const hasDetail = !!exp.bullets?.length;
@@ -41,7 +41,7 @@ const ExperienceTimeline: React.FC = () => {
             aria-expanded={hasDetail ? isExpanded : undefined}
             className={
               hasDetail
-                ? 'cursor-pointer rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-600'
+                ? 'cursor-pointer rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 dark:focus-visible:ring-amber-500/70'
                 : ''
             }
           >
@@ -56,7 +56,7 @@ const ExperienceTimeline: React.FC = () => {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="flex min-w-0 items-baseline text-[15px] font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+                    <h3 className="flex min-w-0 items-baseline text-[15px] font-semibold tracking-tight text-stone-900 dark:text-stone-100">
                       {exp.link ? (
                         <a
                           href={exp.link}
@@ -66,17 +66,17 @@ const ExperienceTimeline: React.FC = () => {
                           className="group flex min-w-0 items-baseline"
                         >
                           <span className="truncate">{exp.company}</span>
-                          <span className="shrink-0 ml-1.5 text-neutral-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                          <span className="shrink-0 ml-1.5 text-stone-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                         </a>
                       ) : (
                         <span className="truncate">{exp.company}</span>
                       )}
                     </h3>
-                    <span className="mono text-[11px] italic text-neutral-400 dark:text-neutral-500 whitespace-nowrap">
+                    <span className="mono text-[11px] italic text-stone-400 dark:text-stone-500 whitespace-nowrap">
                       {exp.period}
                     </span>
                   </div>
-                  <p className="text-[13px] italic lowercase text-neutral-500 dark:text-neutral-400 mt-0.5 truncate">
+                  <p className="text-[13px] italic lowercase text-stone-500 dark:text-stone-400 mt-0.5 truncate">
                     {exp.role}
                   </p>
                 </div>
@@ -84,20 +84,15 @@ const ExperienceTimeline: React.FC = () => {
 
               {/* Expandable bullets — grid-rows trick animates height without JS measuring */}
               {hasDetail && (
-                <div
-                  aria-hidden={!isExpanded}
-                  className={`grid transition-[grid-template-rows] ease-out ${
-                    isExpanded ? 'grid-rows-[1fr] duration-300' : 'grid-rows-[0fr] duration-500'
-                  }`}
-                >
+                <div aria-hidden={!isExpanded} className={`accordion ${isExpanded ? 'open' : ''}`}>
                   <div className="overflow-hidden">
                     <ul className="pt-2.5 pl-12 space-y-1">
                       {exp.bullets!.map((bullet, idx) => (
                         <li
                           key={idx}
-                          className="flex gap-2 text-[12.5px] leading-relaxed text-neutral-600 dark:text-neutral-300"
+                          className="flex gap-2 text-[12.5px] leading-relaxed text-stone-600 dark:text-stone-300"
                         >
-                          <span className="text-neutral-300 dark:text-neutral-600 select-none">–</span>
+                          <span className="text-stone-300 dark:text-stone-600 select-none">–</span>
                           <span>{bullet}</span>
                         </li>
                       ))}

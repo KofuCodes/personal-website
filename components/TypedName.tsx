@@ -64,19 +64,19 @@ const TypedName: React.FC<{ className?: string }> = ({ className = '' }) => {
   const cursor = (
     <span
       aria-hidden="true"
-      className={`inline-block w-[3px] h-[0.72em] ml-[0.08em] bg-neutral-400 dark:bg-neutral-500 ${
+      className={`inline-block w-[3px] h-[0.72em] ml-[0.08em] bg-amber-500 ${
         blinking ? 'animate-blink' : ''
       }`}
     />
   );
 
   return (
-    <h1 className={`font-semibold tracking-tight leading-tight text-neutral-500 dark:text-neutral-400 ${className}`}>
+    <h1 className={`font-semibold tracking-tight leading-tight text-stone-500 dark:text-stone-400 ${className}`}>
       <span className="sr-only">hey, i&apos;m Ethan Tran</span>
       <span aria-hidden="true">
         {PREFIX.slice(0, prefixCount)}
         {phase === 'deleting' && cursor}
-        <span className="text-neutral-900 dark:text-neutral-100">{NAME.slice(0, nameCount)}</span>
+        <span className="text-stone-900 dark:text-stone-100">{NAME.slice(0, nameCount)}</span>
         {phase !== 'deleting' && phase !== 'done' && cursor}
       </span>
     </h1>

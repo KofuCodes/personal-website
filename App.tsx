@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route, useLocation, Link, Navigate } from
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SensorField from './components/SensorField';
+import LoopCursor from './components/LoopCursor';
 import Home from './pages/Home';
 import Papers from './pages/Papers';
 import Photography from './pages/Photography';
@@ -26,8 +27,9 @@ const AppShell: React.FC = () => {
   const isHome = pathname === '/';
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 flex flex-col">
+    <div className="min-h-screen bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 flex flex-col">
       <SensorField />
+      <LoopCursor />
       {!isHome && <Navbar />}
       <main className="flex-grow w-full relative z-10">
         <Routes>
@@ -39,8 +41,8 @@ const AppShell: React.FC = () => {
           <Route path="*" element={
             <div className="max-w-2xl mx-auto px-6 py-40 text-center">
               <h1 className="text-3xl font-semibold mb-3 tracking-tight">404</h1>
-              <p className="text-neutral-500 dark:text-neutral-400 mb-8 mono text-sm">Page not found</p>
-              <Link to="/" className="inline-block border border-neutral-300 dark:border-neutral-700 px-5 py-2 rounded-full text-sm font-medium hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors">
+              <p className="text-stone-500 dark:text-stone-400 mb-8 mono text-sm">Page not found</p>
+              <Link to="/" className="inline-block border border-stone-300 dark:border-stone-700 px-5 py-2 rounded-full text-sm font-medium hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors">
                 Back home
               </Link>
             </div>
