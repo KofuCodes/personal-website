@@ -33,19 +33,25 @@ const IdentityPanel: React.FC = () => {
               string (~11.1em in IBM Plex Mono, cursor included) never wraps or overflows */}
           <TypedName className="whitespace-nowrap text-[length:min(clamp(1.5rem,0.9rem+1.75vw,2.4rem),(100vw-72px)/11.1)] lg:text-[length:min(clamp(1.5rem,0.9rem+1.75vw,2.4rem),(40vw-126px)/11.1)]" />
           <div className="w-full max-w-md h-px bg-stone-200 dark:bg-stone-800 my-5" />
-          <img
-            src="/headshot.jpg"
-            alt="Ethan Tran"
-            className="w-32 h-32 rounded-xl object-cover ring-1 ring-inset ring-black/5 dark:ring-white/10 mb-5"
-          />
-          <p className="text-[14px] text-stone-600 dark:text-stone-300">
-            computer engineering @{' '}
-            <Brand name="University of Waterloo" label="UWaterloo" domain="uwaterloo.ca" href="https://uwaterloo.ca" />
-          </p>
-          <p className="text-[14px] leading-relaxed text-stone-600 dark:text-stone-300 mt-2">
-            from firmware to PCBs to shipped hackathon builds — I love building hardware that
-            feels like software and software that feels like hardware.
-          </p>
+
+          {/* Headshot + bio side-by-side on desktop, stacked on mobile */}
+          <div className="flex flex-col lg:flex-row gap-4 lg:gap-5 items-start">
+            <img
+              src="/headshot.jpg"
+              alt="Ethan Tran"
+              className="w-32 h-32 flex-shrink-0 rounded-xl object-cover ring-1 ring-inset ring-black/5 dark:ring-white/10"
+            />
+            <div className="flex-1">
+              <p className="text-[14px] text-stone-600 dark:text-stone-300">
+                computer engineering @{' '}
+                <Brand name="University of Waterloo" label="UWaterloo" domain="uwaterloo.ca" href="https://uwaterloo.ca" />
+              </p>
+              <p className="text-[14px] leading-relaxed text-stone-600 dark:text-stone-300 mt-2">
+                from firmware to PCBs to shipped hackathon builds — I love building hardware that
+                feels like software and software that feels like hardware.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* External links — underlined, unlike the pages nav above */}
