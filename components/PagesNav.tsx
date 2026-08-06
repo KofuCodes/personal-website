@@ -1,0 +1,42 @@
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
+const pages = [
+  { label: 'index', to: '/' },
+  { label: 'papers', to: '/papers' },
+  { label: 'gallery', to: '/photography' },
+];
+
+/**
+ * Page navigation, distinct from the external-links row: no underlines, and
+ * the active page carries a ➢ marker + the coral accent. Routes swap only
+ * the right panel — this nav (and the whole left panel) stays put.
+ */
+const PagesNav: React.FC = () => {
+  const { pathname } = useLocation();
+
+  return (
+    <nav aria-label="Pages" className="flex items-center gap-5 mono text-[13px] lowercase">
+      {pages.map((page) => {
+        const active = pathname === page.to;
+        return (
+          <Link
+            key={page.to}
+            to={page.to}
+            aria-current={active ? 'page' : undefined}
+            className={`transition-colors ${
+              active
+                ? 'text-orange-700 dark:text-coral'
+                : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
+            }`}
+          >
+            {page.label}
+            <span aria-hidden="true" className={`ml-1 ${active ? '' : 'invisible'}`}>➢</span>
+          </Link>
+        );
+      })}
+    </nav>
+  );
+};
+
+export default PagesNav;

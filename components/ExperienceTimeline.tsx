@@ -41,7 +41,7 @@ const ExperienceTimeline: React.FC = () => {
             aria-expanded={hasDetail ? isExpanded : undefined}
             className={
               hasDetail
-                ? 'cursor-pointer rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 dark:focus-visible:ring-amber-500/70'
+                ? 'cursor-pointer rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-700 dark:focus-visible:ring-coral/80'
                 : ''
             }
           >
@@ -55,7 +55,7 @@ const ExperienceTimeline: React.FC = () => {
                 />
 
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline justify-between gap-3">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-3">
                     <h3 className="flex min-w-0 items-baseline text-[15px] font-semibold tracking-tight text-stone-900 dark:text-stone-100">
                       {exp.link ? (
                         <a

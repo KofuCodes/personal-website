@@ -12,10 +12,12 @@ const Part: React.FC<{ part: AboutPart }> = ({ part }) => {
   }
 
   if ('to' in part) {
+    // Page links wear the coral accent (like the pages nav) — external links
+    // elsewhere keep the quiet stone underline.
     return (
       <Link
         to={part.to}
-        className="font-medium underline decoration-stone-300 dark:decoration-stone-600 underline-offset-[3px] hover:decoration-stone-900 dark:hover:decoration-stone-100 transition-colors"
+        className="font-medium text-orange-700 dark:text-coral no-underline hover:underline underline-offset-[3px] transition-colors"
       >
         {part.text}
       </Link>
@@ -39,7 +41,7 @@ const About: React.FC = () => (
     {aboutItems.map((item, i) => (
       <li key={i} className="text-[14.5px] leading-relaxed text-stone-700 dark:text-stone-300">
         <div className="flex gap-2.5">
-          <span className="text-[9px] leading-[2.4] text-amber-600/70 dark:text-amber-500/60 select-none" aria-hidden="true">
+          <span className="text-[9px] leading-[2.4] text-coral/90 dark:text-coral/70 select-none" aria-hidden="true">
             ✦
           </span>
           <span>

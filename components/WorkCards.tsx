@@ -14,7 +14,7 @@ const ProjectCard: React.FC<{ project: Project; onOpen: (p: Project) => void }> 
   const img = project.content.buildImage;
   return (
     <figure
-      className="group cursor-pointer mb-7 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 dark:focus-visible:ring-amber-500/70"
+      className="group cursor-pointer mb-7 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-700 dark:focus-visible:ring-coral/80"
       onClick={() => onOpen(project)}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -27,7 +27,7 @@ const ProjectCard: React.FC<{ project: Project; onOpen: (p: Project) => void }> 
       aria-label={`Open ${project.title} details`}
     >
       {img && (
-        <div className="overflow-hidden rounded-md ring-1 ring-inset ring-black/5 dark:ring-white/10 bg-stone-100 dark:bg-stone-900">
+        <div className="overflow-hidden rounded-md ring-1 ring-inset ring-black/5 dark:ring-white/10 bg-amber-100 dark:bg-stone-900">
           <img
             src={img}
             alt={project.title}
@@ -41,7 +41,7 @@ const ProjectCard: React.FC<{ project: Project; onOpen: (p: Project) => void }> 
           <span className="text-[14.5px] font-medium tracking-tight text-stone-900 dark:text-stone-100 underline decoration-transparent decoration-1 underline-offset-[3px] transition-colors duration-200 group-hover:decoration-stone-400 dark:group-hover:decoration-stone-500">
             {project.title}
           </span>
-          <span className="mono text-[11px] text-stone-400 dark:text-stone-500 whitespace-nowrap">
+          <span className="mono text-[11px] text-stone-500 dark:text-stone-400 whitespace-nowrap">
             {project.year}
           </span>
         </span>

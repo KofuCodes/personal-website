@@ -121,7 +121,7 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
       <span
         aria-hidden="true"
         style={shift ? { marginLeft: shift } : undefined}
-        className={`pointer-events-none absolute left-1/2 z-20 w-60 -translate-x-1/2 overflow-hidden rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900 shadow-lg shadow-black/5 dark:shadow-black/40 opacity-0 scale-95 transition-[opacity,transform] duration-200 ease-out group-hover/lp:opacity-100 group-hover/lp:scale-100 group-focus-within/lp:opacity-100 group-focus-within/lp:scale-100 ${
+        className={`pointer-events-none absolute left-1/2 z-20 w-60 -translate-x-1/2 overflow-hidden rounded-xl border border-stone-200 dark:border-stone-800 bg-amber-50 dark:bg-stone-900 shadow-lg shadow-black/5 dark:shadow-black/40 opacity-0 scale-95 transition-[opacity,transform] duration-200 ease-out group-hover/lp:opacity-100 group-hover/lp:scale-100 group-focus-within/lp:opacity-100 group-focus-within/lp:scale-100 ${
           side === 'top' ? 'bottom-full mb-2 origin-bottom' : 'top-full mt-2 origin-top'
         }`}
       >

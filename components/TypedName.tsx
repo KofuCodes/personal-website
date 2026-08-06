@@ -64,7 +64,7 @@ const TypedName: React.FC<{ className?: string }> = ({ className = '' }) => {
   const cursor = (
     <span
       aria-hidden="true"
-      className={`inline-block w-[3px] h-[0.72em] ml-[0.08em] bg-amber-500 ${
+      className={`inline-block w-[3px] h-[0.72em] ml-[0.08em] bg-coral ${
         blinking ? 'animate-blink' : ''
       }`}
     />

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 /**
- * The site's thesis, live: a small amber dot chasing the cursor under real PD
+ * The site's thesis, live: a small coral dot chasing the cursor under real PD
  * control. The cursor is the setpoint, the dot is the plant — deliberately
  * underdamped, so it overshoots and settles instead of gliding. "Always
  * self-adjusting to the targeted goal."
@@ -103,7 +103,7 @@ const LoopCursor: React.FC = () => {
       className="fixed left-0 top-0 z-[90] pointer-events-none opacity-0 transition-opacity duration-700"
       style={{ willChange: 'transform' }}
     >
-      <div className="w-1.5 h-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-500/80" />
+      <div className="w-1.5 h-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-coral/90" />
     </div>
   );
 };

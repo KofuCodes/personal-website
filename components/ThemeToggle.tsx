@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 /**
  * Sun/moon theme switch with the circular view-transition reveal wiping out
- * from the button. Shared by the navbar (subpages) and the home links row.
+ * from the button. Rendered in the identity panel's links row on all routes.
  */
 const ThemeToggle: React.FC<{ className?: string }> = ({ className = '' }) => {
   const [isDark, setIsDark] = useState(document.documentElement.classList.contains('dark'));
@@ -14,7 +14,7 @@ const ThemeToggle: React.FC<{ className?: string }> = ({ className = '' }) => {
     // Keep browser chrome (mobile address bar etc.) matching the surface
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', dark ? '#0c0a09' : '#fafaf9');
+      ?.setAttribute('content', dark ? '#0c0a09' : '#fffbeb');
   };
 
   const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -59,7 +59,7 @@ const ThemeToggle: React.FC<{ className?: string }> = ({ className = '' }) => {
   return (
     <button
       onClick={toggleTheme}
-      className={`w-8 h-8 flex items-center justify-center rounded-md text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors ${className}`}
+      className={`w-8 h-8 flex items-center justify-center rounded-md text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-amber-100 dark:hover:bg-stone-900 transition-colors ${className}`}
       aria-label="Toggle theme"
     >
       {isDark ? (

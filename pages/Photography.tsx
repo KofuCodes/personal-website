@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { photos as allPhotos, Photo } from '../data/photography';
 import Aperture from '../components/Aperture';
+import QuietHeader from '../components/QuietHeader';
 
 const Photography: React.FC = () => {
   const [active, setActive] = useState<number | null>(null);
@@ -39,36 +40,86 @@ const Photography: React.FC = () => {
   const next = useCallback(() => setActive((i) => (i === null ? i : (i + 1) % flat.length)), [flat.length]);
   const prev = useCallback(() => setActive((i) => (i === null ? i : (i - 1 + flat.length) % flat.length)), [flat.length]);
 
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
+  const wasOpen = useRef(false);
+
   useEffect(() => {
     if (active === null) return;
+    // Lock both scroll containers: body (mobile) and the right panel (desktop)
     document.body.style.overflow = 'hidden';
+    const panel = document.getElementById('right-panel');
+    const prevPanel = panel ? panel.style.overflow : '';
+    if (panel) panel.style.overflow = 'hidden';
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close();
-      if (e.key === 'ArrowRight') next();
-      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        close();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        next();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prev();
+      } else if (e.key === 'Tab') {
+        // Trap focus inside the lightbox
+        const root = overlayRef.current;
+        if (!root) return;
+        const focusables = root.querySelectorAll<HTMLElement>('button, [tabindex]:not([tabindex="-1"])');
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        const activeEl = document.activeElement;
+        if (!root.contains(activeEl)) {
+          e.preventDefault();
+          first.focus();
+        } else if (e.shiftKey && activeEl === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && activeEl === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = '';
+      if (panel) panel.style.overflow = prevPanel;
       window.removeEventListener('keydown', onKey);
     };
   }, [active, close, next, prev]);
 
+  // Move focus into the lightbox on open; restore it to the thumbnail on close
+  useEffect(() => {
+    const open = active !== null;
+    if (open && !wasOpen.current) {
+      wasOpen.current = true;
+      openerRef.current = document.activeElement as HTMLElement | null;
+      closeRef.current?.focus();
+    } else if (!open && wasOpen.current) {
+      wasOpen.current = false;
+      openerRef.current?.focus?.();
+    }
+  }, [active]);
+
   const current = active !== null ? flat[active] : null;
 
   return (
-    <div className="max-w-5xl mx-auto px-6 pt-28 pb-12">
-      <header className="mb-12 reveal">
-        <h1 className="text-2xl font-semibold tracking-tight flex items-center gap-2.5">
-          <Aperture className="w-5 h-5 text-stone-400" /> Gallery
-        </h1>
-        <p className="text-[15px] text-stone-500 dark:text-stone-400 mt-2">My story, through a lens.</p>
+    <div>
+      <header className="mb-8 reveal group">
+        <QuietHeader label="gallery">
+          <Aperture className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 self-center" animate />
+        </QuietHeader>
+        <p className="text-[13.5px] text-stone-500 dark:text-stone-400">my story, through a lens.</p>
       </header>
 
       <div className="space-y-14">
         {groups.map((group) => (
           <section key={group.title} className="reveal">
-            <h2 className="mono text-[12px] uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-4">
+            <h2 className="mono text-[12px] lowercase tracking-wider text-stone-500 dark:text-stone-400 mb-4">
               {group.title}
             </h2>
             <div className="columns-2 md:columns-3 gap-3 [&>*]:mb-3">
@@ -94,10 +145,15 @@ const Photography: React.FC = () => {
       {current &&
         createPortal(
           <div
+            ref={overlayRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${current.location} — photo viewer`}
             className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 sm:p-8"
             onClick={close}
           >
             <button
+              ref={closeRef}
               className="absolute top-4 right-4 w-10 h-10 grid place-items-center text-white/70 hover:text-white transition-colors"
               onClick={close}
               aria-label="Close"
@@ -143,8 +199,8 @@ const Photography: React.FC = () => {
         )}
 
       <footer className="mt-20 pt-8 border-t border-stone-200 dark:border-stone-800 text-center">
-        <p className="mono text-[12px] uppercase tracking-wider text-stone-400 dark:text-stone-500">
-          End of collection
+        <p className="mono text-[12px] lowercase tracking-wider text-stone-400 dark:text-stone-500">
+          end of collection ✵
         </p>
       </footer>
     </div>

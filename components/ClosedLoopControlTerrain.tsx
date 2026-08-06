@@ -296,8 +296,8 @@ function Scene({
       m.prevDark = dark;
       const ink = dark ? '#ededed' : '#1a1a1a';
       const faint = dark ? '#8a8a8a' : '#a6a6a6';
-      // The goal wears the site's amber "target" accent
-      const accent = dark ? '#f59e0b' : '#d97706';
+      // The goal wears the site's coral "target" accent
+      const accent = dark ? '#ff7f50' : '#ea580c';
       wireMat.current?.color.set('#9a9a9a');
       fillMat.current?.color.set(dark ? '#ffffff' : '#000000');
       roverMat.current?.color.set(ink);
@@ -463,10 +463,10 @@ const MiniGraph: React.FC<{ histRef: React.MutableRefObject<Hist>; className?: s
         const pad = 3;
         const mapY = (v: number) => H / 2 - (v / ERR_SCALE) * (H / 2 - pad);
 
-        // goal zone: ±BAND — amber, matching the goal marker in the scene
+        // goal zone: ±BAND — coral, matching the goal marker in the scene
         const bandTop = mapY(BAND);
         const bandBot = mapY(-BAND);
-        ctx.fillStyle = dark ? 'rgba(245,158,11,0.13)' : 'rgba(217,119,6,0.11)';
+        ctx.fillStyle = dark ? 'rgba(255,127,80,0.14)' : 'rgba(234,88,12,0.10)';
         ctx.fillRect(0, bandTop, W, bandBot - bandTop);
 
         // zero line

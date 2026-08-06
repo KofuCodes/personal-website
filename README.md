@@ -8,9 +8,10 @@ npm run dev      # http://localhost:3000
 npm run build    # production build in /dist
 ```
 
-The home page is a split-panel portfolio: identity + experience on the left (sticky on
-desktop), terrain / about / projects / gallery on the right (scrolls). Everything lives
-on one page — project details open in a modal, not a separate route.
+The whole site is a split-panel portfolio: the identity panel on the left (name, bio,
+links, experience) **never changes** — routes swap only the right panel (index /
+papers / gallery, via the ➢ pages nav at the top left). Project details open in a
+modal, not a separate route.
 
 All content lives in **`/data`** as plain TypeScript — you never touch a component to
 add a project, a job, an about line, or a photo. The sections below are the recipes.
@@ -95,9 +96,10 @@ Drop files in `/public/photography/<Album>/` and register each in
 
 | Section | Data | Component |
 |---|---|---|
-| Typed name + bio + links (left panel) | inline | [`pages/Home.tsx`](pages/Home.tsx), [`components/TypedName.tsx`](components/TypedName.tsx), [`components/ThemeToggle.tsx`](components/ThemeToggle.tsx) |
+| Identity panel (persists across routes) | inline | [`components/IdentityPanel.tsx`](components/IdentityPanel.tsx), [`components/TypedName.tsx`](components/TypedName.tsx), [`components/PagesNav.tsx`](components/PagesNav.tsx), [`components/ThemeToggle.tsx`](components/ThemeToggle.tsx) |
 | Experience (hover to expand) | `data/experience.ts` | [`components/ExperienceTimeline.tsx`](components/ExperienceTimeline.tsx) |
-| Now playing / copyright (left bottom) | — | [`components/SpotifyStatus.tsx`](components/SpotifyStatus.tsx), [`pages/Home.tsx`](pages/Home.tsx) |
+| Now playing / copyright | — | [`components/SpotifyStatus.tsx`](components/SpotifyStatus.tsx), [`components/IdentityPanel.tsx`](components/IdentityPanel.tsx) (desktop), [`App.tsx`](App.tsx) (mobile footer) |
+| Section headers ("x —") | — | [`components/QuietHeader.tsx`](components/QuietHeader.tsx) |
 | Closed-loop terrain + caption | — | [`components/ClosedLoopControlTerrain.tsx`](components/ClosedLoopControlTerrain.tsx) (canvas), [`pages/Home.tsx`](pages/Home.tsx) (caption) |
 | About | `data/about.ts` | [`components/About.tsx`](components/About.tsx) |
 | Project cards + filters | `data/projects.ts` | [`components/WorkCards.tsx`](components/WorkCards.tsx), filters in [`pages/Home.tsx`](pages/Home.tsx) |
@@ -110,7 +112,9 @@ Scroll animations are [`components/Reveal.tsx`](components/Reveal.tsx) (right-pa
 sections below the masthead) and the `.reveal` CSS classes in [`index.html`](index.html)
 (load-time stagger for the left panel, the terrain masthead, and subpages).
 
-**Theme**: warm stone palette with a single amber "target" accent — the ✦ about
-markers, active filter, typing cursor, focus rings, the terrain's goal marker, and
-the cursor-chaser dot all wear it. The chaser is a real underdamped PD controller
-(cursor = setpoint), matching the terrain caption.
+**Theme**: cream paper (`amber-50`) with warm stone ink, IBM Plex Mono throughout,
+and a single coral "target" accent (deepened to a darker orange in light mode where
+text contrast needs it) — the ✦ about markers, active filter/nav page,
+typing cursor, focus rings, the terrain's goal marker, and the cursor-chaser dot all
+wear it. The chaser is a real underdamped PD controller (cursor = setpoint), matching
+the terrain caption.

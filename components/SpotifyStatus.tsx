@@ -21,10 +21,59 @@ interface LanyardResponse {
   };
 }
 
+interface PollState {
+  loading: boolean;
+  error: string | null;
+  data: LanyardResponse['data'] | null;
+}
+
+/**
+ * Module-level refcounted poller: the component mounts twice (desktop footer +
+ * mobile footer, CSS-toggled), but exactly one interval polls the Lanyard API
+ * and both instances subscribe to it.
+ */
+let pollState: PollState = { loading: true, error: null, data: null };
+const listeners = new Set<(s: PollState) => void>();
+let pollTimer: ReturnType<typeof setInterval> | null = null;
+
+const fetchStatus = async () => {
+  try {
+    const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error(`Discord ID not found.`);
+      }
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const json: LanyardResponse = await response.json();
+
+    if (json.success === false && json.error) {
+      // Silently handle "not monitored" — hide the widget until Lanyard tracks the user
+      if (json.error.code === 'user_not_monitored') {
+        pollState = { loading: false, error: null, data: null };
+      } else {
+        throw new Error(json.error.message || 'Lanyard API error');
+      }
+    } else if (json.data) {
+      pollState = { loading: false, error: null, data: json.data };
+      if (json.data.listening_to_spotify && json.data.spotify) {
+        localStorage.setItem('spotify_last_played', JSON.stringify(json.data.spotify));
+      }
+    } else {
+      pollState = { loading: false, error: 'No data received from API', data: null };
+    }
+  } catch (error) {
+    console.error("Error fetching Spotify status:", error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    pollState = { loading: false, error: errorMessage, data: null };
+  }
+  listeners.forEach((l) => l(pollState));
+};
+
 const SpotifyStatus: React.FC = () => {
-  const [data, setData] = useState<LanyardResponse['data'] | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [{ loading, error, data }, setState] = useState<PollState>(pollState);
 
   const [lastPlayed, setLastPlayed] = useState<{
     track_id: string;
@@ -32,66 +81,31 @@ const SpotifyStatus: React.FC = () => {
     artist: string;
     album_art_url: string;
   } | null>(() => {
-    // Load from localStorage on initial render
     const saved = localStorage.getItem('spotify_last_played');
     return saved ? JSON.parse(saved) : null;
   });
 
   useEffect(() => {
-    const fetchStatus = async () => {
-      try {
-        const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
-
-        if (!response.ok) {
-          if (response.status === 404) {
-            throw new Error(`Discord ID not found.`);
-          }
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const json: LanyardResponse = await response.json();
-
-
-
-        // Check for API errors
-        if (json.success === false && json.error) {
-          // Silently handle "not monitored" - just hide the component until Lanyard starts tracking
-          if (json.error.code === 'user_not_monitored') {
-
-            setData(null);
-            setError(null); // Don't show error, just hide component
-            return;
-          }
-          throw new Error(json.error.message || 'Lanyard API error');
-        }
-
-        if (json.data) {
-          setData(json.data);
-          setError(null);
-
-          // Save last played track when listening
-          if (json.data.listening_to_spotify && json.data.spotify) {
-            setLastPlayed(json.data.spotify);
-            localStorage.setItem('spotify_last_played', JSON.stringify(json.data.spotify));
-          }
-
-
-        } else {
-          setError('No data received from API');
-        }
-      } catch (error) {
-        console.error("Error fetching Spotify status:", error);
-        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-        setError(errorMessage);
-        setData(null);
-      } finally {
-        setLoading(false);
+    const listener = (s: PollState) => {
+      setState(s);
+      if (s.data?.listening_to_spotify && s.data.spotify) {
+        setLastPlayed(s.data.spotify);
       }
     };
-
-    fetchStatus();
-    const interval = setInterval(fetchStatus, 10000); // Check every 10 seconds instead of 30
-    return () => clearInterval(interval);
+    listeners.add(listener);
+    listener(pollState);
+    // First subscriber starts the shared poll
+    if (pollTimer === null) {
+      fetchStatus();
+      pollTimer = setInterval(fetchStatus, 10000);
+    }
+    return () => {
+      listeners.delete(listener);
+      if (listeners.size === 0 && pollTimer !== null) {
+        clearInterval(pollTimer);
+        pollTimer = null;
+      }
+    };
   }, []);
 
   const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
@@ -141,7 +155,7 @@ const SpotifyStatus: React.FC = () => {
           href={`https://open.spotify.com/track/${track_id}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 group py-1 px-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors"
+          className="flex items-center gap-2 group py-1 px-1.5 rounded-md hover:bg-amber-100 dark:hover:bg-stone-900 transition-colors"
           title={`Last played: ${song} — ${artist}`}
         >
           <img src={album_art_url} alt="" className="w-5 h-5 rounded-[3px] object-cover flex-shrink-0 ring-1 ring-inset ring-black/5 dark:ring-white/10" />
@@ -171,7 +185,7 @@ const SpotifyStatus: React.FC = () => {
       href={`https://open.spotify.com/track/${track_id}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-2 group py-1 px-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors"
+      className="flex items-center gap-2 group py-1 px-1.5 rounded-md hover:bg-amber-100 dark:hover:bg-stone-900 transition-colors"
       title={`Now playing: ${song} — ${artist}`}
     >
       <img src={album_art_url} alt="" className="w-5 h-5 rounded-[3px] object-cover flex-shrink-0 ring-1 ring-inset ring-black/5 dark:ring-white/10" />
