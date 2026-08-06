@@ -2,6 +2,11 @@ import React from 'react';
 import { experiences } from '../data/experience';
 import { BrandLogo } from './Brand';
 
+/**
+ * Compact experience rows: logo, company front and center, role as a quiet
+ * subtitle, dates on the right. Details stay in data/experience.ts (bullets)
+ * for reference — the page keeps only the shape of the story.
+ */
 const ExperienceTimeline: React.FC = () => {
   return (
     <ul className="divide-y divide-neutral-200 dark:divide-neutral-800">
@@ -15,37 +20,30 @@ const ExperienceTimeline: React.FC = () => {
           <li key={exp.id}>
             <Wrapper
               {...wrapperProps}
-              className={`group flex gap-4 py-6 ${exp.link ? 'cursor-pointer' : ''}`}
+              className={`group flex items-center gap-4 py-4 ${exp.link ? 'cursor-pointer' : ''}`}
             >
               <BrandLogo
                 name={exp.company}
                 domain={exp.domain}
                 src={exp.logo}
-                className="w-9 h-9 mt-0.5 p-1.5"
+                className="w-10 h-10 p-1.5"
               />
 
               <div className="flex-1 min-w-0">
-                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-x-4 gap-y-0.5">
-                  <h3 className="text-[15px] font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-                    {exp.role}
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="flex min-w-0 items-baseline text-[15px] font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+                    <span className="truncate">{exp.company}</span>
                     {exp.link && (
-                      <span className="inline-block ml-1.5 text-neutral-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                      <span className="shrink-0 ml-1.5 text-neutral-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                     )}
                   </h3>
-                  <span className="mono text-[11px] text-neutral-400 dark:text-neutral-500 whitespace-nowrap">
+                  <span className="mono text-[11px] italic text-neutral-400 dark:text-neutral-500 whitespace-nowrap">
                     {exp.period}
                   </span>
                 </div>
-                <p className="text-[13px] text-neutral-500 dark:text-neutral-400 mt-0.5">{exp.company}</p>
-
-                <ul className="mt-3 space-y-1.5">
-                  {exp.bullets.map((bullet, idx) => (
-                    <li key={idx} className="flex gap-2.5 text-[13px] leading-relaxed text-neutral-600 dark:text-neutral-300">
-                      <span className="text-neutral-300 dark:text-neutral-600 select-none">–</span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-[13px] italic lowercase text-neutral-500 dark:text-neutral-400 mt-0.5 truncate">
+                  {exp.role}
+                </p>
               </div>
             </Wrapper>
           </li>

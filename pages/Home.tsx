@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
 import { photos } from '../data/photography';
 import ExperienceTimeline from '../components/ExperienceTimeline';
-import WorkList from '../components/WorkList';
+import WorkCards from '../components/WorkCards';
+import About from '../components/About';
 import Brand from '../components/Brand';
 import Aperture from '../components/Aperture';
 import LinkPreview from '../components/LinkPreview';
@@ -81,12 +82,6 @@ const Home: React.FC = () => {
             <Brand name="Arduino" domain="arduino.cc" href="https://www.arduino.cc" /> and a soldering iron, shipping
             tangible things at hackathons with friends.
           </p>
-          <p>
-            Off the keyboard, I document cities on a Sony Cybershot — urban architecture, travel, and the details most
-            people overlook. The{' '}
-            <Link to="/photography" className="font-medium underline decoration-neutral-300 dark:decoration-neutral-600 underline-offset-[3px] hover:decoration-neutral-900 dark:hover:decoration-neutral-100 transition-colors">gallery</Link>{' '}
-            is where my favorite frames live.
-          </p>
         </div>
 
         <div className="flex items-center gap-1 mt-6">
@@ -118,6 +113,9 @@ const Home: React.FC = () => {
             <ClosedLoopControlTerrain />
           </Suspense>
         </div>
+        <p className="mt-3 text-center text-[12.5px] italic text-neutral-400 dark:text-neutral-500">
+          a closed loop over shifting ground — always self-adjusting to the targeted goal. me too.
+        </p>
       </section>
 
       {/* ── Selected Work ── */}
@@ -128,13 +126,19 @@ const Home: React.FC = () => {
             All work →
           </Link>
         </div>
-        <WorkList projects={featuredProjects} />
+        <WorkCards projects={featuredProjects} />
       </section>
 
       {/* ── Experience ── */}
       <section className="mt-16 reveal" style={{ animationDelay: '0.16s' }}>
         <h2 className="mono text-[12px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-2">Experience</h2>
         <ExperienceTimeline />
+      </section>
+
+      {/* ── About ── */}
+      <section className="mt-16 reveal" style={{ animationDelay: '0.2s' }}>
+        <h2 className="mono text-[12px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-4">About</h2>
+        <About />
       </section>
 
       {/* ── Gallery preview ── */}
@@ -165,12 +169,6 @@ const Home: React.FC = () => {
           ))}
         </div>
       </section>
-
-      {/* ── Closing note ── */}
-      <p className="mt-16 text-[14px] leading-relaxed text-neutral-500 dark:text-neutral-400 reveal" style={{ animationDelay: '0.32s' }}>
-        Outside of work you'll find me tuning mechanical keyboards, chasing clean architecture shots, or grinding a
-        40-line Tetris sprint.
-      </p>
 
       {/* ── Playlist ── */}
       <section className="mt-16 reveal" style={{ animationDelay: '0.38s' }}>

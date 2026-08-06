@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { projects } from '../data/projects';
 import { Category } from '../types';
-import WorkList from '../components/WorkList';
+import WorkCards from '../components/WorkCards';
 
 const categories: (Category | 'All')[] = ['All', 'Embedded/Firmware', 'Hardware', 'Web/App', 'Hackathons'];
 
@@ -56,7 +56,7 @@ const ProjectsPage: React.FC = () => {
 
       <div className="reveal" style={{ animationDelay: '0.12s' }}>
         {filteredProjects.length > 0 ? (
-          <WorkList projects={filteredProjects} />
+          <WorkCards projects={filteredProjects} />
         ) : (
           <div className="text-center py-16 text-[13px] text-neutral-400 dark:text-neutral-500 mono">
             No matches found.
