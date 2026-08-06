@@ -104,8 +104,8 @@ const Photography: React.FC = () => {
 
   return (
     <div>
-      <header className="mt-9 mb-8 reveal group">
-        <QuietHeader label="gallery" as="h1">
+      <header className="mb-8 reveal group">
+        <QuietHeader label="gallery">
           <Aperture className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 self-center" animate />
         </QuietHeader>
         <p className="text-[13.5px] text-stone-500 dark:text-stone-400">my story, through a lens.</p>

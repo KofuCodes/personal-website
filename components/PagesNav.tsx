@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 
 const pages = [
   { label: 'index', to: '/' },
+  { label: 'projects', to: '/projects' },
+  { label: 'work', to: '/work' },
   { label: 'gallery', to: '/photography' },
 ];
 
@@ -15,7 +17,7 @@ const PagesNav: React.FC = () => {
   const { pathname } = useLocation();
 
   return (
-    <nav aria-label="Pages" className="flex items-center gap-5 mono text-[13px] lowercase">
+    <nav aria-label="Pages" className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:gap-x-5 mono text-[13px] lowercase">
       {pages.map((page) => {
         const active = pathname === page.to;
         return (

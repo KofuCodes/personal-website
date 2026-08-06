@@ -68,11 +68,9 @@ const labelCls =
 function Scene({
   histRef,
   statusRef,
-  zoomRef,
 }: {
   histRef: React.MutableRefObject<Hist>;
   statusRef: React.MutableRefObject<Status>;
-  zoomRef?: React.MutableRefObject<number>;
 }) {
   // ── terrain geometry (positions updated each frame) ──
   const { geometry, baseXZ } = useMemo(() => {
@@ -364,13 +362,10 @@ function Scene({
       goalLabelRef.current.textContent = label;
     }
 
-    // ── slow camera orbit, dollied by the stage zoom ──
-    // zoom 1 = stage fully open. Scaling the whole camera position by 1/zoom is
-    // a pure dolly (the look-at target sits on the origin), so the scene's
-    // apparent size tracks the stage exactly — no canvas resize needed.
+    // ── slow camera orbit ──
     const a = state.clock.elapsedTime * 0.11;
-    const k = 1 / Math.max(0.2, zoomRef?.current ?? 1);
-    state.camera.position.set(Math.cos(a) * 6.1 * k, 3.5 * k, Math.sin(a) * 6.1 * k);
+    const R = 6.1;
+    state.camera.position.set(Math.cos(a) * R, 3.5, Math.sin(a) * R);
     state.camera.lookAt(0, 0.1, 0);
   });
 
@@ -572,9 +567,7 @@ const Hud: React.FC<{ statusRef: React.MutableRefObject<Status> }> = ({ statusRe
   );
 };
 
-const ClosedLoopControlTerrain: React.FC<{ zoomRef?: React.MutableRefObject<number> }> = ({
-  zoomRef,
-}) => {
+const ClosedLoopControlTerrain: React.FC = () => {
   const histRef = useRef<Hist>({ err: [] });
   const statusRef = useRef<Status>({
     loop: 0,
@@ -602,24 +595,16 @@ const ClosedLoopControlTerrain: React.FC<{ zoomRef?: React.MutableRefObject<numb
   }, []);
 
   return (
-    <div ref={wrapRef} className="relative w-full h-full overflow-hidden">
-      {/* The canvas keeps a constant layout size (--stage-h) while the box
-          around it animates open, so the WebGL buffer is never reallocated
-          mid-scroll; --stage-offset keeps the crop centered. */}
-      <div
-        className="absolute inset-x-0"
-        style={{ height: 'var(--stage-h, 100%)', top: 'var(--stage-offset, 0px)' }}
+    <div ref={wrapRef} className="relative w-full h-full">
+      <Canvas
+        frameloop={frameloop}
+        dpr={[1, 1.6]}
+        camera={{ position: [6.1, 3.5, 6.1], fov: 42 }}
+        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+        style={{ background: 'transparent' }}
       >
-        <Canvas
-          frameloop={frameloop}
-          dpr={[1, 1.6]}
-          camera={{ position: [6.1, 3.5, 6.1], fov: 42 }}
-          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-          style={{ background: 'transparent' }}
-        >
-          <Scene histRef={histRef} statusRef={statusRef} zoomRef={zoomRef} />
-        </Canvas>
-      </div>
+        <Scene histRef={histRef} statusRef={statusRef} />
+      </Canvas>
 
       <Hud statusRef={statusRef} />
       <MiniGraph histRef={histRef} className="absolute top-2 right-1 z-10 w-36 hidden sm:block" />

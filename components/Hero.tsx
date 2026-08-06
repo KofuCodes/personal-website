@@ -2,19 +2,37 @@ import React from 'react';
 import TypedName from './TypedName';
 import Brand from './Brand';
 import LinkPreview from './LinkPreview';
+import SpotifyStatus from './SpotifyStatus';
+import ThemeToggle from './ThemeToggle';
 
 const quietLink =
   'text-[13px] lowercase text-stone-500 dark:text-stone-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-[3px] hover:text-stone-900 dark:hover:text-stone-100 hover:decoration-stone-500 transition-colors';
 
 /**
- * Top of the index page: typed name, headshot, bio, and the external links —
- * everything that used to live in the left rail, now stacked above the rest.
+ * The persistent identity block: typed name (with now-playing and the theme
+ * toggle sharing its line), headshot, bio, and external links. Lives in the
+ * shell above the pages nav, so it never changes as routes swap.
  */
 const Hero: React.FC = () => (
-  <section className="mt-9 reveal" style={{ animationDelay: '0.06s' }}>
-    {/* nowrap, with the size capped by the column width so the full
-        "xin chào, i'm …" string (~14.5em in IBM Plex Mono) never wraps */}
-    <TypedName className="whitespace-nowrap text-[length:min(2.4rem,calc((100vw_-_4rem)_/_14.5))]" />
+  <section className="reveal" style={{ animationDelay: '0.06s' }}>
+    {/* Name left, now playing + theme right. Below sm they stack above the
+        name instead, since the two can't share a 360px line. */}
+    <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+      {/* nowrap, sized so the full "xin chào, i'm …" string (~14.5em in IBM
+          Plex Mono) always fits the column beside the right-hand cluster */}
+      <TypedName className="whitespace-nowrap text-[length:min(2.4rem,calc(var(--content)/14.5))] sm:text-[length:min(2.4rem,calc((var(--content)_-_15rem)/14.5))]" />
+
+      <div className="flex shrink-0 items-center gap-1 self-end sm:self-auto">
+        {/* Fixed slot: the cluster is right-aligned, so letting the widget size
+            to the track title would slide the row on every song. */}
+        <div className="flex w-[46px] shrink-0 justify-start sm:w-[184px]">
+          <SpotifyStatus />
+        </div>
+        <span className="opacity-70">
+          <ThemeToggle />
+        </span>
+      </div>
+    </div>
 
     <div className="h-px bg-stone-200 dark:bg-stone-800 my-6" />
 
@@ -36,7 +54,7 @@ const Hero: React.FC = () => (
           feels like software and software that feels like hardware.
         </p>
 
-        {/* External links — underlined, unlike the pages nav up top */}
+        {/* External links — underlined, unlike the pages nav below */}
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-4">
           <LinkPreview href="https://github.com/kofucodes" title="GitHub" domain="github.com" className={quietLink}>
             github
