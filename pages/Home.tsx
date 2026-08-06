@@ -17,10 +17,15 @@ const Home: React.FC = () => (
       <About />
     </div>
 
-    <div className="mt-6 flex-1 min-h-[180px] w-full">
-      <Suspense fallback={<div className="h-full w-full" />}>
-        <ClosedLoopControlTerrain />
-      </Suspense>
+    {/* The inner layer is absolute so it gets a definite height: `h-full`
+        inside a flex-1 box resolves against flex-basis 0%, i.e. to nothing,
+        which left the canvas stuck at its intrinsic 150px. */}
+    <div className="relative mt-6 w-full flex-1 min-h-[180px]">
+      <div className="absolute inset-0">
+        <Suspense fallback={<div className="h-full w-full" />}>
+          <ClosedLoopControlTerrain />
+        </Suspense>
+      </div>
     </div>
     <p className="mt-2.5 text-center text-[12.5px] italic text-stone-500 dark:text-stone-400">
       I'm always self-adjusting to the targeted goal
