@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route, useLocation, Link, Navigate } from
 import SensorField from './components/SensorField';
 import Hero from './components/Hero';
 import PagesNav from './components/PagesNav';
+import ScrollTop from './components/ScrollTop';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Work from './pages/Work';
@@ -70,6 +71,8 @@ const App: React.FC = () => {
             </p>
           </footer>
         </div>
+
+        <ScrollTop />
       </div>
     </Router>
   );

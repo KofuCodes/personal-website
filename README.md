@@ -100,6 +100,7 @@ Drop files in `/public/photography/<Album>/` and register each in
 | Shell layout (zones, routes) + footer | — | [`App.tsx`](App.tsx) |
 | Hero — typed name, now playing, theme, headshot, bio, links | inline | [`components/Hero.tsx`](components/Hero.tsx), [`components/TypedName.tsx`](components/TypedName.tsx), [`components/SpotifyStatus.tsx`](components/SpotifyStatus.tsx), [`components/ThemeToggle.tsx`](components/ThemeToggle.tsx) |
 | Pages nav (➢ index / projects / work / gallery) | — | [`components/PagesNav.tsx`](components/PagesNav.tsx) |
+| Back-to-top pill (appears past 260px) | — | [`components/ScrollTop.tsx`](components/ScrollTop.tsx) |
 | Closed-loop terrain + caption | — | [`components/ClosedLoopControlTerrain.tsx`](components/ClosedLoopControlTerrain.tsx) (canvas), [`App.tsx`](App.tsx) (sizing + caption) |
 | Section headers ("x —") | — | [`components/QuietHeader.tsx`](components/QuietHeader.tsx) |
 | index → About | `data/about.ts` | [`pages/Home.tsx`](pages/Home.tsx), [`components/About.tsx`](components/About.tsx) |
