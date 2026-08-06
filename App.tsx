@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation, Link, Navigate } from 'react-router-dom';
 import SensorField from './components/SensorField';
-import LoopCursor from './components/LoopCursor';
 import IdentityPanel from './components/IdentityPanel';
 import SpotifyStatus from './components/SpotifyStatus';
 import Home from './pages/Home';
@@ -29,7 +28,6 @@ const App: React.FC = () => {
       <ScrollToTop />
       <div className="min-h-screen bg-amber-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100">
         <SensorField />
-        <LoopCursor />
         <div className="relative z-10 grid min-h-screen lg:h-screen lg:overflow-hidden grid-cols-1 lg:grid-cols-[2fr_3fr]">
           <IdentityPanel />
 

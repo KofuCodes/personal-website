@@ -105,7 +105,6 @@ Drop files in `/public/photography/<Album>/` and register each in
 | Project cards + filters | `data/projects.ts` | [`components/WorkCards.tsx`](components/WorkCards.tsx), filters in [`pages/Home.tsx`](pages/Home.tsx) |
 | Project detail modal | `data/projects.ts` | [`components/ProjectModal.tsx`](components/ProjectModal.tsx) |
 | Gallery (+ home preview) | `data/photography.ts` | [`pages/Photography.tsx`](pages/Photography.tsx), [`pages/Home.tsx`](pages/Home.tsx) |
-| PD cursor-chaser dot | — | [`components/LoopCursor.tsx`](components/LoopCursor.tsx) |
 
 Scroll animations are [`components/Reveal.tsx`](components/Reveal.tsx) (right-panel
 sections below the masthead) and the `.reveal` CSS classes in [`index.html`](index.html)
@@ -114,6 +113,4 @@ sections below the masthead) and the `.reveal` CSS classes in [`index.html`](ind
 **Theme**: cream paper (`amber-50`) with warm stone ink, IBM Plex Mono throughout,
 and a single coral "target" accent (deepened to a darker orange in light mode where
 text contrast needs it) — the ✦ about markers, active filter/nav page,
-typing cursor, focus rings, the terrain's goal marker, and the cursor-chaser dot all
-wear it. The chaser is a real underdamped PD controller (cursor = setpoint), matching
-the terrain caption.
+typing cursor, focus rings, and the terrain's goal marker all wear it.

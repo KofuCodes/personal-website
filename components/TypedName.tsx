@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const PREFIX = "hey, i'm ";
+const PREFIX = "xin chào, i'm ";
 const NAME = 'Ethan Tran';
 const TYPED_PAUSE = 1100;
 const START_DELAY = 650;
@@ -16,8 +16,8 @@ const deleteDelay = () =>
   Math.random() < 0.28 ? 320 + Math.random() * 260 : 75 + Math.random() * 55;
 
 /**
- * Hero heading that types out "hey, i'm Ethan Tran", pauses, then backspaces
- * the "hey, i'm " part so only the name remains.
+ * Hero heading that types out "xin chào, i'm Ethan Tran", pauses, then
+ * backspaces the "xin chào, i'm " part so only the name remains.
  */
 const TypedName: React.FC<{ className?: string }> = ({ className = '' }) => {
   const [prefixCount, setPrefixCount] = useState(0);
@@ -72,7 +72,7 @@ const TypedName: React.FC<{ className?: string }> = ({ className = '' }) => {
 
   return (
     <h1 className={`font-semibold tracking-tight leading-tight text-stone-500 dark:text-stone-400 ${className}`}>
-      <span className="sr-only">hey, i&apos;m Ethan Tran</span>
+      <span className="sr-only">xin chào, i&apos;m Ethan Tran</span>
       <span aria-hidden="true">
         {PREFIX.slice(0, prefixCount)}
         {phase === 'deleting' && cursor}

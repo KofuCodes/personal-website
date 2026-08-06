@@ -19,8 +19,8 @@ export const aboutItems: AboutItem[] = [
   {
     parts: [
       'Favorite game: ',
-      { domain: 'leagueoflegends.com', name: 'League of Legends' },
-      ' — I can quit whenever I want.',
+      { emoji: '🎮' },
+      ' League of Legends — I can quit whenever I want.',
     ],
   },
   {
