@@ -1,51 +1,111 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { experiences } from '../data/experience';
 import { BrandLogo } from './Brand';
 
 /**
- * Compact experience rows: logo, company front and center, role as a quiet
- * subtitle, dates on the right. Details stay in data/experience.ts (bullets)
- * for reference — the page keeps only the shape of the story.
+ * Compact experience rows that expand on hover (tap on mobile) to show the
+ * detail bullets from data/experience.ts — the shape of the story up front,
+ * the substance one hover away.
  */
 const ExperienceTimeline: React.FC = () => {
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
   return (
     <ul className="divide-y divide-neutral-200 dark:divide-neutral-800">
       {experiences.map((exp) => {
-        const Wrapper: React.ElementType = exp.link ? 'a' : 'div';
-        const wrapperProps = exp.link
-          ? { href: exp.link, target: '_blank', rel: 'noopener noreferrer' }
-          : {};
+        const isExpanded = expandedId === exp.id;
+        const hasDetail = !!exp.bullets?.length;
+
+        const toggle = () => setExpandedId((prev) => (prev === exp.id ? null : exp.id));
 
         return (
-          <li key={exp.id}>
-            <Wrapper
-              {...wrapperProps}
-              className={`group flex items-center gap-4 py-4 ${exp.link ? 'cursor-pointer' : ''}`}
-            >
-              <BrandLogo
-                name={exp.company}
-                domain={exp.domain}
-                src={exp.logo}
-                className="w-10 h-10 p-1.5"
-              />
+          <li
+            key={exp.id}
+            // Pointer (not mouse) events so a touch tap doesn't fire a synthetic
+            // mouseenter that expands the row just before click collapses it.
+            onPointerEnter={hasDetail ? (e) => { if (e.pointerType !== 'touch') setExpandedId(exp.id); } : undefined}
+            onPointerLeave={hasDetail ? (e) => { if (e.pointerType !== 'touch') setExpandedId(null); } : undefined}
+            onClick={hasDetail ? toggle : undefined}
+            onKeyDown={
+              hasDetail
+                ? (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      toggle();
+                    }
+                  }
+                : undefined
+            }
+            tabIndex={hasDetail ? 0 : undefined}
+            role={hasDetail ? 'button' : undefined}
+            aria-expanded={hasDetail ? isExpanded : undefined}
+            className={
+              hasDetail
+                ? 'cursor-pointer rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-600'
+                : ''
+            }
+          >
+            <div className="py-3.5">
+              <div className="flex items-center gap-3">
+                <BrandLogo
+                  name={exp.company}
+                  domain={exp.domain}
+                  src={exp.logo}
+                  className="w-9 h-9 p-1.5"
+                />
 
-              <div className="flex-1 min-w-0">
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="flex min-w-0 items-baseline text-[15px] font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-                    <span className="truncate">{exp.company}</span>
-                    {exp.link && (
-                      <span className="shrink-0 ml-1.5 text-neutral-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-                    )}
-                  </h3>
-                  <span className="mono text-[11px] italic text-neutral-400 dark:text-neutral-500 whitespace-nowrap">
-                    {exp.period}
-                  </span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="flex min-w-0 items-baseline text-[15px] font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+                      {exp.link ? (
+                        <a
+                          href={exp.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="group flex min-w-0 items-baseline"
+                        >
+                          <span className="truncate">{exp.company}</span>
+                          <span className="shrink-0 ml-1.5 text-neutral-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                        </a>
+                      ) : (
+                        <span className="truncate">{exp.company}</span>
+                      )}
+                    </h3>
+                    <span className="mono text-[11px] italic text-neutral-400 dark:text-neutral-500 whitespace-nowrap">
+                      {exp.period}
+                    </span>
+                  </div>
+                  <p className="text-[13px] italic lowercase text-neutral-500 dark:text-neutral-400 mt-0.5 truncate">
+                    {exp.role}
+                  </p>
                 </div>
-                <p className="text-[13px] italic lowercase text-neutral-500 dark:text-neutral-400 mt-0.5 truncate">
-                  {exp.role}
-                </p>
               </div>
-            </Wrapper>
+
+              {/* Expandable bullets — grid-rows trick animates height without JS measuring */}
+              {hasDetail && (
+                <div
+                  aria-hidden={!isExpanded}
+                  className={`grid transition-[grid-template-rows] ease-out ${
+                    isExpanded ? 'grid-rows-[1fr] duration-300' : 'grid-rows-[0fr] duration-500'
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <ul className="pt-2.5 pl-12 space-y-1">
+                      {exp.bullets!.map((bullet, idx) => (
+                        <li
+                          key={idx}
+                          className="flex gap-2 text-[12.5px] leading-relaxed text-neutral-600 dark:text-neutral-300"
+                        >
+                          <span className="text-neutral-300 dark:text-neutral-600 select-none">–</span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
           </li>
         );
       })}

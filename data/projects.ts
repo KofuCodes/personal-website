@@ -8,17 +8,11 @@ export const projects: Project[] = [
     year: '2025',
     category: 'Embedded/Firmware',
     summary: 'A precision-engineered hackpad designed for competitive Tetris gameplay.',
-    description: 'Built for precision and speed, TetriPad features a unique 4-switch pyramid D-pad layout to minimize input errors during fast-paced Tetris sessions.',
-    bullets: [
-      'Engineered a 4-switch pyramid layout inspired by the classic D-pad for intuitive control.',
-      'Programmed custom firmware to handle responsive input and real-time OLED screen feedback.',
-      'Integrated hardware and software by combining custom wiring with low-latency microcontroller code.'
-    ],
     tags: ['Embedded', 'Firmware', 'Hardware', 'OLED', 'Input Devices'],
     links: {
       github: 'https://github.com/KofuCodes/hackpad'
     },
-    featured: true,
+    kind: 'hardware',
     content: {
       problem: 'Standard mechanical keyboards or cheap gamepads often suffer from ghosting or awkward ergonomics for specialized games like Tetris, where directional precision is everything.',
       solution: 'A dedicated, hard-wired macro pad with a layout specifically optimized for the "NES" style of Tetris play, but with modern switches.',
@@ -33,17 +27,11 @@ export const projects: Project[] = [
     year: '2025',
     category: ['Hardware', 'Hackathons'],
     summary: 'A Gundam-themed Power Rangers morpher using RFID for detection.',
-    description: 'Created for a hackathon, this device combines the aesthetic of Gundam with the mechanics of a Power Rangers Morpher, utilizing RFID cards to trigger unique lighting and sound sequences.',
-    bullets: [
-      'Implemented RFID technology for short-range wireless detection and activation.',
-      'Developed a handheld device that lights up upon card insertion.',
-      'Incorporated Gundam-inspired wings in the CAD to enhance the visual and mechanical design.'
-    ],
     tags: ['RFID', 'Electronics', 'CAD', 'Prototyping', 'Hackathon'],
     links: {
       github: 'https://github.com/KofuCodes/Gundam-Rangers'
     },
-    featured: true,
+    kind: 'hardware',
     content: {
       problem: 'As a kid, I always dreamed of having a real Power Rangers morpher that actually worked. I wanted to bring that childhood dream to life with modern technology.',
       solution: 'A 3D-printed enclosure designed in CAD that houses a custom PCB, an MFRC522 RFID reader, and NeoPixel LEDs.',
@@ -58,17 +46,11 @@ export const projects: Project[] = [
     year: '2024',
     category: 'Hackathons',
     summary: 'The first high school hackathon for Hamiltonian students.',
-    description: 'Organized and executed the inaugural HammerHacks event, bringing together high school students from Hamilton to collaborate on innovative tech projects over a full day of hacking.',
-    bullets: [
-      'Organized logistics for 100+ high school participants and mentors.',
-      'Coordinated project showcases and judging from industry professionals.',
-      'Created an inclusive environment fostering creativity and technical learning.'
-    ],
     tags: ['Community', 'Hackathon', 'Event', 'Organization'],
     links: {
       website: 'https://hammerhacks2024.wcagas.com'
     },
-    featured: true,
+    kind: 'software',
     content: {
       problem: 'High school students in Hamilton had limited access to hackathon opportunities and tech community events.',
       solution: 'Created a full-day hackathon event tailored for high school developers to learn, build, and network.',
@@ -84,17 +66,11 @@ export const projects: Project[] = [
     year: '2025',
     category: ['Hackathons', 'Web/App'],
     summary: 'A synesthesia simulator that plays music based on color temperature.',
-    description: 'Coloradio simulates synesthesia by analyzing colors through AI-powered camera detection and playing corresponding music based on whether the dominant colors are cool or warm-toned.',
-    bullets: [
-      'Built an AI-powered color detection system using the device camera.',
-      'Implemented real-time analysis to determine cool vs warm color temperature.',
-      'Created a dynamic audio experience that responds to visual input, simulating synesthesia.'
-    ],
     tags: ['AI', 'Computer Vision', 'Audio', 'Hackathon', 'Web App'],
     links: {
       github: 'https://github.com/KofuCodes/Coloradio'
     },
-    featured: true,
+    kind: 'software',
     content: {
       problem: 'Most people never experience synesthesia—the neurological phenomenon where one sense triggers another, like seeing colors when hearing music.',
       solution: 'A web application that reverses the synesthesia experience: instead of seeing colors from music, users hear music generated from colors.',

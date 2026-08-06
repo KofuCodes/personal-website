@@ -6,16 +6,15 @@ export interface Project {
   title: string;
   year: string;
   category: Category | Category[];
+  /** Which home-page filter shows this project. Omit for 'both'. */
+  kind?: 'software' | 'hardware' | 'both';
   summary: string;
-  description: string;
-  bullets: string[];
   tags: string[];
   links: {
     github?: string;
     demo?: string;
     website?: string;
   };
-  featured: boolean;
   content: {
     problem: string;
     solution: string;
@@ -32,7 +31,7 @@ export interface Experience {
   role: string;
   company: string;
   period: string;
-  /** Kept as reference material (resume, future detail views) — not rendered on the home page. */
+  /** Rendered in the home-page experience accordion — shown when the row is hovered (tapped on mobile). */
   bullets?: string[];
   /** Optional logo: a website domain (favicon) or a local /public/logos asset. */
   domain?: string;

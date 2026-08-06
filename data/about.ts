@@ -11,18 +11,16 @@ import { AboutItem } from '../types';
 export const aboutItems: AboutItem[] = [
   {
     parts: [
-      'Favorite game: ',
-      { domain: 'leagueoflegends.com', name: 'League of Legends' },
-      ' — I can quit whenever I want.',
+      'Embedded clicked at a Toronto hackathon — a ',
+      { emoji: '🪩' },
+      ' disco ball answering motion with light and sound.',
     ],
   },
   {
     parts: [
-      'I tune ',
-      { emoji: '⌨️' },
-      ' mechanical keyboards and grind ',
-      { emoji: '🕹️' },
-      ' 40-line Tetris sprints.',
+      'Favorite game: ',
+      { domain: 'leagueoflegends.com', name: 'League of Legends' },
+      ' — I can quit whenever I want.',
     ],
   },
   {

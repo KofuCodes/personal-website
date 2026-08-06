@@ -104,7 +104,9 @@
 
       to {
         opacity: 1;
-        transform: translateY(0);
+        /* `none` (not translateY(0)) so the filled end value doesn't create a
+           stacking context that would trap hover-preview cards under later sections */
+        transform: none;
       }
     }
 
@@ -113,10 +115,71 @@
       animation: reveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
+    /* Scroll reveal — applied by <Reveal> when the block enters the viewport */
+    .sreveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .sreveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Typing cursor for the hero name */
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .animate-blink {
+      animation: blink 1.06s step-end infinite;
+    }
+
+    /* Project modal entrance */
+    @keyframes modal-fade {
+      from {
+        opacity: 0;
+      }
+    }
+
+    @keyframes modal-pop {
+      from {
+        opacity: 0;
+        transform: scale(0.96) translateY(10px);
+      }
+    }
+
+    .modal-fade {
+      animation: modal-fade 0.2s ease-out;
+    }
+
+    .modal-pop {
+      animation: modal-pop 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .reveal {
+      .reveal,
+      .modal-fade,
+      .modal-pop {
         animation: none;
         opacity: 1;
+      }
+
+      .sreveal {
+        transition: none;
+        opacity: 1;
+        transform: none;
+      }
+
+      .aperture,
+      .transition-transform,
+      .transition-\[grid-template-rows\] {
+        transition-duration: 0.01ms !important;
       }
 
       * {
