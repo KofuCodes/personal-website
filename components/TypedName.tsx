@@ -7,6 +7,11 @@ const START_DELAY = 650;
 
 type Phase = 'idle' | 'typing' | 'deleting' | 'done';
 
+// Play the type-out once per page load. The hero now lives inside <Routes>, so
+// navigating gallery → index remounts it, and replaying the ~9s intro every
+// time would be tiresome.
+let hasPlayed = false;
+
 /** Human-ish keystroke delay: mostly steady, with occasional hesitation. */
 const typeDelay = () =>
   Math.random() < 0.12 ? 260 + Math.random() * 180 : 95 + Math.random() * 80;
@@ -21,11 +26,14 @@ const deleteDelay = () =>
  */
 const TypedName: React.FC<{ className?: string }> = ({ className = '' }) => {
   const [prefixCount, setPrefixCount] = useState(0);
-  const [nameCount, setNameCount] = useState(0);
-  const [phase, setPhase] = useState<Phase>('idle');
+  const [nameCount, setNameCount] = useState(hasPlayed ? NAME.length : 0);
+  const [phase, setPhase] = useState<Phase>(hasPlayed ? 'done' : 'idle');
 
   useEffect(() => {
-    if (phase === 'done') return;
+    if (phase === 'done') {
+      hasPlayed = true;
+      return;
+    }
 
     // Reduced motion: skip straight to the final state
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

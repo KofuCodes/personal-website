@@ -8,10 +8,10 @@ npm run dev      # http://localhost:3000
 npm run build    # production build in /dist
 ```
 
-The whole site is a split-panel portfolio: the identity panel on the left (name, bio,
-links, experience) **never changes** — routes swap only the right panel (index /
-gallery, via the ➢ pages nav at the top left). Project details open in a
-modal, not a separate route.
+The site is one centered column. A persistent top bar carries the ➢ pages nav
+(index / gallery) on the left and now-playing + the theme toggle on the right;
+everything else stacks below it — hero, terrain, about, experience, projects,
+gallery. Project details open in a modal, not a separate route.
 
 All content lives in **`/data`** as plain TypeScript — you never touch a component to
 add a project, a job, an about line, or a photo. The sections below are the recipes.
@@ -96,19 +96,22 @@ Drop files in `/public/photography/<Album>/` and register each in
 
 | Section | Data | Component |
 |---|---|---|
-| Identity panel (persists across routes) | inline | [`components/IdentityPanel.tsx`](components/IdentityPanel.tsx), [`components/TypedName.tsx`](components/TypedName.tsx), [`components/PagesNav.tsx`](components/PagesNav.tsx), [`components/ThemeToggle.tsx`](components/ThemeToggle.tsx) |
+| Top bar (nav, now playing, theme) + footer | — | [`App.tsx`](App.tsx), [`components/PagesNav.tsx`](components/PagesNav.tsx), [`components/SpotifyStatus.tsx`](components/SpotifyStatus.tsx), [`components/ThemeToggle.tsx`](components/ThemeToggle.tsx) |
+| Hero (typed name, headshot, bio, links) | inline | [`components/Hero.tsx`](components/Hero.tsx), [`components/TypedName.tsx`](components/TypedName.tsx) |
 | Experience (hover to expand) | `data/experience.ts` | [`components/ExperienceTimeline.tsx`](components/ExperienceTimeline.tsx) |
-| Now playing / copyright | — | [`components/SpotifyStatus.tsx`](components/SpotifyStatus.tsx), [`components/IdentityPanel.tsx`](components/IdentityPanel.tsx) (desktop), [`App.tsx`](App.tsx) (mobile footer) |
 | Section headers ("x —") | — | [`components/QuietHeader.tsx`](components/QuietHeader.tsx) |
-| Closed-loop terrain + caption | — | [`components/ClosedLoopControlTerrain.tsx`](components/ClosedLoopControlTerrain.tsx) (canvas), [`pages/Home.tsx`](pages/Home.tsx) (caption) |
+| Closed-loop terrain + caption | — | [`components/TerrainStage.tsx`](components/TerrainStage.tsx) (scroll-opening stage), [`components/ClosedLoopControlTerrain.tsx`](components/ClosedLoopControlTerrain.tsx) (canvas), [`pages/Home.tsx`](pages/Home.tsx) (caption) |
 | About | `data/about.ts` | [`components/About.tsx`](components/About.tsx) |
 | Project cards + filters | `data/projects.ts` | [`components/WorkCards.tsx`](components/WorkCards.tsx), filters in [`pages/Home.tsx`](pages/Home.tsx) |
 | Project detail modal | `data/projects.ts` | [`components/ProjectModal.tsx`](components/ProjectModal.tsx) |
 | Gallery (+ home preview) | `data/photography.ts` | [`pages/Photography.tsx`](pages/Photography.tsx), [`pages/Home.tsx`](pages/Home.tsx) |
 
-Scroll animations are [`components/Reveal.tsx`](components/Reveal.tsx) (right-panel
-sections below the masthead) and the `.reveal` CSS classes in [`index.html`](index.html)
-(load-time stagger for the left panel, the terrain masthead, and subpages).
+Scroll animations are [`components/Reveal.tsx`](components/Reveal.tsx) (sections below
+the masthead) and the `.reveal` CSS classes in [`index.html`](index.html) (load-time
+stagger for the top bar, hero, terrain, and the gallery page). The terrain additionally opens on scroll —
+[`components/TerrainStage.tsx`](components/TerrainStage.tsx) grows the stage from ~62%
+to full over the first ~340px and dollies the camera to match, while the canvas keeps a
+fixed layout size so the WebGL buffer is never reallocated mid-scroll.
 
 **Theme**: cream paper (`amber-50`) with warm stone ink, IBM Plex Mono throughout,
 and a single coral "target" accent (deepened to a darker orange in light mode where

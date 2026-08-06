@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 /**
  * Sun/moon theme switch with the circular view-transition reveal wiping out
- * from the button. Rendered in the identity panel's links row on all routes.
+ * from the button. Rendered in the top bar's right cluster on all routes.
  */
 const ThemeToggle: React.FC<{ className?: string }> = ({ className = '' }) => {
   const [isDark, setIsDark] = useState(document.documentElement.classList.contains('dark'));

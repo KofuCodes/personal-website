@@ -1,17 +1,17 @@
-import React, { useMemo, useState, Suspense, lazy } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
 import { photos } from '../data/photography';
 import { Project } from '../types';
+import Hero from '../components/Hero';
+import TerrainStage from '../components/TerrainStage';
 import WorkCards from '../components/WorkCards';
 import About from '../components/About';
+import ExperienceTimeline from '../components/ExperienceTimeline';
 import Reveal from '../components/Reveal';
 import ProjectModal from '../components/ProjectModal';
 import QuietHeader from '../components/QuietHeader';
 import Aperture from '../components/Aperture';
-
-// Heavy (three.js) — code-split so it doesn't block the initial page load.
-const ClosedLoopControlTerrain = lazy(() => import('../components/ClosedLoopControlTerrain'));
 
 type Filter = 'all' | 'software' | 'hardware';
 
@@ -25,11 +25,10 @@ const shuffle = <T,>(arr: T[]): T[] => {
   return a;
 };
 
-/** Right-panel content for the index page — the identity panel lives in the app shell. */
 const Home: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [filter, setFilter] = useState<Filter>('all');
-  const [galleryPreview] = useState(() => shuffle(photos).slice(0, 6));
+  const [galleryPreview] = useState(() => shuffle(photos).slice(0, 8));
 
   const filteredProjects = useMemo(
     () =>
@@ -56,28 +55,34 @@ const Home: React.FC = () => {
 
   return (
     <>
-      {/* Terrain masthead */}
-      <section className="reveal" style={{ animationDelay: '0.12s' }}>
-        <div className="h-[clamp(280px,38vh,400px)] w-full">
-          <Suspense fallback={<div className="h-full w-full" />}>
-            <ClosedLoopControlTerrain />
-          </Suspense>
-        </div>
+      <Hero />
+
+      {/* Terrain masthead — opens up as you scroll */}
+      <section className="mt-12 reveal" style={{ animationDelay: '0.14s' }}>
+        <TerrainStage />
         <p className="mt-3 text-center text-[12.5px] italic text-stone-500 dark:text-stone-400">
           I'm always self-adjusting to the targeted goal
         </p>
       </section>
 
       {/* About */}
-      <Reveal className="mt-12">
+      <Reveal className="mt-14">
         <section>
           <QuietHeader label="about" />
           <About />
         </section>
       </Reveal>
 
+      {/* Experience */}
+      <Reveal className="mt-14">
+        <section>
+          <QuietHeader label="experience" />
+          <ExperienceTimeline />
+        </section>
+      </Reveal>
+
       {/* Projects */}
-      <Reveal className="mt-12">
+      <Reveal className="mt-14">
         <section>
           <QuietHeader label="projects">
             {filterButton('software')}
@@ -86,7 +91,7 @@ const Home: React.FC = () => {
           {filteredProjects.length > 0 ? (
             <WorkCards projects={filteredProjects} onOpen={setSelectedProject} />
           ) : (
-            <p className="mono text-[12px] text-stone-400 dark:text-stone-500 py-8 text-center">
+            <p className="mono text-[12px] text-stone-500 dark:text-stone-400 py-8 text-center">
               nothing here yet.
             </p>
           )}
@@ -94,7 +99,7 @@ const Home: React.FC = () => {
       </Reveal>
 
       {/* Gallery preview */}
-      <Reveal className="mt-12">
+      <Reveal className="mt-14">
         <section className="group">
           <QuietHeader label="gallery">
             <Aperture className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 self-center" animate />
@@ -105,7 +110,7 @@ const Home: React.FC = () => {
               view all ➢
             </Link>
           </QuietHeader>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-4 gap-2">
             {galleryPreview.map((photo) => (
               <Link
                 key={photo.id}

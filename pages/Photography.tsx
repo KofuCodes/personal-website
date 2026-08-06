@@ -47,11 +47,7 @@ const Photography: React.FC = () => {
 
   useEffect(() => {
     if (active === null) return;
-    // Lock both scroll containers: body (mobile) and the right panel (desktop)
     document.body.style.overflow = 'hidden';
-    const panel = document.getElementById('right-panel');
-    const prevPanel = panel ? panel.style.overflow : '';
-    if (panel) panel.style.overflow = 'hidden';
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -87,7 +83,6 @@ const Photography: React.FC = () => {
     window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = '';
-      if (panel) panel.style.overflow = prevPanel;
       window.removeEventListener('keydown', onKey);
     };
   }, [active, close, next, prev]);
@@ -109,8 +104,8 @@ const Photography: React.FC = () => {
 
   return (
     <div>
-      <header className="mb-8 reveal group">
-        <QuietHeader label="gallery">
+      <header className="mt-9 mb-8 reveal group">
+        <QuietHeader label="gallery" as="h1">
           <Aperture className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 self-center" animate />
         </QuietHeader>
         <p className="text-[13.5px] text-stone-500 dark:text-stone-400">my story, through a lens.</p>
@@ -198,7 +193,8 @@ const Photography: React.FC = () => {
           document.body
         )}
 
-      <footer className="mt-20 pt-8 border-t border-stone-200 dark:border-stone-800 text-center">
+      {/* No rule here — the shell footer below draws the page's only one */}
+      <footer className="mt-16 text-center">
         <p className="mono text-[12px] lowercase tracking-wider text-stone-400 dark:text-stone-500">
           end of collection ✵
         </p>

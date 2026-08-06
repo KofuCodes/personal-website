@@ -8,8 +8,8 @@ const pages = [
 
 /**
  * Page navigation, distinct from the external-links row: no underlines, and
- * the active page carries a ➢ marker + the coral accent. Routes swap only
- * the right panel — this nav (and the whole left panel) stays put.
+ * the active page carries a ➢ marker + the coral accent. Lives in the top bar,
+ * outside <Routes>, so it persists across route changes.
  */
 const PagesNav: React.FC = () => {
   const { pathname } = useLocation();

@@ -6,6 +6,10 @@ import { BrandLogo } from './Brand';
  * Compact experience rows that expand on hover (tap on mobile) to show the
  * detail bullets from data/experience.ts — the shape of the story up front,
  * the substance one hover away.
+ *
+ * The row itself stays a plain list item: the disclosure is a real <button>
+ * beside the period, so the company link inside the row remains independently
+ * focusable and activatable.
  */
 const ExperienceTimeline: React.FC = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -18,6 +22,8 @@ const ExperienceTimeline: React.FC = () => {
 
         const toggle = () => setExpandedId((prev) => (prev === exp.id ? null : exp.id));
 
+        const panelId = `exp-detail-${exp.id}`;
+
         return (
           <li
             key={exp.id}
@@ -26,24 +32,7 @@ const ExperienceTimeline: React.FC = () => {
             onPointerEnter={hasDetail ? (e) => { if (e.pointerType !== 'touch') setExpandedId(exp.id); } : undefined}
             onPointerLeave={hasDetail ? (e) => { if (e.pointerType !== 'touch') setExpandedId(null); } : undefined}
             onClick={hasDetail ? toggle : undefined}
-            onKeyDown={
-              hasDetail
-                ? (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      toggle();
-                    }
-                  }
-                : undefined
-            }
-            tabIndex={hasDetail ? 0 : undefined}
-            role={hasDetail ? 'button' : undefined}
-            aria-expanded={hasDetail ? isExpanded : undefined}
-            className={
-              hasDetail
-                ? 'cursor-pointer rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-700 dark:focus-visible:ring-coral/80'
-                : ''
-            }
+            className={hasDetail ? 'cursor-pointer' : ''}
           >
             <div className="py-3.5">
               <div className="flex items-center gap-3">
@@ -72,9 +61,36 @@ const ExperienceTimeline: React.FC = () => {
                         <span className="truncate">{exp.company}</span>
                       )}
                     </h3>
-                    <span className="mono text-[11px] italic text-stone-400 dark:text-stone-500 whitespace-nowrap">
-                      {exp.period}
-                    </span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="mono text-[11px] italic text-stone-400 dark:text-stone-500 whitespace-nowrap">
+                        {exp.period}
+                      </span>
+                      {hasDetail && (
+                        <button
+                          type="button"
+                          aria-expanded={isExpanded}
+                          aria-controls={panelId}
+                          aria-label={`${exp.company} details`}
+                          onClick={(e) => {
+                            // The row itself toggles too — don't undo this click.
+                            e.stopPropagation();
+                            toggle();
+                          }}
+                          className="shrink-0 self-center -my-1 p-1 rounded text-stone-400 dark:text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-700 dark:focus-visible:ring-coral/80 transition-colors"
+                        >
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            aria-hidden="true"
+                            className={`w-3 h-3 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
                   </div>
                   <p className="text-[13px] italic lowercase text-stone-500 dark:text-stone-400 mt-0.5 truncate">
                     {exp.role}
@@ -84,7 +100,7 @@ const ExperienceTimeline: React.FC = () => {
 
               {/* Expandable bullets — grid-rows trick animates height without JS measuring */}
               {hasDetail && (
-                <div aria-hidden={!isExpanded} className={`accordion ${isExpanded ? 'open' : ''}`}>
+                <div id={panelId} aria-hidden={!isExpanded} className={`accordion ${isExpanded ? 'open' : ''}`}>
                   <div className="overflow-hidden">
                     <ul className="pt-2.5 pl-12 space-y-1">
                       {exp.bullets!.map((bullet, idx) => (
