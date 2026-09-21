@@ -3,6 +3,26 @@ import { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    slug: 'patch',
+    title: 'Patch',
+    year: '2026',
+    category: ['Hardware', 'Hackathons'],
+    summary: 'A voice-controlled rover that goes and finds your stuff. Top 10% at Hack the North.',
+    tags: ['Raspberry Pi', 'Python', 'FastAPI', 'OpenCV', 'YOLO', 'React', 'Motor Control', 'Hackathon'],
+    links: {
+      github: 'https://github.com/Enginaaron/Patch'
+    },
+    content: {
+      problem: 'You should be able to say "find my white water bottle, I think it\'s beside my backpack" and have a robot go do it. Most voice-controlled robots map a phrase to a fixed motor command and never actually look at the room.',
+      solution: 'Patch sends the spoken request and its live camera frame to Huawei\'s OMNI multimodal model together. It rotates in roughly 30 degree steps to scan, asks "is this your bottle?" when it spots a likely match, and only drives over once you say yes.',
+      build: 'Raspberry Pi 5, a TB6612FNG motor driver, two gear motors, a USB webcam, and a chassis made of popsicle sticks and hot glue. The camera pokes through the nose of a cardboard raccoon. Backend is FastAPI with OpenCV, plus a local YOLO pass that screens frames before we spend a cloud call. The React frontend runs over an SSH tunnel so the browser will allow the mic. Steering is a proportional controller on the bounding box centre, mixed into left and right PWM. There is no depth sensor, so distance comes from how wide the bottle looks in frame, calibrated off one measurement at 7.5 feet.',
+      learned: 'Cloud inference takes seconds, so the rover moves in short pulses and stops before every look. The scary failure is a late model response restarting the motors after someone hits stop. Every stop or cancel now bumps a generation token, and a stale response can\'t command the wheels. Also: below about 30% PWM these motors only twitch, so the controller has a floor.',
+      video: '<video src="/patch-drive-test.mp4" controls muted playsinline preload="metadata" style="display:block;width:100%;max-height:70vh;background:#000;"></video>',
+      buildImage: '/patch.jpg',
+      finishedImage: '/patch-floor-test.jpg'
+    }
+  },
+  {
     slug: 'hackpad-tetripad',
     title: 'TetriPad',
     year: '2025',
