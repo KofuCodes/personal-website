@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Work from './pages/Work';
 import Photography from './pages/Photography';
+import Resume from './pages/Resume';
 
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
@@ -51,6 +52,7 @@ const App: React.FC = () => {
               <Route path="/projects" element={<Projects />} />
               <Route path="/work" element={<Work />} />
               <Route path="/photography" element={<Photography />} />
+              <Route path="/resume" element={<Resume />} />
               {/* Old per-project deep links land on the projects page */}
               <Route path="/projects/*" element={<Navigate to="/projects" replace />} />
               <Route path="*" element={

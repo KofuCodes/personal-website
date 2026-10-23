@@ -70,9 +70,6 @@ const Hero: React.FC = () => (
           <a href="mailto:e64tran@uwaterloo.ca" className={quietLink}>
             email
           </a>
-          <a href="/Ethan_Tran_Resume.pdf" target="_blank" rel="noopener noreferrer" className={quietLink}>
-            resume
-          </a>
         </div>
       </div>
     </div>

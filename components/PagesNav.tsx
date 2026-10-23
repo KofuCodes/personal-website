@@ -6,6 +6,7 @@ const pages = [
   { label: 'projects', to: '/projects' },
   { label: 'work', to: '/work' },
   { label: 'gallery', to: '/photography' },
+  { label: 'resume', to: '/resume' },
 ];
 
 /**
