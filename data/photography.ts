@@ -93,27 +93,6 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '13',
-    url: '/photography/San Francisco - 2025/DSCN3810.JPG',
-    location: 'San Francisco, California',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '14',
-    url: '/photography/San Francisco - 2025/DSCN3839.JPG',
-    location: 'San Francisco, California',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '15',
-    url: '/photography/San Francisco - 2025/DSCN3841.JPG',
-    location: 'San Francisco, California',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
     id: '16',
     url: '/photography/San Francisco - 2025/DSCN3844.JPG',
     location: 'San Francisco, California',
@@ -156,27 +135,12 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '22',
-    url: '/photography/San Francisco - 2025/DSCN3925.JPG',
-    location: 'San Francisco, California',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '23',
-    url: '/photography/San Francisco - 2025/DSCN3949.JPG',
-    location: 'San Francisco, California',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
     id: '103',
     url: '/photography/San Francisco - 2025/IMG_3430.jpg',
     location: 'San Francisco, California',
     year: '2025',
     aspect: 'landscape'
   },
-  // Hamilton - 2025
   {
     id: '24',
     url: '/photography/Hamilton - 2025/001456560015.jpeg',
@@ -206,27 +170,6 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '28',
-    url: '/photography/Hamilton - 2025/C6260926-74F1-4D36-BB1E-78A1BEA426B8.jpg',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '29',
-    url: '/photography/Hamilton - 2025/DSC03115.JPG',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '30',
-    url: '/photography/Hamilton - 2025/DSC03129.JPG',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
     id: '31',
     url: '/photography/Hamilton - 2025/DSC03133.JPG',
     location: 'Hamilton, Ontario',
@@ -234,29 +177,8 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '32',
-    url: '/photography/Hamilton - 2025/DSC03165.JPG',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
     id: '33',
     url: '/photography/Hamilton - 2025/DSC03191.JPG',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '34',
-    url: '/photography/Hamilton - 2025/DSC03214.JPG',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '35',
-    url: '/photography/Hamilton - 2025/DSC03240.JPG',
     location: 'Hamilton, Ontario',
     year: '2025',
     aspect: 'landscape'
@@ -304,27 +226,6 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '42',
-    url: '/photography/Hamilton - 2025/IMG_2764.JPG',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '43',
-    url: '/photography/Hamilton - 2025/IMG_4264_Original.JPG',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '44',
-    url: '/photography/Hamilton - 2025/IMG_4275_Original.JPG',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
     id: '45',
     url: '/photography/Hamilton - 2025/IMG_6128.JPG',
     location: 'Hamilton, Ontario',
@@ -339,22 +240,8 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '110',
-    url: '/photography/Hamilton - 2025/IMG_2384.jpg',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
     id: '111',
     url: '/photography/Hamilton - 2025/IMG_2395.jpg',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '112',
-    url: '/photography/Hamilton - 2025/IMG_2981.jpg',
     location: 'Hamilton, Ontario',
     year: '2025',
     aspect: 'landscape'
@@ -374,20 +261,6 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '115',
-    url: '/photography/Hamilton - 2025/IMG_3384.jpg',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '116',
-    url: '/photography/Hamilton - 2025/IMG_3745.jpg',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
     id: '117',
     url: '/photography/Hamilton - 2025/IMG_4073.jpg',
     location: 'Hamilton, Ontario',
@@ -401,7 +274,6 @@ export const photos: Photo[] = [
     year: '2025',
     aspect: 'landscape'
   },
-  // Selena's Bday
   {
     id: '46',
     url: '/photography/Selena_s Bday/beauty_1758412825422.JPG',
@@ -412,13 +284,6 @@ export const photos: Photo[] = [
   {
     id: '48',
     url: '/photography/Selena_s Bday/DSC03895.JPG',
-    location: 'Hamilton, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '49',
-    url: '/photography/Selena_s Bday/DSC03902.JPG',
     location: 'Hamilton, Ontario',
     year: '2025',
     aspect: 'landscape'
@@ -437,7 +302,6 @@ export const photos: Photo[] = [
     year: '2025',
     aspect: 'landscape'
   },
-  // Will's Bday
   {
     id: '52',
     url: '/photography/Will_s bday/DSC03277.JPG',
@@ -494,7 +358,6 @@ export const photos: Photo[] = [
     year: '2025',
     aspect: 'landscape'
   },
-  // Montréal
   {
     id: '60',
     url: '/photography/Montréal/IMG_1487.JPG',
@@ -566,13 +429,6 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '105',
-    url: '/photography/Montréal/IMG_4193.jpg',
-    location: 'Montreal, Québec',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
     id: '106',
     url: '/photography/Montréal/IMG_4199.jpg',
     location: 'Montreal, Québec',
@@ -590,28 +446,6 @@ export const photos: Photo[] = [
     id: '108',
     url: '/photography/Montréal/IMG_4266.jpg',
     location: 'Montreal, Québec',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  // Waterloo - 2025
-  {
-    id: '69',
-    url: '/photography/Waterloo - 2025/02AB13D5-8CB3-43F4-8376-C79DB94A5F50.jpg',
-    location: 'Waterloo, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '70',
-    url: '/photography/Waterloo - 2025/527D23E9-9E7B-40BD-8EEF-D5CB5AEF215F.jpg',
-    location: 'Waterloo, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '71',
-    url: '/photography/Waterloo - 2025/54254596-2DFE-49B9-A4AD-A02094C73978.jpg',
-    location: 'Waterloo, Ontario',
     year: '2025',
     aspect: 'landscape'
   },
@@ -658,29 +492,8 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '119',
-    url: '/photography/Waterloo - 2025/IMG_0129.jpg',
-    location: 'Waterloo, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '120',
-    url: '/photography/Waterloo - 2025/IMG_0206.jpg',
-    location: 'Waterloo, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
     id: '121',
     url: '/photography/Waterloo - 2025/IMG_0419.jpg',
-    location: 'Waterloo, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '122',
-    url: '/photography/Waterloo - 2025/IMG_1394.jpg',
     location: 'Waterloo, Ontario',
     year: '2025',
     aspect: 'landscape'
@@ -693,20 +506,12 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '124',
-    url: '/photography/Waterloo - 2025/IMG_4746.jpg',
-    location: 'Waterloo, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
     id: '125',
     url: '/photography/Waterloo - 2025/IMG_4756.jpg',
     location: 'Waterloo, Ontario',
     year: '2025',
     aspect: 'landscape'
   },
-  // Toronto - 2025
   {
     id: '78',
     url: '/photography/Toronto - 2025/DSC03813.JPG',
@@ -764,29 +569,8 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '96',
-    url: '/photography/Toronto - 2025/IMG_1715.jpg',
-    location: 'Toronto, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
     id: '97',
     url: '/photography/Toronto - 2025/IMG_1965.jpg',
-    location: 'Toronto, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '98',
-    url: '/photography/Toronto - 2025/IMG_2566.jpg',
-    location: 'Toronto, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  {
-    id: '99',
-    url: '/photography/Toronto - 2025/IMG_2603.jpg',
     location: 'Toronto, Ontario',
     year: '2025',
     aspect: 'landscape'
@@ -806,14 +590,6 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '102',
-    url: '/photography/Toronto - 2025/IMG_5439.jpg',
-    location: 'Toronto, Ontario',
-    year: '2025',
-    aspect: 'landscape'
-  },
-  // Toronto - 2024
-  {
     id: '85',
     url: '/photography/Toronto - 2024/DDCC80F7-F3EA-4DBD-961E-EC18ECE19DCC.jpg',
     location: 'Toronto, Ontario',
@@ -828,13 +604,6 @@ export const photos: Photo[] = [
     aspect: 'landscape'
   },
   {
-    id: '87',
-    url: '/photography/Toronto - 2024/IMG_2640.jpg',
-    location: 'Toronto, Ontario',
-    year: '2024',
-    aspect: 'landscape'
-  },
-  {
     id: '88',
     url: '/photography/Toronto - 2024/IMG_4587.jpg',
     location: 'Toronto, Ontario',
@@ -844,13 +613,6 @@ export const photos: Photo[] = [
   {
     id: '89',
     url: '/photography/Toronto - 2024/IMG_9392.jpg',
-    location: 'Toronto, Ontario',
-    year: '2024',
-    aspect: 'landscape'
-  },
-  {
-    id: '90',
-    url: '/photography/Toronto - 2024/IMG_9416.jpg',
     location: 'Toronto, Ontario',
     year: '2024',
     aspect: 'landscape'
@@ -881,6 +643,160 @@ export const photos: Photo[] = [
     url: '/photography/Toronto - 2024/IMG_9846.jpg',
     location: 'Toronto, Ontario',
     year: '2024',
+    aspect: 'landscape'
+  },
+  {
+    id: '126',
+    url: '/photography/Ethan_s bday - 2026/DSC04025.JPG',
+    location: 'Hamilton, Ontario',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '127',
+    url: '/photography/Ethan_s bday - 2026/DSC04035.JPG',
+    location: 'Hamilton, Ontario',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '128',
+    url: '/photography/Ethan_s bday - 2026/DSC04062.JPG',
+    location: 'Hamilton, Ontario',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '129',
+    url: '/photography/Ethan_s bday - 2026/DSC04078.JPG',
+    location: 'Hamilton, Ontario',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '130',
+    url: '/photography/Ethan_s bday - 2026/IMG_1161.jpg',
+    location: 'Hamilton, Ontario',
+    year: '2026',
+    aspect: 'portrait'
+  },
+  {
+    id: '131',
+    url: '/photography/Ethan_s bday - 2026/IMG_2596.jpg',
+    location: 'Hamilton, Ontario',
+    year: '2026',
+    aspect: 'portrait'
+  },
+  {
+    id: '132',
+    url: '/photography/Ethan_s bday - 2026/IMG_1184.JPG',
+    location: 'Hamilton, Ontario',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '133',
+    url: '/photography/vancali - 2026/DSC04445.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '134',
+    url: '/photography/vancali - 2026/DSC04578.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '135',
+    url: '/photography/vancali - 2026/DSC04587.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '136',
+    url: '/photography/vancali - 2026/DSC04593.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '137',
+    url: '/photography/vancali - 2026/DSCN4432.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'portrait'
+  },
+  {
+    id: '138',
+    url: '/photography/vancali - 2026/DSC04627.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '139',
+    url: '/photography/vancali - 2026/DSC04700.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '140',
+    url: '/photography/vancali - 2026/DSC04720.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '141',
+    url: '/photography/vancali - 2026/DSCN4660.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '142',
+    url: '/photography/vancali - 2026/DSC04901.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '143',
+    url: '/photography/vancali - 2026/DSCN4628.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '144',
+    url: '/photography/vancali - 2026/IMG_4145.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'portrait'
+  },
+  {
+    id: '145',
+    url: '/photography/vancali - 2026/IMG_4177.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'portrait'
+  },
+  {
+    id: '146',
+    url: '/photography/vancali - 2026/IMG_4251.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
+    aspect: 'landscape'
+  },
+  {
+    id: '147',
+    url: '/photography/vancali - 2026/IMG_4298.JPG',
+    location: 'Vancouver & California',
+    year: '2026',
     aspect: 'landscape'
   }
 ];
