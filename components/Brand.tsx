@@ -22,8 +22,8 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ name, domain, src, classNa
   const [current, setCurrent] = useState<string | undefined>(src || favicon);
 
   const base =
-    'inline-block shrink-0 rounded-[4px] object-contain bg-stone-100 dark:bg-stone-800 ' +
-    'ring-1 ring-inset ring-black/5 dark:ring-white/10';
+    'inline-block shrink-0 rounded-[4px] object-contain bg-ink-100 ' +
+    'ring-1 ring-inset ring-black/5';
 
   if (current) {
     return (
@@ -42,7 +42,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ name, domain, src, classNa
   return (
     <span
       aria-hidden="true"
-      className={`${base} inline-flex items-center justify-center font-semibold text-stone-500 dark:text-stone-400 ${className}`}
+      className={`${base} inline-flex items-center justify-center font-semibold text-ink-500 ${className}`}
     >
       <span style={{ fontSize: '0.62em' }}>{name.trim().charAt(0).toUpperCase()}</span>
     </span>
@@ -69,7 +69,7 @@ const Brand: React.FC<BrandProps> = ({ name, label, href, domain, src, className
       <span
         className={
           underline
-            ? 'underline decoration-stone-300 dark:decoration-stone-600 underline-offset-[3px] group-hover/lp:decoration-stone-900 dark:group-hover/lp:decoration-stone-100 transition-colors'
+            ? 'underline decoration-ink-300 underline-offset-[3px] group-hover/lp:decoration-ink-900 transition-colors'
             : undefined
         }
       >
@@ -84,14 +84,14 @@ const Brand: React.FC<BrandProps> = ({ name, label, href, domain, src, className
         href={href}
         title={name}
         domain={domain}
-        className="font-medium text-stone-900 dark:text-stone-100"
+        className="font-medium text-ink-900"
       >
         {inner(true)}
       </LinkPreview>
     );
   }
 
-  return <span className="font-medium text-stone-900 dark:text-stone-100">{inner(false)}</span>;
+  return <span className="font-medium text-ink-900">{inner(false)}</span>;
 };
 
 export default Brand;

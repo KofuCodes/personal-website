@@ -4,10 +4,10 @@ import { Project } from '../types';
 
 const StoryBlock: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
   <section>
-    <h3 className="mono text-[10px] uppercase tracking-wider text-stone-400 mb-1">
+    <h3 className="text-[11px] uppercase tracking-wider text-ink-400 mb-1">
       {label}
     </h3>
-    <p className="text-[13.5px] leading-relaxed text-stone-200">{children}</p>
+    <p className="text-[14.5px] leading-relaxed text-ink-200">{children}</p>
   </section>
 );
 
@@ -146,11 +146,11 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
 
           {/* Story column */}
           <div className="w-full lg:w-96 shrink-0 pb-8 lg:pb-0">
-            <div className="mono text-[10px] uppercase tracking-wider text-stone-400 mb-2">
+            <div className="text-[11px] uppercase tracking-wider text-ink-400 mb-2">
               {project.year} · {categories.join(' · ')}
             </div>
             <h2 className="text-xl font-semibold tracking-tight text-white mb-1.5">{project.title}</h2>
-            <p className="text-[14px] leading-relaxed text-stone-300 mb-5">{project.summary}</p>
+            <p className="text-[15px] leading-relaxed text-ink-300 mb-5">{project.summary}</p>
 
             <div className="space-y-4">
               <StoryBlock label="The problem">{project.content.problem}</StoryBlock>
@@ -161,7 +161,7 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
 
             <div className="flex flex-wrap gap-1.5 mt-5">
               {project.tags.map((tag) => (
-                <span key={tag} className="mono text-[10px] text-stone-400 border border-white/15 rounded px-1.5 py-0.5">
+                <span key={tag} className="text-[11px] text-ink-400 border border-white/15 rounded px-1.5 py-0.5">
                   {tag}
                 </span>
               ))}
@@ -174,7 +174,7 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
                     href={project.links.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-[12.5px] font-medium px-3.5 py-1.5 rounded-full bg-white text-stone-900 hover:opacity-85 transition-opacity"
+                    className="inline-flex items-center text-[13.5px] font-medium px-3.5 py-1.5 rounded-full bg-white text-ink-900 hover:opacity-85 transition-opacity"
                   >
                     GitHub ↗
                   </a>
@@ -184,7 +184,7 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
                     href={project.links.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-[12.5px] font-medium px-3.5 py-1.5 rounded-full bg-white text-stone-900 hover:opacity-85 transition-opacity"
+                    className="inline-flex items-center text-[13.5px] font-medium px-3.5 py-1.5 rounded-full bg-white text-ink-900 hover:opacity-85 transition-opacity"
                   >
                     Website ↗
                   </a>
@@ -194,7 +194,7 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
                     href={project.links.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-[12.5px] font-medium px-3.5 py-1.5 rounded-full border border-white/25 text-white hover:bg-white/10 transition-colors"
+                    className="inline-flex items-center text-[13.5px] font-medium px-3.5 py-1.5 rounded-full border border-white/25 text-white hover:bg-white/10 transition-colors"
                   >
                     Live demo ↗
                   </a>

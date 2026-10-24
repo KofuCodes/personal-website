@@ -35,20 +35,6 @@ export const aboutItems: AboutItem[] = [
   },
   {
     parts: [
-      'Currently reading about ',
-      { emoji: '📚' },
-      ' RLMs and recursive self-improvement.',
-    ],
-  },
-  {
-    parts: [
-      'My favorite model is ',
-      { domain: 'claude.ai', name: 'Claude Opus 5' },
-      '.',
-    ],
-  },
-  {
-    parts: [
       'My current goal is to contribute to ',
       { domain: 'nvidia.com', name: 'NVIDIA' },
       '.',

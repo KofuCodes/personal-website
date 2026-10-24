@@ -12,12 +12,12 @@ const Part: React.FC<{ part: AboutPart }> = ({ part }) => {
   }
 
   if ('to' in part) {
-    // Page links wear the coral accent (like the pages nav) — external links
-    // elsewhere keep the quiet stone underline.
+    // Page links wear the beak accent (like the pages nav) — external links
+    // elsewhere keep the quiet ink underline.
     return (
       <Link
         to={part.to}
-        className="font-medium text-orange-700 dark:text-coral no-underline hover:underline underline-offset-[3px] transition-colors"
+        className="font-medium text-beak no-underline hover:underline underline-offset-[3px] transition-colors"
       >
         {part.text}
       </Link>
@@ -39,9 +39,9 @@ const PartList: React.FC<{ parts: AboutPart[] }> = ({ parts }) => (
 const About: React.FC = () => (
   <ul className="space-y-2.5">
     {aboutItems.map((item, i) => (
-      <li key={i} className="text-[12.5px] leading-relaxed text-stone-700 dark:text-stone-300">
+      <li key={i} className="text-[13.5px] leading-relaxed text-ink-700">
         <div className="flex gap-2.5">
-          <span className="text-[10px] leading-[2.4] text-coral/90 dark:text-coral/70 select-none" aria-hidden="true">
+          <span className="text-[11px] leading-[2.4] text-beak/90 select-none" aria-hidden="true">
             ✦
           </span>
           <span>
@@ -49,7 +49,7 @@ const About: React.FC = () => (
           </span>
         </div>
         {item.sub && (
-          <div className="flex gap-2 pl-6 mt-0.5 text-[11.5px] text-stone-500 dark:text-stone-400">
+          <div className="flex gap-2 pl-6 mt-0.5 text-[12.5px] text-ink-500">
             <span className="select-none" aria-hidden="true">↳</span>
             <span>
               <PartList parts={item.sub} />

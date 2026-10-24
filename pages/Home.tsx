@@ -1,14 +1,15 @@
 import React, { Suspense, lazy } from 'react';
 import About from '../components/About';
+import OnRepeat from '../components/OnRepeat';
 import QuietHeader from '../components/QuietHeader';
 
 // Heavy (three.js) — code-split so it doesn't block the initial page load.
 const ClosedLoopControlTerrain = lazy(() => import('../components/ClosedLoopControlTerrain'));
 
 /**
- * Index: the about list, then the closed-loop terrain. The terrain is the flex
- * child that absorbs whatever height is left over, so the whole page lands
- * inside one viewport without scrolling.
+ * Index: the about list, what's on repeat, then the closed-loop terrain. The
+ * terrain is the flex child that absorbs whatever height is left over, so on
+ * a tall enough screen the whole page lands inside one viewport.
  */
 const Home: React.FC = () => (
   <section className="reveal flex flex-1 flex-col">
@@ -16,6 +17,8 @@ const Home: React.FC = () => (
       <QuietHeader label="about" />
       <About />
     </div>
+
+    <OnRepeat />
 
     {/* The inner layer is absolute so it gets a definite height: `h-full`
         inside a flex-1 box resolves against flex-basis 0%, i.e. to nothing,
@@ -27,7 +30,7 @@ const Home: React.FC = () => (
         </Suspense>
       </div>
     </div>
-    <p className="mt-2.5 text-center text-[12.5px] italic text-stone-500 dark:text-stone-400">
+    <p className="mt-2.5 text-center text-[13.5px] italic text-ink-500">
       I'm always self-adjusting to the targeted goal
     </p>
   </section>

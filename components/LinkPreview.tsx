@@ -121,13 +121,13 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
       <span
         aria-hidden="true"
         style={shift ? { marginLeft: shift } : undefined}
-        className={`pointer-events-none absolute left-1/2 z-20 w-60 -translate-x-1/2 overflow-hidden rounded-xl border border-stone-200 dark:border-stone-800 bg-amber-50 dark:bg-stone-900 shadow-lg shadow-black/5 dark:shadow-black/40 opacity-0 scale-95 transition-[opacity,transform] duration-200 ease-out group-hover/lp:opacity-100 group-hover/lp:scale-100 group-focus-within/lp:opacity-100 group-focus-within/lp:scale-100 ${
+        className={`pointer-events-none absolute left-1/2 z-20 w-60 -translate-x-1/2 overflow-hidden rounded-xl border border-ink-200 bg-paper shadow-lg shadow-black/5 opacity-0 scale-95 transition-[opacity,transform] duration-200 ease-out group-hover/lp:opacity-100 group-hover/lp:scale-100 group-focus-within/lp:opacity-100 group-focus-within/lp:scale-100 ${
           side === 'top' ? 'bottom-full mb-2 origin-bottom' : 'top-full mt-2 origin-top'
         }`}
       >
         {wantShot && !shotFailed && (
           <span
-            className={`relative block h-32 w-full bg-stone-100 dark:bg-stone-800 ${
+            className={`relative block h-32 w-full bg-ink-100 ${
               armed && !shotLoaded ? 'animate-pulse' : ''
             }`}
           >
@@ -154,10 +154,10 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
             />
           )}
           <span className="flex min-w-0 flex-col leading-tight">
-            <span className="truncate text-[13px] font-semibold text-stone-900 dark:text-stone-100">
+            <span className="truncate text-[14px] font-semibold text-ink-900">
               {title ?? resolvedDomain}
             </span>
-            <span className="mono truncate text-[11px] text-stone-400 dark:text-stone-500">
+            <span className="truncate text-[12px] text-ink-400">
               {resolvedDomain}
             </span>
           </span>

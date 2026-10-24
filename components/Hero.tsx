@@ -1,28 +1,26 @@
 import React from 'react';
-import TypedName from './TypedName';
 import Brand from './Brand';
 import LinkPreview from './LinkPreview';
 import SpotifyStatus from './SpotifyStatus';
-import ThemeToggle from './ThemeToggle';
 
 const quietLink =
-  'text-[13px] lowercase text-stone-500 dark:text-stone-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-[3px] hover:text-stone-900 dark:hover:text-stone-100 hover:decoration-stone-500 transition-colors';
+  'text-[14px] lowercase text-ink-500 underline decoration-ink-300 underline-offset-[3px] hover:text-ink-900 hover:decoration-ink-500 transition-colors';
 
 /**
- * The persistent identity block: typed name (with now-playing and the theme
- * toggle sharing its line), headshot, bio, and external links. Lives in the
- * shell above the pages nav, so it never changes as routes swap.
+ * The persistent identity block: name (with now-playing sharing its line),
+ * headshot, bio, and external links. Lives in the shell above the pages nav,
+ * so it never changes as routes swap.
  */
 const Hero: React.FC = () => (
   // relative z-30: .reveal makes this a stacking context, which would otherwise
   // trap the link-preview cards below later siblings (the terrain HUD is z-10).
   <section className="relative z-30 reveal" style={{ animationDelay: '0.06s' }}>
-    {/* Name left, now playing + theme right. Below sm they stack above the
-        name instead, since the two can't share a 360px line. */}
+    {/* Name left, now playing right. Below sm they stack above the name
+        instead, since the two can't share a 360px line. */}
     <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-      {/* nowrap, sized so the full "xin chào, i'm …" string (~14.5em in IBM
-          Plex Mono) always fits the column beside the right-hand cluster */}
-      <TypedName className="whitespace-nowrap text-[length:min(2.4rem,calc(var(--content)/14.5))] sm:text-[length:min(2.4rem,calc((var(--content)_-_15rem)/14.5))]" />
+      <h1 className="whitespace-nowrap text-[2rem] sm:text-[2.25rem] font-semibold tracking-tight leading-tight text-ink-900">
+        Ethan Tran
+      </h1>
 
       <div className="flex shrink-0 items-center gap-1 self-end sm:self-auto">
         {/* Fixed slot: the cluster is right-aligned, so letting the widget size
@@ -30,28 +28,25 @@ const Hero: React.FC = () => (
         <div className="flex w-[46px] shrink-0 justify-start sm:w-[184px]">
           <SpotifyStatus />
         </div>
-        <span className="opacity-70">
-          <ThemeToggle />
-        </span>
       </div>
     </div>
 
-    <div className="h-px bg-stone-200 dark:bg-stone-800 my-5" />
+    <div className="brush-rule my-5" aria-hidden="true" />
 
     {/* Headshot with the bio and links beside it (stacked on mobile) */}
     <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
       <img
         src="/headshot.jpg"
         alt="Ethan Tran"
-        className="w-28 h-28 flex-shrink-0 rounded-xl object-cover ring-1 ring-inset ring-black/5 dark:ring-white/10"
+        className="w-28 h-28 flex-shrink-0 rounded-xl object-cover ring-1 ring-inset ring-black/5"
       />
       {/* Capped so the bio keeps a readable measure on a wide column */}
       <div className="flex-1 min-w-0 max-w-2xl">
-        <p className="text-[14px] text-stone-600 dark:text-stone-300">
+        <p className="text-[14px] sm:text-[15px] text-ink-600">
           computer engineering @{' '}
           <Brand name="University of Waterloo" label="UWaterloo" domain="uwaterloo.ca" href="https://uwaterloo.ca" />
         </p>
-        <p className="text-[14px] leading-relaxed text-stone-600 dark:text-stone-300 mt-2">
+        <p className="text-[14px] sm:text-[15px] leading-relaxed text-ink-600 mt-2">
           from firmware to PCBs to shipped hackathon builds — I love building hardware that
           feels like software and software that feels like hardware.
         </p>

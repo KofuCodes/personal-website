@@ -7,7 +7,8 @@ import QuietHeader from '../components/QuietHeader';
 const Photography: React.FC = () => {
   const [active, setActive] = useState<number | null>(null);
 
-  // Group by "location - year", with a stable priority order.
+  // Group by "location - year": newest year first; within a year the featured
+  // places lead, in this order, then the rest alphabetically.
   const { groups, flat } = useMemo(() => {
     const map: { [key: string]: Photo[] } = {};
     allPhotos.forEach((photo) => {
@@ -15,16 +16,16 @@ const Photography: React.FC = () => {
       (map[key] ||= []).push(photo);
     });
 
-    const priority = ['Waterloo, Ontario', 'San Francisco, California'];
+    const priority = ['Vancouver & California', 'Waterloo, Ontario', 'San Francisco, California'];
+    const rank = (loc: string) => {
+      const i = priority.indexOf(loc);
+      return i === -1 ? priority.length : i;
+    };
     const keys = Object.keys(map).sort((a, b) => {
       const [locA, yearA] = a.split(' — ');
       const [locB, yearB] = b.split(' — ');
-      const pa = priority.indexOf(locA);
-      const pb = priority.indexOf(locB);
-      if (pa !== -1 && pb !== -1) return pa !== pb ? pa - pb : yearB.localeCompare(yearA);
-      if (pa !== -1) return -1;
-      if (pb !== -1) return 1;
-      return yearA !== yearB ? yearB.localeCompare(yearA) : a.localeCompare(b);
+      if (yearA !== yearB) return yearB.localeCompare(yearA);
+      return rank(locA) - rank(locB) || locA.localeCompare(locB);
     });
 
     const flat: Photo[] = [];
@@ -106,15 +107,15 @@ const Photography: React.FC = () => {
     <div>
       <header className="mb-8 reveal group">
         <QuietHeader label="gallery">
-          <Aperture className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 self-center" animate />
+          <Aperture className="w-3.5 h-3.5 text-ink-400 self-center" animate />
         </QuietHeader>
-        <p className="text-[13.5px] text-stone-500 dark:text-stone-400">my story, through a lens.</p>
+        <p className="text-[14.5px] text-ink-500">my story, through a lens.</p>
       </header>
 
       <div className="space-y-14">
         {groups.map((group) => (
           <section key={group.title} className="reveal">
-            <h2 className="mono text-[12px] lowercase tracking-wider text-stone-500 dark:text-stone-400 mb-4">
+            <h2 className="text-[13px] lowercase tracking-wider text-ink-500 mb-4">
               {group.title}
             </h2>
             <div className="columns-2 md:columns-3 gap-3 [&>*]:mb-3">
@@ -122,7 +123,7 @@ const Photography: React.FC = () => {
                 <button
                   key={photo.id}
                   onClick={() => setActive(group.start + i)}
-                  className="block w-full overflow-hidden rounded-lg ring-1 ring-inset ring-black/5 dark:ring-white/10 break-inside-avoid group"
+                  className="block w-full overflow-hidden rounded-lg ring-1 ring-inset ring-black/5 break-inside-avoid group"
                 >
                   <img
                     src={photo.url}
@@ -174,7 +175,7 @@ const Photography: React.FC = () => {
                 alt={current.location}
                 className="max-w-full max-h-[80vh] object-contain rounded-lg"
               />
-              <figcaption className="mono text-[12px] text-white/60 mt-4 text-center">
+              <figcaption className="text-[13px] text-white/60 mt-4 text-center">
                 {current.location} · {current.year}
                 <span className="ml-3 text-white/40">{active! + 1} / {flat.length}</span>
               </figcaption>
@@ -195,7 +196,7 @@ const Photography: React.FC = () => {
 
       {/* No rule here — the shell footer below draws the page's only one */}
       <footer className="mt-16 text-center">
-        <p className="mono text-[12px] lowercase tracking-wider text-stone-400 dark:text-stone-500">
+        <p className="text-[13px] lowercase tracking-wider text-ink-400">
           end of collection ✵
         </p>
       </footer>

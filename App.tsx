@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation, Link, Navigate } from 'react-router-dom';
-import SensorField from './components/SensorField';
+import GeeseSky from './components/GeeseSky';
+import WatercolorTrail from './components/WatercolorTrail';
 import Hero from './components/Hero';
 import PagesNav from './components/PagesNav';
 import ScrollTop from './components/ScrollTop';
@@ -32,14 +33,16 @@ const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-[100dvh] bg-amber-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100">
-        <SensorField />
+      <div className="min-h-[100dvh] bg-paper text-ink-900">
+        {/* The paper, back to front: the flock, the cursor's brush, then the
+            grain over both so they read as painted into it. All fixed and
+            z-auto in this one stacking context — a wrapper with its own z-index
+            would isolate the trail's and grain's blend modes from the page. */}
+        <GeeseSky />
+        <WatercolorTrail />
+        <div className="paper-grain" aria-hidden="true" />
 
-        {/* --content is this column's inner width, used to size the hero type. */}
-        <div
-          className="relative z-10 mx-auto flex min-h-[100dvh] w-full max-w-[46rem] flex-col px-6 sm:px-8 pt-5 sm:pt-6 pb-6"
-          style={{ '--content': 'min(100vw - 4rem, 42rem)' } as React.CSSProperties}
-        >
+        <div className="relative z-10 mx-auto flex min-h-[100dvh] w-full max-w-[46rem] flex-col px-6 sm:px-8 pt-5 sm:pt-6 pb-6">
           <Hero />
 
           <div className="mt-6 reveal" style={{ animationDelay: '0.1s' }}>
@@ -58,8 +61,8 @@ const App: React.FC = () => {
               <Route path="*" element={
                 <div className="py-16 text-center">
                   <h2 className="text-2xl font-semibold mb-3 tracking-tight">404</h2>
-                  <p className="text-stone-500 dark:text-stone-400 mb-8 mono text-sm">page not found</p>
-                  <Link to="/" className="inline-block border border-stone-300 dark:border-stone-700 px-5 py-2 rounded-full text-sm font-medium hover:bg-amber-100 dark:hover:bg-stone-900 transition-colors">
+                  <p className="text-ink-500 mb-8 text-sm">page not found</p>
+                  <Link to="/" className="inline-block border border-ink-300 px-5 py-2 rounded-full text-sm font-medium hover:bg-paper-100 transition-colors">
                     ➢ back to index
                   </Link>
                 </div>
@@ -67,8 +70,10 @@ const App: React.FC = () => {
             </Routes>
           </main>
 
-          <footer className="mt-6 pt-4 border-t border-stone-200 dark:border-stone-800">
-            <p className="text-[12.5px] text-stone-500 dark:text-stone-400 select-none">
+          <footer className="mt-6">
+            {/* painted stroke in place of the old 1px border; mb-4 keeps the old pt-4 gap */}
+            <div className="brush-rule mb-4" aria-hidden="true" />
+            <p className="text-[13.5px] text-ink-500 select-none">
               © {new Date().getFullYear()} Ethan Tran · Waterloo, ON
             </p>
           </footer>

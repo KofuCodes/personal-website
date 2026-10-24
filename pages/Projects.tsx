@@ -24,10 +24,10 @@ const Projects: React.FC = () => {
     <button
       aria-pressed={filter === value}
       onClick={() => setFilter(filter === value ? 'all' : value)}
-      className={`mono text-[12px] lowercase transition-colors ${
+      className={`text-[13px] lowercase transition-colors ${
         filter === value
-          ? 'text-orange-700 dark:text-coral underline underline-offset-[3px]'
-          : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
+          ? 'text-beak underline underline-offset-[3px]'
+          : 'text-ink-500 hover:text-ink-900'
       }`}
     >
       {value}
@@ -44,7 +44,7 @@ const Projects: React.FC = () => {
       {filteredProjects.length > 0 ? (
         <WorkCards projects={filteredProjects} onOpen={setSelectedProject} />
       ) : (
-        <p className="mono text-[12px] text-stone-500 dark:text-stone-400 py-8 text-center">
+        <p className="text-[13px] text-ink-500 py-8 text-center">
           nothing here yet.
         </p>
       )}

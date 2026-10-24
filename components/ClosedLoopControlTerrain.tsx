@@ -57,16 +57,13 @@ type Status = {
 const getTerrainHeight = (x: number, y: number, t: number) =>
   0.45 * Math.sin(1.2 * x + t) + 0.3 * Math.cos(1.5 * y) + 0.15 * Math.sin(x * y);
 
-const isDark = () =>
-  typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
-
 const detunedGains = () => ({
   kp: 0.015 + Math.random() * 0.025,
   kd: Math.random() * 0.015,
 });
 
 const labelCls =
-  'mono text-[9px] uppercase tracking-wider whitespace-nowrap select-none pointer-events-none';
+  'tabular-nums text-[10px] uppercase tracking-wider whitespace-nowrap select-none pointer-events-none';
 
 function Scene({
   histRef,
@@ -163,7 +160,7 @@ function Scene({
     px: 0, pz: 0,
     cy: 0,
     prevErr: 0,
-    prevDark: null as boolean | null,
+    colored: false,
     // current run: start → (bezier ctrl) → goal
     sx: 0, sz: 0, gx: 0, gz: 0, cx: 0, cz: 0,
     t0: 0,
@@ -293,16 +290,15 @@ function Scene({
       m.cy = getTerrainHeight(0, 0, 0);
     }
 
-    // ── theme colors (only on change) ──
-    const dark = isDark();
-    if (dark !== m.prevDark) {
-      m.prevDark = dark;
-      const ink = dark ? '#ededed' : '#1a1a1a';
-      const faint = dark ? '#8a8a8a' : '#a6a6a6';
-      // The goal wears the site's coral "target" accent
-      const accent = dark ? '#ff7f50' : '#ea580c';
-      wireMat.current?.color.set('#9a9a9a');
-      fillMat.current?.color.set(dark ? '#ffffff' : '#000000');
+    // ── colors (once, on the first frame, when the materials exist) ──
+    if (!m.colored) {
+      m.colored = true;
+      const ink = '#2a3035';
+      const faint = '#a3abb0';
+      // The goal wears the site's beak-orange "target" accent
+      const accent = '#a3541a';
+      wireMat.current?.color.set('#9aa3a8');
+      fillMat.current?.color.set('#1b1f22');
       roverMat.current?.color.set(ink);
       haloMat.current?.color.set(ink);
       ringMat.current?.color.set(accent);
@@ -407,7 +403,7 @@ function Scene({
         </mesh>
         {/* low zIndexRange keeps the in-scene label under the HUD and any open preview card */}
         <Html center position={[0, 0.74, 0]} pointerEvents="none" zIndexRange={[5, 0]}>
-          <div ref={goalLabelRef} className={`${labelCls} text-stone-500 dark:text-stone-400`}>
+          <div ref={goalLabelRef} className={`${labelCls} text-ink-500`}>
             target
           </div>
         </Html>
@@ -459,18 +455,17 @@ const MiniGraph: React.FC<{ histRef: React.MutableRefObject<Hist>; className?: s
 
     const draw = () => {
       if ((window.devicePixelRatio || 1) !== rawDpr) resize();
-      const dark = isDark();
-      const ink = dark ? '233,233,233' : '26,26,26';
-      const faint = dark ? '138,138,138' : '166,166,166';
+      const ink = '42,48,53';
+      const faint = '163,171,176';
       ctx.clearRect(0, 0, W, H);
       if (W && H) {
         const pad = 3;
         const mapY = (v: number) => H / 2 - (v / ERR_SCALE) * (H / 2 - pad);
 
-        // goal zone: ±BAND — coral, matching the goal marker in the scene
+        // goal zone: ±BAND — beak orange, matching the goal marker in the scene
         const bandTop = mapY(BAND);
         const bandBot = mapY(-BAND);
-        ctx.fillStyle = dark ? 'rgba(255,127,80,0.14)' : 'rgba(234,88,12,0.10)';
+        ctx.fillStyle = 'rgba(163,84,26,0.10)';
         ctx.fillRect(0, bandTop, W, bandBot - bandTop);
 
         // zero line
@@ -515,7 +510,7 @@ const MiniGraph: React.FC<{ histRef: React.MutableRefObject<Hist>; className?: s
 
   return (
     <div className={`pointer-events-none select-none ${className ?? ''}`}>
-      <div className="mono text-[9px] uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-1">
+      <div className="tabular-nums text-[10px] uppercase tracking-wider text-ink-400 mb-1">
         error · goal ±{BAND}
       </div>
       <canvas ref={canvasRef} className="w-full h-[42px]" />
@@ -561,12 +556,12 @@ const Hud: React.FC<{ statusRef: React.MutableRefObject<Status> }> = ({ statusRe
 
   return (
     <div className="absolute top-2 left-1 z-10 pointer-events-none select-none max-w-[15rem]">
-      <div className="text-[14px] font-semibold tracking-tight text-stone-800 dark:text-stone-100">closed-loop</div>
-      <div className="mono text-[11px] text-stone-400 dark:text-stone-500 mt-0.5 leading-snug">
+      <div className="text-[15px] font-semibold tracking-tight text-ink-800">closed-loop</div>
+      <div className="tabular-nums text-[12px] text-ink-400 mt-0.5 leading-snug">
         goal: reach the marker, hold error within ±{BAND}
       </div>
-      <div ref={statusEl} className="mono text-[11px] text-stone-600 dark:text-stone-300 mt-1.5" />
-      <div ref={gainsEl} className="mono text-[10px] text-stone-400 dark:text-stone-500 mt-0.5" />
+      <div ref={statusEl} className="tabular-nums text-[12px] text-ink-600 mt-1.5" />
+      <div ref={gainsEl} className="tabular-nums text-[11px] text-ink-400 mt-0.5" />
     </div>
   );
 };

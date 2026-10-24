@@ -11,14 +11,14 @@ const pages = [
 
 /**
  * Page navigation, distinct from the external-links row: no underlines, and
- * the active page carries a ➢ marker + the coral accent. Lives in the top bar,
+ * the active page carries a ➢ marker + the beak accent. Lives in the top bar,
  * outside <Routes>, so it persists across route changes.
  */
 const PagesNav: React.FC = () => {
   const { pathname } = useLocation();
 
   return (
-    <nav aria-label="Pages" className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:gap-x-5 mono text-[13px] lowercase">
+    <nav aria-label="Pages" className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:gap-x-5 text-[14px] lowercase">
       {pages.map((page) => {
         const active = pathname === page.to;
         return (
@@ -28,8 +28,8 @@ const PagesNav: React.FC = () => {
             aria-current={active ? 'page' : undefined}
             className={`transition-colors ${
               active
-                ? 'text-orange-700 dark:text-coral'
-                : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
+                ? 'text-beak'
+                : 'text-ink-500 hover:text-ink-900'
             }`}
           >
             {page.label}

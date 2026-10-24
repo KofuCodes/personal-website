@@ -15,7 +15,7 @@ const ExperienceTimeline: React.FC = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   return (
-    <ul className="divide-y divide-stone-200 dark:divide-stone-800">
+    <ul className="divide-y divide-ink-200">
       {experiences.map((exp) => {
         const isExpanded = expandedId === exp.id;
         const hasDetail = !!exp.bullets?.length;
@@ -45,7 +45,7 @@ const ExperienceTimeline: React.FC = () => {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-3">
-                    <h3 className="flex min-w-0 items-baseline text-[15px] font-semibold tracking-tight text-stone-900 dark:text-stone-100">
+                    <h3 className="flex min-w-0 items-baseline text-[16px] font-semibold tracking-tight text-ink-900">
                       {exp.link ? (
                         <a
                           href={exp.link}
@@ -55,14 +55,14 @@ const ExperienceTimeline: React.FC = () => {
                           className="group flex min-w-0 items-baseline"
                         >
                           <span className="truncate">{exp.company}</span>
-                          <span className="shrink-0 ml-1.5 text-stone-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                          <span className="shrink-0 ml-1.5 text-ink-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                         </a>
                       ) : (
                         <span className="truncate">{exp.company}</span>
                       )}
                     </h3>
                     <div className="flex items-baseline gap-2">
-                      <span className="mono text-[11px] italic text-stone-400 dark:text-stone-500 whitespace-nowrap">
+                      <span className="text-[12px] italic text-ink-400 whitespace-nowrap">
                         {exp.period}
                       </span>
                       {hasDetail && (
@@ -76,7 +76,7 @@ const ExperienceTimeline: React.FC = () => {
                             e.stopPropagation();
                             toggle();
                           }}
-                          className="shrink-0 self-center -my-1 p-1 rounded text-stone-400 dark:text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-700 dark:focus-visible:ring-coral/80 transition-colors"
+                          className="shrink-0 self-center -my-1 p-1 rounded text-ink-400 hover:text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-beak transition-colors"
                         >
                           <svg
                             viewBox="0 0 24 24"
@@ -92,7 +92,7 @@ const ExperienceTimeline: React.FC = () => {
                       )}
                     </div>
                   </div>
-                  <p className="text-[13px] italic lowercase text-stone-500 dark:text-stone-400 mt-0.5 truncate">
+                  <p className="text-[14px] italic lowercase text-ink-500 mt-0.5 truncate">
                     {exp.role}
                   </p>
                 </div>
@@ -106,9 +106,9 @@ const ExperienceTimeline: React.FC = () => {
                       {exp.bullets!.map((bullet, idx) => (
                         <li
                           key={idx}
-                          className="flex gap-2 text-[12.5px] leading-relaxed text-stone-600 dark:text-stone-300"
+                          className="flex gap-2 text-[13.5px] leading-relaxed text-ink-600"
                         >
-                          <span className="text-stone-300 dark:text-stone-600 select-none">–</span>
+                          <span className="text-ink-300 select-none">–</span>
                           <span>{bullet}</span>
                         </li>
                       ))}

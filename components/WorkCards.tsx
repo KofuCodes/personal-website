@@ -14,7 +14,7 @@ const ProjectCard: React.FC<{ project: Project; onOpen: (p: Project) => void }> 
   const img = project.content.buildImage;
   return (
     <figure
-      className="group cursor-pointer mb-7 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-700 dark:focus-visible:ring-coral/80"
+      className="group cursor-pointer mb-7 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-beak"
       onClick={() => onOpen(project)}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -27,7 +27,7 @@ const ProjectCard: React.FC<{ project: Project; onOpen: (p: Project) => void }> 
       aria-label={`Open ${project.title} details`}
     >
       {img && (
-        <div className="overflow-hidden rounded-md ring-1 ring-inset ring-black/5 dark:ring-white/10 bg-amber-100 dark:bg-stone-900">
+        <div className="overflow-hidden rounded-md ring-1 ring-inset ring-black/5 bg-paper-100">
           <img
             src={img}
             alt={project.title}
@@ -36,16 +36,16 @@ const ProjectCard: React.FC<{ project: Project; onOpen: (p: Project) => void }> 
           />
         </div>
       )}
-      <figcaption className={img ? 'mt-2' : 'border-b border-stone-200 dark:border-stone-800 pb-3'}>
+      <figcaption className={img ? 'mt-2' : 'border-b border-ink-200 pb-3'}>
         <span className="flex items-baseline justify-between gap-3">
-          <span className="text-[14.5px] font-medium tracking-tight text-stone-900 dark:text-stone-100 underline decoration-transparent decoration-1 underline-offset-[3px] transition-colors duration-200 group-hover:decoration-stone-400 dark:group-hover:decoration-stone-500">
+          <span className="text-[15.5px] font-medium tracking-tight text-ink-900 underline decoration-transparent decoration-1 underline-offset-[3px] transition-colors duration-200 group-hover:decoration-ink-400">
             {project.title}
           </span>
-          <span className="mono text-[11px] text-stone-500 dark:text-stone-400 whitespace-nowrap">
+          <span className="text-[12px] text-ink-500 whitespace-nowrap">
             {project.year}
           </span>
         </span>
-        <span className="mt-0.5 block text-[12.5px] italic text-stone-500 dark:text-stone-400 leading-relaxed">
+        <span className="mt-0.5 block text-[13.5px] italic text-ink-500 leading-relaxed">
           {project.summary}
         </span>
       </figcaption>
