@@ -1,18 +1,16 @@
 import React from 'react';
 
 /**
- * Quiet section marker: lowercase, muted, trailing em dash. `as` lets a
- * page use it as its own h1 without changing how it looks.
+ * Quiet section marker: lowercase, muted, trailing em dash.
  */
 const QuietHeader: React.FC<{
   label: string;
-  as?: 'h1' | 'h2';
   children?: React.ReactNode;
-}> = ({ label, as: Tag = 'h2', children }) => (
+}> = ({ label, children }) => (
   <div className="mb-4 flex items-baseline gap-4">
-    <Tag className="text-[13px] lowercase tracking-wider text-ink-500">
+    <h2 className="text-[13px] lowercase tracking-wider text-ink-500">
       {label} —
-    </Tag>
+    </h2>
     {children}
   </div>
 );

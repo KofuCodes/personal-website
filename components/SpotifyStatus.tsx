@@ -1,7 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
 
 const DISCORD_ID = "369238803656998912";
+
+interface Track {
+  track_id: string;
+  song: string;
+  artist: string;
+  album_art_url: string;
+}
 
 interface LanyardResponse {
   success?: boolean;
@@ -11,13 +17,7 @@ interface LanyardResponse {
   };
   data?: {
     listening_to_spotify: boolean;
-    discord_status?: string;
-    spotify?: {
-      track_id: string;
-      song: string;
-      artist: string;
-      album_art_url: string;
-    };
+    spotify?: Track;
   };
 }
 
@@ -73,15 +73,32 @@ const fetchStatus = async () => {
   listeners.forEach((l) => l(pollState));
 };
 
+/** Cover + title/artist (text hidden below sm), linking to the track. */
+const TrackLink: React.FC<{ track: Track; label: string; children: React.ReactNode }> = ({
+  track: { track_id, song, artist, album_art_url },
+  label,
+  children,
+}) => (
+  <a
+    href={`https://open.spotify.com/track/${track_id}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 py-1 px-1.5 rounded-md hover:bg-paper-100 transition-colors"
+    title={`${label}: ${song} — ${artist}`}
+  >
+    <img src={album_art_url} alt="" className="w-5 h-5 rounded-[3px] object-cover flex-shrink-0 ring-1 ring-inset ring-black/5" />
+    <div className="hidden sm:flex flex-col overflow-hidden max-w-[130px] leading-tight">
+      <span className="text-[12px] font-medium text-ink-700 truncate">{song}</span>
+      <span className="text-[11px] text-ink-400 truncate">{artist}</span>
+    </div>
+    {children}
+  </a>
+);
+
 const SpotifyStatus: React.FC = () => {
   const [{ loading, error, data }, setState] = useState<PollState>(pollState);
 
-  const [lastPlayed, setLastPlayed] = useState<{
-    track_id: string;
-    song: string;
-    artist: string;
-    album_art_url: string;
-  } | null>(() => {
+  const [lastPlayed, setLastPlayed] = useState<Track | null>(() => {
     const saved = localStorage.getItem('spotify_last_played');
     return saved ? JSON.parse(saved) : null;
   });
@@ -145,22 +162,10 @@ const SpotifyStatus: React.FC = () => {
   // Show last played when not currently listening
   if (!data?.listening_to_spotify || !data.spotify) {
     if (lastPlayed) {
-      const { song, artist, album_art_url, track_id } = lastPlayed;
       return (
-        <a
-          href={`https://open.spotify.com/track/${track_id}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 group py-1 px-1.5 rounded-md hover:bg-paper-100 transition-colors"
-          title={`Last played: ${song} — ${artist}`}
-        >
-          <img src={album_art_url} alt="" className="w-5 h-5 rounded-[3px] object-cover flex-shrink-0 ring-1 ring-inset ring-black/5" />
-          <div className="hidden sm:flex flex-col overflow-hidden max-w-[130px] leading-tight">
-            <span className="text-[12px] font-medium text-ink-700 truncate">{song}</span>
-            <span className="text-[11px] text-ink-400 truncate">{artist}</span>
-          </div>
+        <TrackLink track={lastPlayed} label="Last played">
           <span className="w-1.5 h-1.5 rounded-full bg-ink-300 flex-shrink-0" />
-        </a>
+        </TrackLink>
       );
     }
     // Show offline state with Spotify logo when no last played data
@@ -174,26 +179,13 @@ const SpotifyStatus: React.FC = () => {
     );
   }
 
-  const { song, artist, album_art_url, track_id } = data.spotify;
-
   return (
-    <a
-      href={`https://open.spotify.com/track/${track_id}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-center gap-2 group py-1 px-1.5 rounded-md hover:bg-paper-100 transition-colors"
-      title={`Now playing: ${song} — ${artist}`}
-    >
-      <img src={album_art_url} alt="" className="w-5 h-5 rounded-[3px] object-cover flex-shrink-0 ring-1 ring-inset ring-black/5" />
-      <div className="hidden sm:flex flex-col overflow-hidden max-w-[130px] leading-tight">
-        <span className="text-[12px] font-medium text-ink-700 truncate">{song}</span>
-        <span className="text-[11px] text-ink-400 truncate">{artist}</span>
-      </div>
+    <TrackLink track={data.spotify} label="Now playing">
       <span className="flex h-1.5 w-1.5 relative flex-shrink-0">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
         <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500" />
       </span>
-    </a>
+    </TrackLink>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Project } from '../types';
+import WebImage, { imageRatio } from './WebImage';
 
 const StoryBlock: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
   <section>
@@ -127,19 +128,22 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
                   dangerouslySetInnerHTML={{ __html: project.content.video }}
                 />
               )}
-              {project.content.buildImage && (
-                <img
-                  src={project.content.buildImage}
-                  alt={`${project.title} — build`}
-                  className="w-full h-auto rounded-lg ring-1 ring-white/10"
-                />
-              )}
-              {project.content.finishedImage && (
-                <img
-                  src={project.content.finishedImage}
-                  alt={`${project.title} — finished`}
-                  className="w-full h-auto rounded-lg ring-1 ring-white/10"
-                />
+              {[
+                [project.content.buildImage, 'build'],
+                [project.content.finishedImage, 'finished'],
+              ].map(
+                ([src, label]) =>
+                  src && (
+                    // The card's cached small copy shows at once; the large one sharpens in over it
+                    <div
+                      key={label}
+                      className="relative overflow-hidden rounded-lg bg-white/5"
+                      style={{ aspectRatio: imageRatio(src) }}
+                    >
+                      <WebImage src={src} size="lg" alt={`${project.title} — ${label}`} />
+                      <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-white/10" />
+                    </div>
+                  )
               )}
             </div>
           )}

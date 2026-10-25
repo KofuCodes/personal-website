@@ -1,18 +1,19 @@
 # ethantran.ca
 
-Personal site — Vite + React + Tailwind (CDN) + three.js.
+Personal site — Vite + React + Tailwind + three.js.
 
 ```bash
 npm install
 npm run dev      # http://localhost:3000
 npm run build    # production build in /dist
+npm run images   # rebuild web copies after adding/changing photos or project images
 ```
 
 The site is one centered column made of two zones. The **shell** never changes:
-the hero (name, with now-playing on its line, then
-headshot + bio + links), the ➢ pages nav, and the closed-loop terrain. Routes
-swap only what sits **below** it — `index` (about), `projects`, `work`
-(experience), `gallery`. Project details open in a modal, not a separate route.
+the hero (name — which links back to index — with now-playing on its line, then
+headshot + bio + links) and the ➢ pages nav. Routes swap only what sits **below**
+it — `index` (about, on repeat, the closed-loop terrain), `projects`, `work`
+(experience), `gallery`, `resume`. Project details open in a modal, not a separate route.
 
 All content lives in **`/data`** as plain TypeScript — you never touch a component to
 add a project, a job, an about line, or a photo. The sections below are the recipes.
@@ -45,6 +46,9 @@ add a project, a job, an about line, or a photo. The sections below are the reci
   },
 }
 ```
+
+3. **Run `npm run images`** so the card gets its small web copy and blurred preview
+   (see [Images](#images)).
 
 All projects render on the projects page in this file's order, flowing left/right into
 two columns. Valid categories are defined in [`types.ts`](types.ts) (`Category`).
@@ -89,12 +93,23 @@ rendered in order:
 
 ## Add photos
 
-Drop files in `/public/photography/<Album>/` and register each in
-[`data/photography.ts`](data/photography.ts) with `id`, `url`, `location`, `year`, `aspect`
-(`id` must be unique — it's the React list key). Browsers can't show `.HEIC`, so convert
-those to JPG first. Albums are grouped by `location — year`, newest year first; the
-`priority` list in [`pages/Photography.tsx`](pages/Photography.tsx) decides which places
-lead within a year.
+Drop files in `/public/photography/<Album>/`, register each in
+[`data/photography.ts`](data/photography.ts) with `id`, `url`, `location`, `year`
+(`id` must be unique — it's the React list key), then run `npm run images`. Browsers
+can't show `.HEIC`, so convert those to JPG first. Albums are grouped by
+`location — year`, newest year first; the `priority` list in
+[`pages/Photography.tsx`](pages/Photography.tsx) decides which places lead within a year.
+
+## Images
+
+The originals (`public/photography/`, and each project's `buildImage`/`finishedImage`)
+are never served as-is — some are 5 MB. `npm run images`
+([`scripts/web-images.mjs`](scripts/web-images.mjs)) writes WebP copies to `public/web/`
+— `sm` (640px) for the grid and cards, `lg` (2000px) for the lightbox and modal — and
+each image's size plus a tiny blurred preview to `data/image-meta.json`. Commit all of it.
+[`components/WebImage.tsx`](components/WebImage.tsx) uses that to size every image box
+before anything loads, paint the blur at once, and sharpen in the real image. It only
+rebuilds what changed; until you run it, a new image falls back to its original file.
 
 ## On repeat (Spotify)
 
@@ -109,8 +124,9 @@ One-time setup:
 2. Put the app's `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` in `.env.local`, then run
    `node --env-file=.env.local scripts/spotify-auth.mjs` (same in PowerShell, cmd or bash).
    Open the link it prints, approve, and add the `SPOTIFY_REFRESH_TOKEN` it prints to
-   `.env.local` — the shelf now shows under `npm run dev` (the dev server serves `/api/*`
-   like Vercel does).
+   `.env.local` — `npm run dev` then serves `/api/*` from your own handlers, like Vercel
+   does. (Without those secrets, the dev server proxies `/api/*` to the live site, so the
+   shelf still shows your real tracks.)
 3. Add the same three variables to the Vercel project's environment variables and redeploy.
 
 ## Where things render
@@ -119,25 +135,31 @@ One-time setup:
 |---|---|---|
 | Shell layout (zones, routes) + footer | — | [`App.tsx`](App.tsx) |
 | Hero — name, now playing, headshot, bio, links | inline | [`components/Hero.tsx`](components/Hero.tsx), [`components/SpotifyStatus.tsx`](components/SpotifyStatus.tsx) |
-| Pages nav (➢ index / projects / work / gallery) | — | [`components/PagesNav.tsx`](components/PagesNav.tsx) |
+| Pages nav (➢ index / projects / work / gallery / resume) | — | [`components/PagesNav.tsx`](components/PagesNav.tsx) |
 | Back-to-top pill (appears past 260px) | — | [`components/ScrollTop.tsx`](components/ScrollTop.tsx) |
-| Closed-loop terrain + caption | — | [`components/ClosedLoopControlTerrain.tsx`](components/ClosedLoopControlTerrain.tsx) (canvas), [`App.tsx`](App.tsx) (sizing + caption) |
+| index → Closed-loop terrain + caption | — | [`components/ClosedLoopControlTerrain.tsx`](components/ClosedLoopControlTerrain.tsx) (canvas), [`pages/Home.tsx`](pages/Home.tsx) (sizing + caption) |
 | Section headers ("x —") | — | [`components/QuietHeader.tsx`](components/QuietHeader.tsx) |
 | index → About | `data/about.ts` | [`pages/Home.tsx`](pages/Home.tsx), [`components/About.tsx`](components/About.tsx) |
 | index → On repeat (Spotify top 5) | `/api/top-tracks` | [`components/OnRepeat.tsx`](components/OnRepeat.tsx), [`api/top-tracks.ts`](api/top-tracks.ts) |
 | projects → cards + filters | `data/projects.ts` | [`pages/Projects.tsx`](pages/Projects.tsx), [`components/WorkCards.tsx`](components/WorkCards.tsx) |
 | Project detail modal | `data/projects.ts` | [`components/ProjectModal.tsx`](components/ProjectModal.tsx) |
 | work → experience (hover to expand) | `data/experience.ts` | [`pages/Work.tsx`](pages/Work.tsx), [`components/ExperienceTimeline.tsx`](components/ExperienceTimeline.tsx) |
-| gallery → photos | `data/photography.ts` | [`pages/Photography.tsx`](pages/Photography.tsx) |
+| gallery → photos + lightbox | `data/photography.ts` | [`pages/Photography.tsx`](pages/Photography.tsx), [`components/WebImage.tsx`](components/WebImage.tsx) |
+| resume → embedded PDF | `public/Ethan_Tran_Resume.pdf` | [`pages/Resume.tsx`](pages/Resume.tsx) |
 
-Animations are the `.reveal` CSS classes in [`index.html`](index.html): a load-time
-stagger for the hero, nav, and terrain, and the fade each page plays when routes swap.
+Animations live in [`index.css`](index.css). On first load, [`boot.ts`](boot.ts) holds
+every `.reveal` invisible until the webfonts are in (at most 1.2 s), so text never
+visibly swaps fonts; then the hero, nav, page, and footer stagger in from one clean start,
+and the geese bloom and the terrain fade in after. Route changes replay only the page's
+own `.reveal`. With reduced motion on, every fade stays (so loading still reads as calm)
+and only the movement goes: no lifts, zooms, blur, or photo fly-in.
 
 **Theme**: minimal watercolor, sampled from a painting of geese in flight. Warm paper
-(`paper`) with a cool payne's-grey `ink-*` scale, Inter throughout (the same stack as
-wcagas.com), and a single goose-beak orange accent (`beak`) — the ✦ about markers,
-active filter/nav page, focus rings, and the terrain's goal marker all wear it. Light only; all tokens live in the Tailwind
-config in `index.html`.
+(`paper`) with a cool payne's-grey `ink-*` scale, Newsreader for all text (an editorial
+serif whose optical sizes keep small text sturdy and the name fine), and a
+single goose-beak orange accent (`beak`) — the ✦ about markers, active filter/nav page,
+focus rings, and the terrain's goal marker all wear it. Light only; all tokens live in
+[`tailwind.config.js`](tailwind.config.js), compiled at build time.
 
 Behind the page, back to front ([`App.tsx`](App.tsx)):
 - [`GeeseSky`](components/GeeseSky.tsx) — the flock (`public/geese.webp`, feathered so

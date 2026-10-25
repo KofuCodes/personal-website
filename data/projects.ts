@@ -1,4 +1,3 @@
-
 import { Project } from '../types';
 
 export const projects: Project[] = [
@@ -57,7 +56,7 @@ export const projects: Project[] = [
       solution: 'A 3D-printed enclosure designed in CAD that houses a custom PCB, an MFRC522 RFID reader, and NeoPixel LEDs.',
       build: 'The device reads unique UIDs from RFID cards hidden inside "Transformation Chips." Upon detection, it triggers an animation across the LED array.',
       learned: 'Integrating CAD tolerances with electronic components is difficult. I learned how to design for assembly (DFA) through multiple iterations of the shell.',
-      buildImage: '/gundammorpher.jpg'
+      buildImage: '/gundammorpher.webp'
     }
   },
   {
@@ -77,7 +76,7 @@ export const projects: Project[] = [
       build: 'Coordinated venue, sponsors, judges, and participant experience from start to finish.',
       learned: 'Running a successful event requires meticulous planning, strong team coordination, and a passion for building community.',
       video: '<iframe style="width:100%;aspect-ratio:16/9;" src="https://www.youtube.com/embed/Jb-2RpDonEs" title="The First High School Hackathon for Hamiltonian Students | HammerHacks 2024" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
-      buildImage: '/hammerhacks.JPEG'
+      buildImage: '/hammerhacks.webp'
     }
   },
   {

@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Brand from './Brand';
+import FadeImg from './FadeImg';
 import LinkPreview from './LinkPreview';
 import SpotifyStatus from './SpotifyStatus';
 
@@ -14,12 +16,19 @@ const quietLink =
 const Hero: React.FC = () => (
   // relative z-30: .reveal makes this a stacking context, which would otherwise
   // trap the link-preview cards below later siblings (the terrain HUD is z-10).
-  <section className="relative z-30 reveal" style={{ animationDelay: '0.06s' }}>
+  <section className="relative z-30 reveal">
     {/* Name left, now playing right. Below sm they stack above the name
         instead, since the two can't share a 360px line. */}
     <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-      <h1 className="whitespace-nowrap text-[2rem] sm:text-[2.25rem] font-semibold tracking-tight leading-tight text-ink-900">
-        Ethan Tran
+      {/* The name doubles as the way home, like a masthead */}
+      <h1 className="whitespace-nowrap text-[2.4rem] sm:text-[2.7rem] font-normal leading-none tracking-[-0.02em] text-ink-900">
+        <Link
+          to="/"
+          title="index"
+          className="rounded-sm transition-colors duration-300 hover:text-beak focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-beak"
+        >
+          Ethan Tran
+        </Link>
       </h1>
 
       <div className="flex shrink-0 items-center gap-1 self-end sm:self-auto">
@@ -35,9 +44,11 @@ const Hero: React.FC = () => (
 
     {/* Headshot with the bio and links beside it (stacked on mobile) */}
     <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
-      <img
-        src="/headshot.jpg"
+      <FadeImg
+        src="/headshot.webp"
         alt="Ethan Tran"
+        width={112}
+        height={112}
         className="w-28 h-28 flex-shrink-0 rounded-xl object-cover ring-1 ring-inset ring-black/5"
       />
       {/* Capped so the bio keeps a readable measure on a wide column */}

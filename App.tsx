@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation, Link, Navigate } from 'react-router-dom';
+import { ready } from './boot';
 import GeeseSky from './components/GeeseSky';
 import WatercolorTrail from './components/WatercolorTrail';
 import Hero from './components/Hero';
@@ -8,8 +9,13 @@ import ScrollTop from './components/ScrollTop';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Work from './pages/Work';
-import Photography from './pages/Photography';
 import Resume from './pages/Resume';
+
+// The gallery carries the photo list and every blur preview, so it's split
+// out — and fetched in the background once the first page has settled.
+const loadPhotography = () => import('./pages/Photography');
+const Photography = lazy(loadPhotography);
+ready.then(() => setTimeout(loadPhotography, 1500));
 
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
@@ -45,16 +51,26 @@ const App: React.FC = () => {
         <div className="relative z-10 mx-auto flex min-h-[100dvh] w-full max-w-[46rem] flex-col px-6 sm:px-8 pt-5 sm:pt-6 pb-6">
           <Hero />
 
-          <div className="mt-6 reveal" style={{ animationDelay: '0.1s' }}>
+          {/* First load staggers hero → nav → page → footer (boot.ts holds
+              them all until the fonts are in). Later route changes only
+              replay the page's own .reveal, since the shell stays mounted. */}
+          <div className="mt-6 reveal" style={{ animationDelay: '0.08s' }}>
             <PagesNav />
           </div>
 
-          <main className="mt-6 flex flex-1 flex-col">
+          <main className="mt-6 flex flex-1 flex-col reveal" style={{ animationDelay: '0.16s' }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/work" element={<Work />} />
-              <Route path="/photography" element={<Photography />} />
+              <Route
+                path="/photography"
+                element={
+                  <Suspense fallback={null}>
+                    <Photography />
+                  </Suspense>
+                }
+              />
               <Route path="/resume" element={<Resume />} />
               {/* Old per-project deep links land on the projects page */}
               <Route path="/projects/*" element={<Navigate to="/projects" replace />} />
@@ -70,7 +86,7 @@ const App: React.FC = () => {
             </Routes>
           </main>
 
-          <footer className="mt-6">
+          <footer className="mt-6 reveal" style={{ animationDelay: '0.24s' }}>
             {/* painted stroke in place of the old 1px border; mb-4 keeps the old pt-4 gap */}
             <div className="brush-rule mb-4" aria-hidden="true" />
             <p className="text-[13.5px] text-ink-500 select-none">

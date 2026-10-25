@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { ready } from '../boot';
 
 /**
  * The flock: the watercolor geese gliding across the paper behind the page.
@@ -114,7 +115,11 @@ const GeeseSky: React.FC = () => {
     if (!el || bloomed) return;
     bloomed = true;
     if (reduce) {
-      el.style.opacity = '1';
+      // No spreading wash — just let the painting fade up with the page
+      el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1400, delay: 150, easing: 'ease-out', fill: 'both' })
+        .finished.then(() => {
+          el.style.opacity = '1';
+        }, () => {});
       return;
     }
     let spreads = false;
@@ -152,10 +157,11 @@ const GeeseSky: React.FC = () => {
   };
 
   // Bloom once the painting is decoded — from onLoad, or straight away if it
-  // was already cached when we mounted.
+  // was already cached when we mounted — and not before the page itself
+  // starts revealing (boot.ts), so the two open together.
   const tryBloom = () => {
     const img = imgRef.current;
-    if (img?.complete && img.naturalWidth) bloom();
+    if (img?.complete && img.naturalWidth) ready.then(bloom);
   };
 
   useEffect(tryBloom, []);

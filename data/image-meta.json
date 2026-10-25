@@ -1,0 +1,592 @@
+{
+ "/gundammorpher.webp": {
+  "w": 1200,
+  "h": 1600,
+  "blur": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAABQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoRwA8AVxEjIoXWp0KckAP7Q45xr6qxQ3bDjcjVo6cAy7heL5g5m/+IBgfR73UCH0jwfESqCAm89fwC4xrQJx98Qw/ev7+jpMscQrEwKXIQgFzijvJGpc0TDE/8aJpvFSM/OxOv7ko1obSjKpcU0mPMf+Po4s8KAAAA="
+ },
+ "/hammerhacks.webp": {
+  "w": 1200,
+  "h": 892,
+  "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAACQAQCdASoQAAwAA4BaJYwAAZd3uagA/NA4mHlsl1tKFulgcN9BlyO6UaUXrXpTR/7DTpFss5YOkv+ixyzYOn1/NwMQ/jTn7OkpSPHXKhsAAA=="
+ },
+ "/patch-floor-test.jpg": {
+  "w": 1200,
+  "h": 1600,
+  "blur": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADwAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JZwC2yBTF4VlcGa/FQPQAAP5PAPed9rLnuuz6sJ4Vk83kYX9rBHU30Z9ekFjHKTMzorIV7axPxiOP4knLko6Y2jKHWuM7DF5pzONQAAA="
+ },
+ "/patch.jpg": {
+  "w": 1200,
+  "h": 1600,
+  "blur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JYwC7AywTkgjggqvG3UT59AAA/nW2rUZy7bhgoPs/pkjF42brj/N0YXk7lWpZ5kuY5kpXn5lihot0OopdsHQbFjLd/tB7kK6b/Bna6q9PWUg2XtxODaNmIEWygMFwZoBRPF/E/E6ORqaEXWPx8IJZKAzCJGlHLFMG9PaeY5ANnffgAAA="
+ },
+ "/photography/Ethan_s bday - 2026/DSC04025.JPG": {
+  "w": 2000,
+  "h": 1333,
+  "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAwAgCdASoQAAsAA4BaJZQCdAD7K+akc02U4AD+6jNXV234go/EZyz2bQpXOvR1qDzCM3cXqMN+MFc0hl7Uqyd4cviuGTHAD1gb7J9zkDQfZouQzfw12dqkjBUKAAAA"
+ },
+ "/photography/Ethan_s bday - 2026/DSC04035.JPG": {
+  "w": 2000,
+  "h": 1333,
+  "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAsAA4BaJQBOgCFKlqSY3K4AAP51ui2GfBnWN7gcnKTKjs/hPziHDX0QvEnfX5HVhJJWduCxeG10yZ5rmJgkAU+gDbQmOwMHXotzfyfK3vzkA/M6lIAtSbYAAA=="
+ },
+ "/photography/Ethan_s bday - 2026/DSC04062.JPG": {
+  "w": 2000,
+  "h": 1333,
+  "blur": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAABQAgCdASoQAAsAA4BaJQBOgO4Fvr7F+J++oAAA8pPPaCLQSND4jDuc/gS2OVwe3Va5AXXg/8fculeWID+FRXx+tBV5DB3T28u4PD2ZveWoJRiChJiSmMnf5I0cBD0y/RNi7KYnAAA="
+ },
+ "/photography/Ethan_s bday - 2026/DSC04078.JPG": {
+  "w": 2000,
+  "h": 1333,
+  "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABwAgCdASoQAAsAA4BaJZACdAYtzuKz2+XDfwtgAP6s2+h5aBKu+fHTJnU06nS4evsOTKhdFDE2JMrdQarYsh5zdo/kD3p1Xv30p2y3waiqEwKimZTqcOKqD3bc3d7VDIAAAA=="
+ },
+ "/photography/Ethan_s bday - 2026/IMG_1161.jpg": {
+  "w": 1500,
+  "h": 2000,
+  "blur": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JQBdg1gAam3XWXJB9bMXnvwAA+XN1IH7XHKuBNnXLU5PbxwiqVj/ji00MTQYoCcLp97Pk7/FvUrCWJAWrzPhZcZmM30wXFXpcop/Ni82QRCjuLV/0KPXNL4/FC0okBP49ukyEqJkBAAAA"
+ },
+ "/photography/Ethan_s bday - 2026/IMG_1184.JPG": {
+  "w": 2000,
+  "h": 1500,
+  "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQAAwAA4BaJYwCdAEPELJ61yAAze24pYnrGkuvx+3jv95473Kx79pBtxMzkUNOb/sF1ZVrixrAadwgO2mYa/k5jNniRcp0+AAAAA=="
+ },
+ "/photography/Ethan_s bday - 2026/IMG_2596.jpg": {
+  "w": 1500,
+  "h": 2000,
+  "blur": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAABwAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JQAAGcLLEclNQnbgA+0M2oGMVvyv+76+KddOdjq/tLyAGj2MKeggf6n1CUQuTpvMm6Jv42ZL3rj5eS4f3gJZvwrGh8HdYa6oOGRvE/xePGr8jjXQ4jxPhjbnRQAAA"
+ },
+ "/photography/Hamilton - 2025/001456560015.jpeg": {
+  "w": 889,
+  "h": 589,
+  "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAABwAgCdASoQAAsAA4BaJYgCdAYuRuV+evy787fwAP7p4trA4k0/3tA3RIw/u45qGVBq+XQj8/H1/T4VeEqGPn/KmTPFZC+Rw8blm5n98akEbhRYBw5s0hlOISyAAA=="
+ },
+ "/photography/Hamilton - 2025/001456570007.jpeg": {
+  "w": 889,
+  "h": 589,
+  "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAQCdASoQAAsAA4BaJYgCdAD5Vc+xgAD+zET8O/lQdc014qYXCr1WaRDM6fToU1UYSGpk0L4bEWUq6+wYvavllAJIAAAA"
+ },
+ "/photography/Hamilton - 2025/0DE1EF72-6747-412C-8701-B77443A831FA.jpg": {
+  "w": 590,
+  "h": 442,
+  "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAABQAgCdASoQAAwAA4BaJYgCdAYvXbSqzwOgBAAA/uois2R3VDDn09Et8O3Ocn6jjI7CZXObQLciBY4PZkxUJOC65hAQrT/BZhOtFoUjYXxi5SpOjM/6FMA5QGb4EqwAAAA="
+ },
+ "/photography/Hamilton - 2025/6D4CE400-D7C3-4B05-ABA9-1A9513945EAF.jpg": {
+  "w": 480,
+  "h": 360,
+  "blur": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAAAQAgCdASoQAAwAA4BaJZQCw7EPAwRwFCaAAP74UaWyOA/CTZqFCY4dAh3pBLW7DBMP/e/L4/KLE7aMLxBwQH1YmGAAAA=="
+ },
+ "/photography/Hamilton - 2025/DSC03133.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAAAQAgCdASoQAAsAA4BaJZwAAudktWHM0+QAAP75DfC3NjIhP5Vc1piMFfzp6ggPEadjry1bnaIdoC5BimhAAA=="
+ },
+ "/photography/Hamilton - 2025/DSC03191.JPG": {
+  "w": 2000,
+  "h": 1333,
+  "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQAAsAA4BaJQBYdiHdfEgcWgAA/vea5+IIhFh9Gf4dRb7coL0Z1tBqJDQkNx8tPjlyhnPXI4TTV6r4jD1MyBlcn+GVfKeTf7AAAA=="
+ },
+ "/photography/Hamilton - 2025/DSC03246.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADwAQCdASoQAAwAA4BaJYgCdAEQ8Jp0vwAA/udiavUbNn0QZfIoLf95fYqSFuPHiJZfKR9XLjUebj9stGKwa7Z3RWAAAA=="
+ },
+ "/photography/Hamilton - 2025/DSC03255.JPG": {
+  "w": 2000,
+  "h": 1500,
+  "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQAgCdASoQAAwAA4BaJZACdAENqpnHtRNAAP7EmtehjhTNnJiC7Q6Kz5RhXKX7XnOPR7hxpL3cCG2zLtGYD7Or4ZvVi6stJm7RjYAA"
+ },
+ "/photography/Hamilton - 2025/DSC03265.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQAgCdASoQAAwAA4BaJZgCdAD6ROVk95o0ANdw/IdGg0h2IgQZLd0q5Ropa/C9cWUhAm7XjUW824lnZ/pBp5P5+koPdHWXLTG6PAAA"
+ },
+ "/photography/Hamilton - 2025/DSC03266.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAwAgCdASoQAAwAA4BaJZgCdAERGxrNqLxwAAD+52CMD2CPkV5HFZ9CiyL8mhn03X9rJv4skCJYZ9YSrlQmWrnyIbpYOh25FuAAAA=="
+ },
+ "/photography/Hamilton - 2025/DSCN3546.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAwAA4BaJYgCdAEM2fS52mAA/vBzk6hQd/45fVweNSYL/ueociszB7mF1CVvzko3d6TVS0NerXS0+v76uCO86tz01bGF8JVVSsdWIxgAAA=="
+ },
+ "/photography/Hamilton - 2025/IMG_1532.jpg": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAwAA4BaJZQCw7EectEp5r1gAP4Hr3am18uYfvE96EmJCFkYxAvxxXhefavw8QasIknBO0BPmjnAOJNoCjvxwN2paAsrot4XVEY5lpNa2cmbUPv83A+PR+EAAA=="
+ },
+ "/photography/Hamilton - 2025/IMG_2395.jpg": {
+  "w": 627,
+  "h": 836,
+  "blur": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAAAQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JYwCw7YyKwJzHP86VZBZquAD+PguNpCn5VXueWQx5xC4ndJ66czPRq3UMe8r/DZxzevvZLTCdhBcLoFW9BbjjO0rCCfnvc+fRcX2LSsX8/ivXCKtm+H6rdh2Y7me4i8+sd4JGTYrABn+WeNAAAA=="
+ },
+ "/photography/Hamilton - 2025/IMG_2763.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADwAQCdASoQAAwAA4BaJQBdgB3wVICwFwAA/vHotbfosSEGRhnlGmd85LQjoeXhrJswpD32bG2Vf58ieJEZ31FvUinDN724rqZLTjpX48RtoKmM/eUePtcLSOEFt6baZVQAAA=="
+ },
+ "/photography/Hamilton - 2025/IMG_2999.jpg": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAACwAQCdASoQAAwAA4BaJYgCdAEOnIhgAP61O+EHwKZR0JkY21VZWp9BJRgLEI+whzcwVM0lkJp42CeQBNeHHUGlxCyboMxVv+3FTKXKx7wAAA=="
+ },
+ "/photography/Hamilton - 2025/IMG_3153.jpg": {
+  "w": 627,
+  "h": 836,
+  "blur": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAACwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JYgCdMoR4PoACfRtVPbrr3D8SBgHAAOFXiy7/2+Q1HNLqjTWXimxqqtlObiPF/R81oCETs+GyYEzkiAUXKLasgUf5bFpX1dLtK1fsbGdNlNhLySFVfrFphvHVqqdVhx+uHcGwfXpCzbRvO7sInNxKWKOqjN114PJMKvDwLcN9YPNv/9NHozAHpglQqmSK/Un6/hhC4AAAAA=="
+ },
+ "/photography/Hamilton - 2025/IMG_4073.jpg": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQAAwAA4BaJQBOgB6QilCzVAAA/vea8sg7LOyj+zGZG0HKUaQ2Pl4XP+W3/zDc1TH5Tf4Yn0kv9RVBy362MhZbmk96FA/OIRooAA=="
+ },
+ "/photography/Hamilton - 2025/IMG_5874.jpg": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAADQAgCdASoQAAwAA4BaJbACdH8G6AA87h/RJxYXgnCAAP7pBFHE7fvfOcTmrWyXaCAwgA0mFMdpGKLF27qksXAz/3eVyTQ+xFvR/Gv2HgKLgUEkJR6fc76m+6HHYaU3lUtWn8VWppC/pQ5cqVCuJhlt9z8AAA=="
+ },
+ "/photography/Hamilton - 2025/IMG_6128.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoQAAsAA4BaJZACdAYstyYtg8D1AAD+8IwUQ/5LxPGfTGgmvOXCIaZRze44/zqaWNkxC4+VvlEc9KPgY8XLgjUsBRzphQvP0c0OvSLVAwKb9z8JPNob8L/X2NNIDSgA"
+ },
+ "/photography/Montréal/IMG_1487.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAACwAQCdASoQAAwAA4BaJbACdACQ/IAAAP6p7XHpyQGvfqh/cHYEgdQKeINqQbpRnxgXPE+fKKKYt+TCH4QKCjYAAAA="
+ },
+ "/photography/Montréal/IMG_1515.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAACwAQCdASoQAAwAA4BaJZQAAxeTuxqAAP71vGqQFg2tSX2dafUcFzuIVspOdctiTIMn9mvW23vnwAAA"
+ },
+ "/photography/Montréal/IMG_1518.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAQCdASoQAAwAA4BaJZQAAmfhGUepIAD+7QuSPWxFir1w9bd0BtMZXoPbMfiYY6iqr8Gx0n/hNrjAs4S4NBjFBO0UaMofQ+AAAA=="
+ },
+ "/photography/Montréal/IMG_1534.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoQAAwAA4BaJQBOgB6Rb/BTHH4AAPl6QlcvMSq0UMjjz8V7XaJ3XgzR62PPmsBitiDOB82+vfsLv2cN3Kzvtrhpl5eAAA=="
+ },
+ "/photography/Montréal/IMG_1555.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoQAAwAA4BaJYgAAl3cFz12SAAA/ut5rLWqkUI7m6soE3zvtPEiM3LfElLKkCbhmqcMQRYYYP0q0PuF5+yUJ1ZVSDz4SX/e+ERk+AAA"
+ },
+ "/photography/Montréal/IMG_1608.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAAAQAgCdASoQAAwAA4BaJZQAAt0L9zHNtttgAP75x73z/f3DTJ9FcDrVVc8d0psF/ZVxpH4AAAA="
+ },
+ "/photography/Montréal/IMG_1610.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADwAQCdASoQAAwAA4BaJYwC7AEPBavMiWAA/vnHvgBfhp6+nYsU394x8E93dmcnQv3aRDPxHZKcF6vlZd5sHFAA"
+ },
+ "/photography/Montréal/IMG_4085.jpg": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoQAAwAA4BaJbACdH8ADMu2JgAA/rsDBSciEdHVnFn1lK1hCxQ8AN9cC4v4/UHJzgTeNM8qmDc0hDlacAA="
+ },
+ "/photography/Montréal/IMG_4154.jpg": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAABwAgCdASoQAAwAA4BaJZQCdAYwdlHHeHBn64oAAP64PjdbUzHwexbGoQ1Z2HFg9Kfj7oYeGlJZk19Lk9lQ8RZMxbWRN6Pgn+9Mt29pirUAHLtM5SEgn6dzztfIlO4ZT1u80VTB3+eX9F62O9gAAA=="
+ },
+ "/photography/Montréal/IMG_4199.jpg": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAADwAQCdASoQAAwAA4BaJbACdADs7QVMaoAA/tg1CUSZHKVd7gqlM+fZppRnbQ6Pe+N6XsWesw+DCObMALMjnthHxaJ73dyqw2s5NVd8D/WbnPxTclIT7+WtFk04XYGYv74rD+jQwsALAAAA"
+ },
+ "/photography/Montréal/IMG_4201.jpg": {
+  "w": 627,
+  "h": 836,
+  "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQBACdASoQABUAPu1kqU2ppaQiMAgBMB2JZwDLLCHgDF02o263OwB4gAD+6m3t0BWmMlgl2BnyiL/SelC8ow9ph9EUu0/xj5u/FPxmTCCtJM9nMrj4AAAA"
+ },
+ "/photography/Montréal/IMG_4239.jpg": {
+  "w": 627,
+  "h": 836,
+  "blur": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAADwAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JQBOgAeOoE1ogNEwzfOgAAPyHzXwXv3Uy0yXSYhRhhPr6ZvvHDrR5bhZQq2jJIEk0ANxNHfjERvZ1rL0F3hy0YJHuieQBRbqfYNE6hkIwuerImdT7o169s0l/PaL7/HRrq3s1wOyGa0PlvwG2UmvBpK7iAkAA"
+ },
+ "/photography/Montréal/IMG_4266.jpg": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoQAAwAA4BaJYwCdAEO/XWfYAD+shGMJIPUldW98hw1MSV3v69DgLAwq3xsiDNaDJM2h/9JgAA="
+ },
+ "/photography/San Francisco - 2025/DSCN3623.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAAAwAgCdASoQAAwAA4BaJbACdADp15cb+N2QwAD8tPph1AQumuLg2s3lFDAnoHGnUSXHsfco/rM/2zGSqJjApBYjfboTGeticOwW6sl/l4E53TbfOvRCBkWcnMMzGZ2RybDMX/mTeaB+NIdsedtNhpFzAAA="
+ },
+ "/photography/San Francisco - 2025/DSCN3672.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADQAQCdASoQAAwAA4BaJQBOgBQv8NwYIAD5QQiiRKy/qaCPFhqcOjEdYOd3pWGKsIw6dpue2K2cRCFpl03FrvPx4ZJB2fHaqByOTMMXALN9xSxPGAzJggAA"
+ },
+ "/photography/San Francisco - 2025/DSCN3680.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAwAgCdASoQAAwAA4BaJQBOgCN55BnrLo1mAAD+9th+b+uwmRgpnFqq786kG4WVaaXzYM6lHKOutI4bxKOXco9XQbUxsOkWRTyzMiInMnPTjc1qXtU4ViAA"
+ },
+ "/photography/San Francisco - 2025/DSCN3692.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADQAQCdASoQAAwAA4BaJYwC7AC58SbUAAD+hc1UCzpIYOIh+oCgBMznzCf/XmnslVpqaZbDYxnFuexWJgW7/SzpckqSzLXkqkj4mtFeHb2sJmJQ+YjpqkAA"
+ },
+ "/photography/San Francisco - 2025/DSCN3696.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAQCdASoQAAwAA4BaJQBdgCLr0wRFd8AA/uZ32G+3BJ431J41Mx07xm94JYhrh9Wqbnam7QPiPZtAbSMC1vZoH5krrRphecaOaB8qP0oRo1RBQAA="
+ },
+ "/photography/San Francisco - 2025/DSCN3697.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAABQAgCdASoQAAwAA4BaJZQCdAYvXgKkXrl24OAA/ua9Wa/zWG1RP4ENYSWiYZtwtfyNhj8aXDFDeDFrsGOgxOM8egd+dkk61vqOfy8rqu9MMg1h0sPiqINDzrqEbbbrNnnQwcAA"
+ },
+ "/photography/San Francisco - 2025/DSCN3756.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADwAQCdASoQAAwAA4BaJZwAAueNRYlSFwAA/u19D6TmN6asyzA3PkzgKItzgetsMtB7SHxhUj8f8QlJLAttQIAA"
+ },
+ "/photography/San Francisco - 2025/DSCN3757.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoQAAwAA4BaJYwAD5CQbLnhThgAAP74sv/Td3pUqSBoX8f3LF6fYfuTptUbwlJkVY3kqnPOEJ66xyi/HiACEuOuEABocie5yZUxdj4/qmOAAA=="
+ },
+ "/photography/San Francisco - 2025/DSCN3760.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoQAAwAA4BaJYwCdAD7KlqixBZPAAD+QTgjm5DwdvTa+84YzQO9JmJC2cqRdbXhbuAOC7uS4IXSLlW+D0AWHVHtSHjZomybh0MbzimsSci3HUAFK54r1BkV0Xa4DAAA"
+ },
+ "/photography/San Francisco - 2025/DSCN3775.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABQAgCdASoQAAwAA4BaJQBOj+DE/wOJGzGbO2AA/tz1q3i9i1Up0jSgD9c9lIudNIFRqfUctNUVuCy/lAgqZ+EXFxrjXvrBZj+oqYQUYP8jubgb+8dPF9jnlAEu3rpGUIAAAA=="
+ },
+ "/photography/San Francisco - 2025/DSCN3776.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAwAA4BaJZQAAjAjW/NLggAA/uiqqegSROtF9Uswkxlno9VwiJUgQtW6Pb1YHI0c7mrz2Fxp6+crssD3Fv6vZXOBwge1P2Th7C/GkGG+hejtajQAAA=="
+ },
+ "/photography/San Francisco - 2025/DSCN3792.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAABwAgCdASoQAAwAA4BaJaACdAYtL/gkO1KBemIAAP7lOHQtjrbGz8IUY4oq37U+lvMQAtXragwGQhQztlI8jlm9I1PNt83I09+RgHa8+KdRJfOvZn9wr8NJsO6jby6XNFqzjFivM+bJxhVmgAA="
+ },
+ "/photography/San Francisco - 2025/DSCN3844.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQAgCdASoQAAwAA4BaJbACdAEWJ4GbKewwAP4JkNE+1zdF3xsPO/efso5twvwF9fxv/HznfyCUwjnTn9Dj63JVmOLAde3XnmhBqmYmcEQ374akFGoiqZUv+am9fQQgPrC8x254tbyW0wAA"
+ },
+ "/photography/San Francisco - 2025/DSCN3851.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAABQAgCdASoQAAwAA4BaJQBOgMXD4Gnf+DUhiLAA/vVwO8Ef+jOyBKHMwZHgxCl+xmxrQRfrtJs+XmOzi53PgyzLv5kWElbiU+XHwGe76/s9Ddazd8n65Vju5aO6yijfqAE+I4AA"
+ },
+ "/photography/San Francisco - 2025/DSCN3860.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAAAwAgCdASoQAAwAA4BaJbACdAYwxgfzdF2RCAD+0czHfn9nvFlyryGJFKz15j/Yq5v5o0fkiSRJOGjTGRr13qqPRTiIOhkUqI8ImK6m+YHFhkQ3dsi8RoNkFxx00H+Rh/bCzxY79A0q8fXYe6T772nAEAA="
+ },
+ "/photography/San Francisco - 2025/DSCN3864.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAwAgCdASoQAAwAA4BaJQBOgMXSxovdvY4BgADMooyi3aE4mg2hH/aBJ7kT4V83Jiz4uK+R/EhoJ5lYg9eInnVHnXuplsD/Kc/4e4bGftp+Xgl6MlbSkzsVcDa5SeRSm4W2+06VwSNt7iPEBlaggUAA"
+ },
+ "/photography/San Francisco - 2025/DSCN3873.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAwAgCdASoQAAwAA4BaJYwCdAYuk/e+7h4iAAD8/4LdFIgM1xM9szHV80uMlXviFGfTW451LgP/T3WGgfY9ns3BFVznS5c+UtYxdUXpLqC2aB8atBtZf7c/I1QAAA=="
+ },
+ "/photography/San Francisco - 2025/DSCN3892.JPG": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoQAAwAA4BaJQBOgCHRDeE/QAD+W/9oQ+fqx+g0bHRs3PauF928AFlH7PfH26NK1VbGc+S1y8N3/CDbYNNXKkmWogz803xmywGWkgAA"
+ },
+ "/photography/San Francisco - 2025/IMG_3430.jpg": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAwAgCdASoQAAwAA4BaJagCdAEeclmEafFWwAD+NDsbPXeFqD7J/lFkE6/Bwwm66lP3Y6iISOuhqkC4IhRw0191xZmNbxSf2b8Dj5+8NoDUUX4SV3TltC0J9wFxAAAA"
+ },
+ "/photography/Selena_s Bday/beauty_1758412825422.JPG": {
+  "w": 965,
+  "h": 543,
+  "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoQAAkAA4BaJbACdAD1kaxtWn04APhgaHpIxwO9qpW3D+7RyGbCiHJjvmtyKAF4AFNQNk/aQBUiNjh1KrT0vot/iDzCOI38lDecuaMMAAA="
+ },
+ "/photography/Selena_s Bday/DSC03895.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAQCdASoQAAsAA4BaJagCdAEXFd0xfQAA/uwSqDDqmuEjpJU1Fwji3IDRYOpTb5/3Qw2x6W/miXHGcuF4KmMqN1OAtFkU8Fu6hsZWuEChAXgkT9zDIv4zOAA="
+ },
+ "/photography/Selena_s Bday/DSC03909.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAABQAgCdASoQAAsAA4BaJaACdAYvXqiDnBisUoAA+/QE2fhJaBuV122roY+HIm2u5yfYdVzx98mJiHYnpJoAxKrJun50P3tZVi1K9WYJ6I+MvOt6qxzgbPKaghfvdd4z8/ZwpcfB0bdZ/HcYO6paUhAyhxFERAAA"
+ },
+ "/photography/Selena_s Bday/DSC03911.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAACQAgCdASoQAAsAA4BaJbACdAYtpzfRN29/4zPeAAD+wpMPiia7ki8Vv38O5f32kdMi8Ml/YX33PDbBU1VNlW7v+ZC94Y3ep7x6wBqjr+wtsPhXW6xY1HkWCs8ni2EjfuFf7zJTBiaiCgKlc865GcEXLGtuGAwoAAA="
+ },
+ "/photography/Toronto - 2024/DDCC80F7-F3EA-4DBD-961E-EC18ECE19DCC.jpg": {
+  "w": 591,
+  "h": 886,
+  "blur": "data:image/webp;base64,UklGRuAAAABXRUJQVlA4INQAAAAQBQCdASoQABgAPu1iqU2ppaOiMAgBMB2JQBOgjgL8Ab0Vdfb1dYP89tp1VbGysSoAAMyOlm9wAmSFxU9tUKn6xnSY4lw2qKZOTwbd9zqzyV5STmBharvuDUewW6RDstq+77Zb/GxUb2k8rAGAFX0JSF7JqLgSxR/XF945c3JZTrZE87fFb/vOWv1AxyTyfhAj81YMQVuv+oS1+CtiYfdl45OfDkSm0EI++FQ2fWn0b174e2k7S3QHzMOL96Oc+9nxwmBy48P2oAAsORxa6abihowAAA=="
+ },
+ "/photography/Toronto - 2024/IMG_0896.jpg": {
+  "w": 2000,
+  "h": 1500,
+  "blur": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAAAQAgCdASoQAAwAA4BaJQBOgMWRtPKymQawAMtCBZAnXsOCharn6ACLTthO0iwZi6qWDURHMZIfJjXb7HDTCfFVPBc4HpfD64u/wssfzzOLeMhPziHMXHafCUeawUJ3xPifd3IjCkCHvfcEFlbzW20AAAA="
+ },
+ "/photography/Toronto - 2024/IMG_4587.jpg": {
+  "w": 1500,
+  "h": 2000,
+  "blur": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JZACdMoADal0oVAxdZLBhVmAA+xLpjtjipLELE1xercshGEiSMdEuCtDSFUD9Gxkr+EzOtNbb5LoH+DWRTLHJQ0Y0l3yBiW777vpNDsDJjT0/zCjue3KtXJ4FgkSr6pAJ9pb3xtwAAA=="
+ },
+ "/photography/Toronto - 2024/IMG_9392.jpg": {
+  "w": 571,
+  "h": 917,
+  "blur": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAADQAwCdASoQABoAPu1iqU2ppaQiMAgBMB2JQAB80kHSXhTFmidViTAA/tXsckl9Y8V6XWYbSHy1lNLLWh/QhMC6tCmV5guCy2/zZ8kDMGBunca1E4G4qORmf+lgracWMNvzsUiwwQQgUWj721n/FoQ3iMKV1gpzOQb41tqjyWCJO4w0xNUYgp+OPeFMrUsUCl4n7IDokTu+gQAA"
+ },
+ "/photography/Toronto - 2024/IMG_9419.jpg": {
+  "w": 1500,
+  "h": 2000,
+  "blur": "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAADwAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JQBWABClHc8JVeTbAz7wAAP7Jxmqb8vDGtsSPUn/PE6D9Zu1BKUAkCH3evC2JKa/nLBQ5ZMmiBNT2jAu4gYWJOWwqmDStHSyY3fxlIxJmzCnI3QxvIIsPLTkOfpp+Q8HzaTQnsEyO2CF4AAA="
+ },
+ "/photography/Toronto - 2024/IMG_9427.jpg": {
+  "w": 1500,
+  "h": 2000,
+  "blur": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAABQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JQBgbsZUZMf44dWGNGEKuXM4MAPzcTA09eAUN6DSJ4McMQNm/bp8uc9ATfpve4CKOxzDyoqaLxlBPSJbZDR0ndgA4iWQQSwTjaxkLb6bQoG/2BINTrkQ4iJkhvfigXH9eVbiMbwznZDqRhIBaJJv6VDJy5XGqkcAW4AAA"
+ },
+ "/photography/Toronto - 2024/IMG_9428.jpg": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAACQAgCdASoQAAwAA4BaJYwC7AYrdkwHk26SELwuAAD8KgiBFiEHdZ40smZRKjv6K2wLlX4yB70xMJMlXZRx9lVyzn7SwX56WrGoIcy+y1lncafBGNeEUlXCNVJICS8jQbbt57AUGSgA9Pw8y04AAA=="
+ },
+ "/photography/Toronto - 2024/IMG_9846.jpg": {
+  "w": 1500,
+  "h": 2000,
+  "blur": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAADwAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JQAAL3CAhgsc0eR1zijEAAPxeCooDqyawXa06cB1Wda0iNTvi282Qh/LvjEH9WcAFCuMgQ4UY+xqvkrdZniPNdUHIpum2Zva3Hwx9Z/6AFG9DrtIxJ3dl1SNL5ALuFNA8L8jFOv3v+gmKpVceHjkh40p5bhm2fQf72GsDJHnH5F21nof84AAA"
+ },
+ "/photography/Toronto - 2025/DSC03813.JPG": {
+  "w": 591,
+  "h": 886,
+  "blur": "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAADwAwCdASoQABgAPu1iqU2ppaOiMAgBMB2JYgDG9YwSrHCBnSWfwacAAP7CUvL1CNqPF4g25MII1amIM9npZugFPRBOs+AmlKMu6XZnlbFG6oj+xQtxMngMs1if32T8bjIY6F5/Yfmd1FJl+5xMMofjkG1jFOgnMXFGOa5cQAA="
+ },
+ "/photography/Toronto - 2025/DSC03850.JPG": {
+  "w": 591,
+  "h": 886,
+  "blur": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAACQBACdASoQABgAPu1iqU2ppaQiMAgBMB2JYwDKAywBtHswjt4CQrSRYhQsbMAA/vQjF4wtEVqFLhFIeRkxvH3zwlK91pAJ2kgKGXjgyZijuDapm5UsBZzwSt0c+Uh0n9WBqDZtHYmSx3uW0MNCc8YHvAIj16cf6KYs+N/1oiSRwcG3Bg4iCK9TIAA="
+ },
+ "/photography/Toronto - 2025/DSC03933.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAwAgCdASoQAAsAA4BaJYwCw7Dp/vmtQnegAAD+t/IeGD8Nqx+TwnDN3gL4JoWfeJzxtiqj1vERkUqxP/5jonVxtkSqy8+SAAA="
+ },
+ "/photography/Toronto - 2025/DSC03951.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoQAAsAA4BaJQBYdiFsFSGiQEAA/vkXKuvATsK2Zts7HGU6SmIjTRO77cZS8zltEWcAAA=="
+ },
+ "/photography/Toronto - 2025/DSC03953.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoQAAsAA4BaJbACdADdKXNl91EAAP7y6bIJiqTY43lvJEDIuhHFOWyh1Rw3rwfMn0uSH2TfrCBaJOwazH7lThT2ZRQAAA=="
+ },
+ "/photography/Toronto - 2025/IMG_0381.JPG": {
+  "w": 543,
+  "h": 965,
+  "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAABQAwCdASoQAB0APu1kq04ppaQiMAgBMB2JZQABQ8YothSXAAD++1j/Zts7qJzYvNWMWwDnhnZlzqppJHqUfiBAAAA="
+ },
+ "/photography/Toronto - 2025/IMG_0519.jpg": {
+  "w": 627,
+  "h": 836,
+  "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAwAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JYwAAMNN1UEYAAP2PCAYOwJR1XH2UkEMW2DkReZjAcPg024RcgKUiHlRNHwgrXAfnhFCH9gAAAA=="
+ },
+ "/photography/Toronto - 2025/IMG_1965.jpg": {
+  "w": 627,
+  "h": 836,
+  "blur": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAADQAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JYwDE2B6Oy8OQEdIhuoAA/vLdF/58OKxpRsGCYzENZ2Sf4qpHBFHM2B72BmaqQTYBqHg6Tr6orDyrd74DVh37zThSQMvcJ/3tBGRfSLaM7HTag41XtMF4jklbBfkgGxAAAA=="
+ },
+ "/photography/Toronto - 2025/IMG_2625.jpg": {
+  "w": 2000,
+  "h": 1500,
+  "blur": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAAAQAgCdASoQAAwAA4BaJbACdAEDH95r01ZMAP7u8EiqQGlUkPbAMH3Lla1ukk4xmSMaazkLtERc6zcnoVpokoj2WiwQf3a508PJwfNYvgKm1E4bpg4Jg0JhJvN+Fjy5vBonZ3A17fRUPpRa/rggAA=="
+ },
+ "/photography/Toronto - 2025/IMG_2626.jpg": {
+  "w": 627,
+  "h": 836,
+  "blur": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAADwAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdLwABoBkL3hMR4x0AAP7NgO3QP+38njvfzaS9FXamE7sR4hENQKxW/o6grGuNfuUkCEQGDR5J61bavUFVit0aEwD3jhSbaWTeR1cwBcuPJFlJG7XwcocMppmgAAA="
+ },
+ "/photography/Toronto - 2025/IMG_5399.JPG": {
+  "w": 2000,
+  "h": 1500,
+  "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAACwAQCdASoQAAwAA4BaJbACdAD1PGgAAP7CFoMqnYNdNF8hYWFYdjlD+R9IDXDjfRiuqaZRJNmZv5RZZE1Npdl31v0q0/y3Px4RCeOaKSz1g4IAAAA="
+ },
+ "/photography/vancali - 2026/DSC04445.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAQAgCdASoQAAsAA4BaJYgCdAEejCb3I1oAAOJ+0KmNyuAFze5yl7TBRrXXYeCaYE+VjSBGKeN4SPdj7ralUyAtHgvliXjKmXo6WQVtSIAAAA=="
+ },
+ "/photography/vancali - 2026/DSC04578.JPG": {
+  "w": 2000,
+  "h": 1333,
+  "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoQAAsAA4BaJQBWACHAJLKWpWwAAP7yVUY3A1wcLzZIDjziNqLKbBlXKV+RDrtLjJEUAxP+GUV7QU4gLKmPAAAA"
+ },
+ "/photography/vancali - 2026/DSC04587.JPG": {
+  "w": 2000,
+  "h": 1500,
+  "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAACwAQCdASoQAAwAA4BaJYwCdAENV6zgAP7ohYvs3oad4+6n8lRRZ/plv7f+Qf3nJ1alEOoy7t8kYeDM/fKI40gAAAA="
+ },
+ "/photography/vancali - 2026/DSC04593.JPG": {
+  "w": 2000,
+  "h": 1333,
+  "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQAgCdASoQAAsAA4BaJaACdAEPhThCvzMAAP5mCJGStkBCOU1JULCw3YuG0zfz+8pf/reoFYPdkT16ue9KECwUOVDTg7oilK1YW+gA"
+ },
+ "/photography/vancali - 2026/DSC04627.JPG": {
+  "w": 2000,
+  "h": 1333,
+  "blur": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACQAQCdASoQAAsAA4BaJQAAXRo7AAAA/ug1+y81Eo6cdGFIeJlb0ylMJxJSe1In17WgYuzxPV2k+5u0vwAAAA=="
+ },
+ "/photography/vancali - 2026/DSC04700.JPG": {
+  "w": 2000,
+  "h": 1333,
+  "blur": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACQAQCdASoQAAsAA4BaJZwAAgYN0hAA9ya3HFw0Ru2JZcf2TkdZSvFofAAAAA=="
+ },
+ "/photography/vancali - 2026/DSC04720.JPG": {
+  "w": 2000,
+  "h": 1333,
+  "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQAgCdASoQAAsAA4BaJZgCdADdja1zH57gAP7wS60zqGZhp4PN58BLb4I0tZd53QqACvXbyaAUxGch887pB4wbslgQLEUjvOTUAAAA"
+ },
+ "/photography/vancali - 2026/DSC04901.JPG": {
+  "w": 2000,
+  "h": 1333,
+  "blur": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoQAAsAA4BaJYwCw7D0G4eQAAD+y+TnO8MCXDEtgRnb2bf1EZENfMqj7vgoLruK2dsM0QtYAAA="
+ },
+ "/photography/vancali - 2026/DSCN4432.JPG": {
+  "w": 1500,
+  "h": 2000,
+  "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAwCdASoQABUAPu1krU2ppaSiMAgBMB2JQBOgBEP27hFv3rCRkdpwAP7Uh+cwV1QStUWirw7hL+ctIKdbfA2kVoVeRP4aIUJ5nyQWIoGAAA=="
+ },
+ "/photography/vancali - 2026/DSCN4628.JPG": {
+  "w": 2000,
+  "h": 1500,
+  "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACwAQCdASoQAAwAA4BaJZQC7ABWHIAAAP2csCGLwlF/jbxqjBxJt3xX3UaWGMwUJh96eorMC2oEnFHNCSBKlTK3g8quB3bv2SAAAA=="
+ },
+ "/photography/vancali - 2026/DSCN4660.JPG": {
+  "w": 2000,
+  "h": 1500,
+  "blur": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoQAAwAA4BaJbACdAEOZcT+CADxdkZJbeyT+n6HcOkUMp5Zz9dcfj7jdk5cIVOM9es+/L69RAA="
+ },
+ "/photography/vancali - 2026/IMG_4145.JPG": {
+  "w": 1500,
+  "h": 2000,
+  "blur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAADQAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JQBYdghOXVfKTLYPqJ+AA9r5T0yJDOeVzVsnuDad5gLWeBZAIJ0PVTpY3wSQZ5JAvOw2nhm7YFDx3r7tGAmG5DVcQWhmqry/lEmInUPlgIIjTa7lVdN9fD0FuZx0U/+3/ZGZrvpT6HC05fMEF9boThWlD4bvw355mfsq8n8AAAA=="
+ },
+ "/photography/vancali - 2026/IMG_4177.JPG": {
+  "w": 1500,
+  "h": 2000,
+  "blur": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAABwBACdASoQABUAPu1iqU2ppaQiMAgBMB2JZgCdMoMlj0ZFvl+f6jmyStyeAAD+dlaE37BDul9gs85EYf257vcH9SJEb6etqwURvPxZTTz3Y7uM8VW9qRGAad/PPPxgx7u6qKfudpNqqGaokOrpAAAA"
+ },
+ "/photography/vancali - 2026/IMG_4251.JPG": {
+  "w": 2000,
+  "h": 1500,
+  "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAwAA4BaJbACdAD0ZxyoiNaAAP73/0P/6N+v90mlljOYH64orueefFrVz67H532lEgQPTdabIg5l1smL+FKxjVjTfo0pZoXdEBFb8iN2RhHJq2iKX1qQz9gAAA=="
+ },
+ "/photography/vancali - 2026/IMG_4298.JPG": {
+  "w": 2000,
+  "h": 1500,
+  "blur": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAAAwAgCdASoQAAwAA4BaJYgCdGuAAoae30DQAAD6ZulHmiPB/wgARqYDJc+D8mHWhhZYsTiZrcu5qjwQAAA="
+ },
+ "/photography/Waterloo - 2025/DSC03662.JPG": {
+  "w": 2000,
+  "h": 1333,
+  "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAQCdASoQAAsAA4BaJZwAAxbl5x5DI4AA/sYH5SWs99nymjmdvgQjyWRSfI9jWjSwzY5rUikbaieOgXuox1ECkjkYSf58O8QgAA=="
+ },
+ "/photography/Waterloo - 2025/DSC03671.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADwAQCdASoQAAsAA4BaJZQCw7D2N7VSxgAA97CZKhZg0+LSm06IHKV4WOcGFof280bqH00sJE+6ZBhCaEJgAA=="
+ },
+ "/photography/Waterloo - 2025/DSC03673.JPG": {
+  "w": 2000,
+  "h": 1333,
+  "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoQAAsAA4BaJZQCdAD0jFyzegAA/vhWl/NA3jJK9g+nzBEsZicfkOHcCtVnXaM4/vJC/UJC7er6DQ56An+dVnGwPZYOa11wAAA="
+ },
+ "/photography/Waterloo - 2025/DSC03687.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAwAgCdASoQAAsAA4BaJZQCsAELzhrBGnq0AAD++RGGmBrWofe2CMFBR+ckcihpp2HT9tG6+8kdqApjAsFGCb0oXCYsgEfnKMWZrizW4GjgAAAA"
+ },
+ "/photography/Waterloo - 2025/DSC03717.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAQAgCdASoQAAsAA4BaJYwCdADwYYBFE/nAAOJjFTcndUT1FXSokKXlmlvvLr/gbJtzzhTUYrWc3GJecg9JszewAAA="
+ },
+ "/photography/Waterloo - 2025/DSC03719.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAQCdASoQAAsAA4BaJYgCdADJLSxEAAD+9t4xyC807L8+FcuO7/mnK4+YyU+HR7vub1k5H4ERAnxhx7Jk4M5qQLGfNho3Om4mitUFXfyIW20AAAA="
+ },
+ "/photography/Waterloo - 2025/IMG_0419.jpg": {
+  "w": 836,
+  "h": 627,
+  "blur": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADwAQCdASoQAAwAA4BaJQBOgB6MGFTA7SAA+6RRdk3b6RzDGlRmuD+22YQj2mn3X9L3qgDV39oKG3tIqz+yEOVzmbjgAA=="
+ },
+ "/photography/Waterloo - 2025/IMG_4513.jpg": {
+  "w": 627,
+  "h": 836,
+  "blur": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAADwAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JYwC/OB6Kq0mMjIPEZS+gAP70L3n5hGPqtMqU8FP6SviOmEnc7rrZPthPRj9GfESYgX6KtTCVsVtZJmWmMpAQaMCVbG0yfNR5f8wpVbLeqKNFbAxuAAAA"
+ },
+ "/photography/Waterloo - 2025/IMG_4756.jpg": {
+  "w": 627,
+  "h": 836,
+  "blur": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAACwAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JQBbZAlGxcMZkggUz4AD91autvNZhIwHVX+jzVzAe5pDERenUM2Mdi6Hqmkk2KXJnxtIBY32Zp+B/at0wHejjUGg5Wv9HOd5dSaKICcgAAA=="
+ },
+ "/photography/Will_s bday/DSC03277.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoQAAsAA4BaJYgC7ACd1orWsAAA+DCgYgwrKH+QvBxknXuSyXmpeBlYwqlD+3iZYmHE69AwEfg96uljYKvGZT0YofGF0DHrgmfI8WmE2TeHNoAA"
+ },
+ "/photography/Will_s bday/DSC03291.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAABwAgCdASoQAAsAA4BaJagCdAYvry4V+4/5hpUAAP7ifT762HbumcaFUWv6bEZgtuPFppmn+f1cKTeLrTcoddMhc4cPL+HaGl5v4yZ6Uypv/fztBEVVZp+e7tZYgk5Nzlszl/Izq8FeTN1wFiAAAA=="
+ },
+ "/photography/Will_s bday/DSC03292.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAABwAgCdASoQAAsAA4BaJbACdH8AglixrCE1Nw8AAP7xtGwnGVZ+DoDI1kEcrOkyrMGsuut76tsq8rQFIIhkZwpZMyJ3fBNcuHN2rDtBt1yj7SMR6rTVqUYJ7t4/m7BjsK6FItcl6rIdOFVdMpABl96eJJH2vmxyBX0jsW2u59WdREAA"
+ },
+ "/photography/Will_s bday/DSC03301.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRjQAAABXRUJQVlA4ICgAAACwAQCdASoQAAsAA4BaJaQAAuddl34AAP72qNMtuMua05AgfM+QAAAA"
+ },
+ "/photography/Will_s bday/DSC03305.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoQAAsAA4BaJYwAAuVJO1+LcAAA/vkN4fwAuPyEv+hDRO1KEalVjP6zEP/DCIwvwMEg0xDjNNkyg58jIYkuwCV0EundbAAA"
+ },
+ "/photography/Will_s bday/DSC03316.JPG": {
+  "w": 1333,
+  "h": 2000,
+  "blur": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAAAQBACdASoQABgAPu1iqk2ppaQiMAgBMB2JYwC/OB4Sayswff1tUap9QAD+72WUHinXE2zAB4M84SXKeMcJUm+cmnLGAzIBpzOWqKU8b8Hc7nE5gYKkRhoP89sN+xGQ1mL7WNloHzL2Y+ibEzvjUxy/7Gpa+dIxBdrfH7Z5mPHySlfS2OnJXt8jarVT88XNTrjsKhH0AAA="
+ },
+ "/photography/Will_s bday/DSC03319.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACwAQCdASoQAAsAA4BaJYwAAudQ95wAAP75E/7p05F1r4wCZ/BjbVoKWfiuuzsMOnD0++rgZb0Qgk7zDhJvAbH7l9A4AA=="
+ },
+ "/photography/Will_s bday/DSC03323.JPG": {
+  "w": 886,
+  "h": 591,
+  "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoQAAsAA4BaJbACdAEf6ItxaLtAAPIFgtiDU6UhanQbeiHelamLrkQOWcmb+pbED9yJJEsOthvFv3Kgm+fD4xAXZK3/TXQ+0/qCXzsvEAA="
+ },
+ "/tetripad.jpg": {
+  "w": 1064,
+  "h": 656,
+  "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAABQAgCdASoQAAoAA4BaJZwAD4lxdxhcH0mDmAAA/vgZ5HipfaLc1cb/fagZpLY/4rHxrBvQ8fsP2FDUUm9erputsBH6aCPZLuGrvssthMgacIAA"
+ }
+}

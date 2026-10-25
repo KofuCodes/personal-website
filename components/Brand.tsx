@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FadeImg from './FadeImg';
 import LinkPreview from './LinkPreview';
 
 /**
@@ -27,11 +28,10 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ name, domain, src, classNa
 
   if (current) {
     return (
-      <img
+      <FadeImg
         src={current}
         alt=""
         aria-hidden="true"
-        loading="lazy"
         onError={() => setCurrent(undefined)}
         className={`${base} ${className}`}
       />

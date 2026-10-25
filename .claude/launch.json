@@ -6,12 +6,6 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 3000
-    },
-    {
-      "name": "modelverse",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "ai-modelverse", "run", "dev"],
-      "port": 5199
     }
   ]
 }

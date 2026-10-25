@@ -1,4 +1,3 @@
-
 export type Category = 'Embedded/Firmware' | 'Hardware' | 'Web/App' | 'Hackathons';
 
 export interface Project {

@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 
 /**
- * External link with a hover preview card — a small popup under (or above)
- * the link showing a live screenshot of the destination, its name, and domain.
+ * External link with a hover preview card — a small popup under the link
+ * showing a live screenshot of the destination, its name, and domain.
  *
  * The screenshot (via microlink.io) is only requested on first hover/focus so
  * page load never hits the API. If the screenshot fails, the card gracefully
@@ -31,11 +31,8 @@ interface LinkPreviewProps {
   title?: string;
   /** Domain for the favicon + label; derived from href if omitted. */
   domain?: string;
-  /** Where the card opens relative to the link. */
-  side?: 'top' | 'bottom';
   /** Classes applied to the anchor itself. */
   className?: string;
-  'aria-label'?: string;
   children: React.ReactNode;
 }
 
@@ -51,9 +48,7 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
   href,
   title,
   domain,
-  side = 'bottom',
   className = '',
-  'aria-label': ariaLabel,
   children,
 }) => {
   const [armed, setArmed] = useState(false);
@@ -72,7 +67,6 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
       <a
         href={href}
         className={className}
-        aria-label={ariaLabel}
         {...(isHttp ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       >
         {children}
@@ -111,7 +105,6 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
         target="_blank"
         rel="noopener noreferrer"
         className={className}
-        aria-label={ariaLabel}
         onMouseEnter={arm}
         onFocus={arm}
       >
@@ -121,9 +114,7 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
       <span
         aria-hidden="true"
         style={shift ? { marginLeft: shift } : undefined}
-        className={`pointer-events-none absolute left-1/2 z-20 w-60 -translate-x-1/2 overflow-hidden rounded-xl border border-ink-200 bg-paper shadow-lg shadow-black/5 opacity-0 scale-95 transition-[opacity,transform] duration-200 ease-out group-hover/lp:opacity-100 group-hover/lp:scale-100 group-focus-within/lp:opacity-100 group-focus-within/lp:scale-100 ${
-          side === 'top' ? 'bottom-full mb-2 origin-bottom' : 'top-full mt-2 origin-top'
-        }`}
+        className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 w-60 origin-top -translate-x-1/2 overflow-hidden rounded-xl border border-ink-200 bg-paper shadow-lg shadow-black/5 opacity-0 scale-95 transition-[opacity,transform] duration-200 ease-out group-hover/lp:opacity-100 group-hover/lp:scale-100 group-focus-within/lp:opacity-100 group-focus-within/lp:scale-100"
       >
         {wantShot && !shotFailed && (
           <span

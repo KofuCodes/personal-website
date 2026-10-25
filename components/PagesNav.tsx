@@ -33,7 +33,9 @@ const PagesNav: React.FC = () => {
             }`}
           >
             {page.label}
-            <span aria-hidden="true" className={`ml-1 ${active ? '' : 'invisible'}`}>➢</span>
+            {/* Inactive pages hold the marker's space so the row never shifts —
+                except on phones, where five reserved markers would wrap it */}
+            <span aria-hidden="true" className={`ml-1 ${active ? '' : 'invisible hidden sm:inline'}`}>➢</span>
           </Link>
         );
       })}

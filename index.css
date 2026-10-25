@@ -1,0 +1,242 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-size-adjust: 0.48;
+}
+
+::selection {
+  background-color: #1b1f22;
+  color: #fbfaf6;
+}
+
+[role="dialog"] ::selection {
+  /* The project modal and lightbox are near-black */
+  background-color: #dde1e3;
+  color: #111416;
+}
+
+/* Watercolour paper: a fixed, non-interactive overlay the shell mounts
+   once (<div className="paper-grain" aria-hidden="true" />). Two tiled
+   noise layers: a fine cold-press tooth and a slow mottle like sizing that
+   dried unevenly. Multiply only ever darkens, so both are kept faint —
+   ~2% mean darkening, which keeps ink-500 text above 4.5:1. */
+.paper-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='t' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.27 0 0 0 0 0.29 0 0 0 0 0.31 1.1 0 0 0 -0.5'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23t)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='560'%3E%3Cfilter id='m' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007' numOctaves='3' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.56 0 0 0 0 0.6 0 0 0 0 0.6 0.5 0 0 0 -0.27'/%3E%3C/filter%3E%3Crect width='560' height='560' filter='url(%23m)'/%3E%3C/svg%3E");
+  background-size: 220px 220px, 560px 560px;
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+}
+
+/* Hand-painted divider: one loose stroke (pale body, pooled core, dried
+   edge), displaced for a ragged outline and streaked like a dry brush.
+   Stretched to the box, so it reads the same at any column width. */
+.brush-rule {
+  height: 6px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 12' preserveAspectRatio='none'%3E%3Cfilter id='b' x='-2%25' y='-40%25' width='104%25' height='180%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.018 0.35' numOctaves='3' seed='4' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='3.2' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.004 0.8' numOctaves='2' seed='11' result='s'/%3E%3CfeColorMatrix in='s' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.6 0 0 0 -0.55' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cg filter='url(%23b)' fill='%23c5cbce'%3E%3Cpath fill-opacity='0.7' stroke='%23969ea3' stroke-opacity='0.35' stroke-width='0.9' d='M4 6.9C50 4 150 2.7 250 3.5S420 4.3 500 3.3S582 3.7 597 5.5C581 8.3 500 9 420 8.4S280 8 200 9.2S62 9.5 4 6.9Z'/%3E%3Cpath fill-opacity='0.4' d='M46 6.3C120 4.8 220 4.5 330 5.1S500 4.7 562 5.5C500 7.1 400 7.3 320 6.9S140 7.7 46 6.3Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* No visible scrollbars anywhere — panels still scroll normally */
+* {
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Reveal on load — subtle fade + lift. The shell staggers it with inline
+   animation-delays: hero, then nav, then the page. */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    /* `none` (not translateY(0)) so the filled end value doesn't create a
+       stacking context that would trap hover-preview cards under later sections */
+    transform: none;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  animation: reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Until the webfonts are in (boot.ts), every entrance holds on its first
+   frame — invisible — so the font swap reflows text nobody can see yet and
+   the stagger then plays from one clean start. */
+.booting .reveal {
+  animation-play-state: paused;
+}
+
+/* A block that turns up after the page has revealed (the on-repeat shelf):
+   it unfolds its height instead of shoving what's below it down in one jump. */
+@keyframes unfold {
+  from {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+}
+
+.unfold {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.unfold.is-late {
+  animation: unfold 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Experience accordion — quick ease-out expand, slow settle on collapse.
+   Explicit CSS (not utility classes) so duration/easing can't be lost to
+   stylesheet ordering. */
+.accordion {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.accordion.open {
+  grid-template-rows: 1fr;
+  transition-duration: 0.3s;
+}
+
+/* Project modal and photo lightbox entrance */
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+}
+
+.modal-fade {
+  animation: modal-fade 0.2s ease-out;
+}
+
+.modal-pop {
+  animation: modal-pop 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Gallery tiles drift up as they scroll into view (Photography.tsx) */
+.tile {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tile[data-in] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ...and each photo sharpens out of its blurred preview once it lands */
+.ph {
+  opacity: 0;
+  filter: blur(8px);
+  transform: scale(1.03);
+  transition:
+    opacity 0.6s ease-out,
+    filter 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ph.is-loaded {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+.tile:hover .ph.is-loaded {
+  transform: scale(1.035);
+}
+
+/* Thumbnail → lightbox: the photo itself flies between the two (View
+   Transitions, where supported). The page underneath just cross-fades. */
+::view-transition-group(photo) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(photo),
+::view-transition-new(photo) {
+  /* Both snapshots share one box; stretch, don't letterbox, while it morphs */
+  height: 100%;
+  object-fit: cover;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+}
+
+@media print {
+  .paper-grain {
+    display: none;
+  }
+}
+
+/* Reduced motion keeps every fade — that's what lets loading read as calm
+   instead of pieces popping in at random — and drops only the movement: no
+   lifts, zooms or blur, and no photo flying into the lightbox (Photography.tsx
+   checks the same query). */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .modal-pop {
+    animation-name: fade-in;
+  }
+
+  .tile,
+  .ph,
+  .tile:hover .ph.is-loaded {
+    transform: none;
+    filter: none;
+    transition-property: opacity;
+  }
+
+  .aperture,
+  .transition-transform {
+    transition-duration: 0.01ms !important;
+  }
+
+  * {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Camera aperture mark — blades drift open on hover */
+.aperture {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .aperture {
+  transform: rotate(60deg);
+}

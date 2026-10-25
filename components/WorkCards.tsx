@@ -1,5 +1,6 @@
 import React from 'react';
 import { Project } from '../types';
+import WebImage, { imageRatio } from './WebImage';
 
 /**
  * Projects as photos in an essay: two columns of natural-aspect images with
@@ -27,13 +28,13 @@ const ProjectCard: React.FC<{ project: Project; onOpen: (p: Project) => void }> 
       aria-label={`Open ${project.title} details`}
     >
       {img && (
-        <div className="overflow-hidden rounded-md ring-1 ring-inset ring-black/5 bg-paper-100">
-          <img
-            src={img}
-            alt={project.title}
-            loading="lazy"
-            className="block w-full h-auto transition duration-300 group-hover:brightness-[1.05]"
-          />
+        // Sized to the image's own shape up front, so the columns never jump
+        <div
+          className="relative overflow-hidden rounded-md bg-paper-100 transition duration-300 group-hover:brightness-[1.05]"
+          style={{ aspectRatio: imageRatio(img) }}
+        >
+          <WebImage src={img} size="sm" alt={project.title} />
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-black/5" />
         </div>
       )}
       <figcaption className={img ? 'mt-2' : 'border-b border-ink-200 pb-3'}>

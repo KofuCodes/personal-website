@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame, RootState } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
+import { ready } from '../boot';
 
 /**
  * Closed-loop control with a real goal.
@@ -581,6 +582,11 @@ const ClosedLoopControlTerrain: React.FC = () => {
 
   const wrapRef = useRef<HTMLDivElement>(null);
   const [frameloop, setFrameloop] = useState<'always' | 'never'>('always');
+  // Fades in once the first frames are drawn (and the page has revealed),
+  // rather than popping in whenever this chunk and WebGL happen to be ready.
+  const [shown, setShown] = useState(false);
+  const onCreated = () =>
+    ready.then(() => requestAnimationFrame(() => requestAnimationFrame(() => setShown(true))));
 
   // Pause the sim + render loop entirely while scrolled offscreen.
   useEffect(() => {
@@ -596,13 +602,17 @@ const ClosedLoopControlTerrain: React.FC = () => {
   return (
     // isolate: keeps the HUD/graph overlays inside this box so they can't
     // compete with the rest of the page's stacking order.
-    <div ref={wrapRef} className="relative isolate w-full h-full">
+    <div
+      ref={wrapRef}
+      className={`relative isolate w-full h-full transition-opacity duration-1000 ease-out ${shown ? 'opacity-100' : 'opacity-0'}`}
+    >
       <Canvas
         frameloop={frameloop}
         dpr={[1, 1.6]}
         camera={{ position: [CAM_R, CAM_Y, CAM_R], fov: 42 }}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         style={{ background: 'transparent' }}
+        onCreated={onCreated}
       >
         <Scene histRef={histRef} statusRef={statusRef} />
       </Canvas>

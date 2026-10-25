@@ -41,16 +41,15 @@ export default defineConfig(({ mode }) => {
   // Expose .env.local to the dev API handlers (server side only — nothing here
   // is prefixed VITE_, so none of it reaches the browser bundle).
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''));
+  // Without the Spotify secrets locally, borrow the live site's /api instead,
+  // so `npm run dev` still shows the real on-repeat shelf.
+  const hasSecrets = !!process.env.SPOTIFY_REFRESH_TOKEN;
   return {
     server: {
       port: 3000,
       host: '0.0.0.0',
+      proxy: hasSecrets ? undefined : { '/api': { target: 'https://www.ethantran.ca', changeOrigin: true } },
     },
-    plugins: [react(), devApi()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
-    },
+    plugins: [react(), hasSecrets && devApi()],
   };
 });
