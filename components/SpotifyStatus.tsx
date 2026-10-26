@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from 'react';
 
-const DISCORD_ID = "369238803656998912";
-
 interface Track {
-  track_id: string;
-  song: string;
+  id: string;
+  title: string;
   artist: string;
-  album_art_url: string;
+  url: string;
+  cover: string | null;
 }
 
-interface LanyardResponse {
-  success?: boolean;
-  error?: {
-    code: string;
-    message: string;
-  };
-  data?: {
-    listening_to_spotify: boolean;
-    spotify?: Track;
-  };
+/** From /api/now-playing: what's on Spotify now, or the last track played. */
+interface NowPlaying {
+  state: 'playing' | 'paused' | 'recent';
+  track: Track | null;
 }
 
 interface PollState {
   loading: boolean;
   error: string | null;
-  data: LanyardResponse['data'] | null;
+  data: NowPlaying | null;
 }
 
+const LABEL: Record<NowPlaying['state'], string> = {
+  playing: 'Now playing',
+  paused: 'Paused',
+  recent: 'Last played',
+};
+
 /**
- * Module-level refcounted poller: exactly one interval polls the Lanyard API and
+ * Module-level refcounted poller: exactly one interval polls /api/now-playing and
  * every mounted instance subscribes to it. Only one instance mounts today (the
  * shell header), but the refcount keeps StrictMode's dev double-invoke — and any
  * future second mount — from starting a second interval.
@@ -38,57 +37,41 @@ const listeners = new Set<(s: PollState) => void>();
 let pollTimer: ReturnType<typeof setInterval> | null = null;
 
 const fetchStatus = async () => {
+  // A background tab skips its turns; the first poll always runs.
+  if (document.hidden && !pollState.loading) return;
   try {
-    const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
-
-    if (!response.ok) {
-      if (response.status === 404) {
-        throw new Error(`Discord ID not found.`);
-      }
-      throw new Error(`HTTP error! status: ${response.status}`);
+    const response = await fetch('/api/now-playing');
+    const json = await response.json().catch(() => null);
+    if (!response.ok || !json) {
+      throw new Error(json?.error || `HTTP ${response.status}`);
     }
-
-    const json: LanyardResponse = await response.json();
-
-    if (json.success === false && json.error) {
-      // Silently handle "not monitored" — hide the widget until Lanyard tracks the user
-      if (json.error.code === 'user_not_monitored') {
-        pollState = { loading: false, error: null, data: null };
-      } else {
-        throw new Error(json.error.message || 'Lanyard API error');
-      }
-    } else if (json.data) {
-      pollState = { loading: false, error: null, data: json.data };
-      if (json.data.listening_to_spotify && json.data.spotify) {
-        localStorage.setItem('spotify_last_played', JSON.stringify(json.data.spotify));
-      }
-    } else {
-      pollState = { loading: false, error: 'No data received from API', data: null };
-    }
+    pollState = { loading: false, error: null, data: json };
   } catch (error) {
-    console.error("Error fetching Spotify status:", error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    pollState = { loading: false, error: errorMessage, data: null };
+    pollState = { loading: false, error: error instanceof Error ? error.message : 'Unknown error', data: null };
   }
   listeners.forEach((l) => l(pollState));
 };
 
 /** Cover + title/artist (text hidden below sm), linking to the track. */
 const TrackLink: React.FC<{ track: Track; label: string; children: React.ReactNode }> = ({
-  track: { track_id, song, artist, album_art_url },
+  track: { title, artist, url, cover },
   label,
   children,
 }) => (
   <a
-    href={`https://open.spotify.com/track/${track_id}`}
+    href={url}
     target="_blank"
     rel="noopener noreferrer"
     className="flex items-center gap-2 py-1 px-1.5 rounded-md hover:bg-paper-100 transition-colors"
-    title={`${label}: ${song} — ${artist}`}
+    title={`${label}: ${title} — ${artist}`}
   >
-    <img src={album_art_url} alt="" className="w-5 h-5 rounded-[3px] object-cover flex-shrink-0 ring-1 ring-inset ring-black/5" />
+    {cover ? (
+      <img src={cover} alt="" className="w-5 h-5 rounded-[3px] object-cover flex-shrink-0 ring-1 ring-inset ring-black/5" />
+    ) : (
+      <span className="w-5 h-5 rounded-[3px] bg-ink-200 flex-shrink-0" />
+    )}
     <div className="hidden sm:flex flex-col overflow-hidden max-w-[130px] leading-tight">
-      <span className="text-[12px] font-medium text-ink-700 truncate">{song}</span>
+      <span className="text-[12px] font-medium text-ink-700 truncate">{title}</span>
       <span className="text-[11px] text-ink-400 truncate">{artist}</span>
     </div>
     {children}
@@ -98,27 +81,16 @@ const TrackLink: React.FC<{ track: Track; label: string; children: React.ReactNo
 const SpotifyStatus: React.FC = () => {
   const [{ loading, error, data }, setState] = useState<PollState>(pollState);
 
-  const [lastPlayed, setLastPlayed] = useState<Track | null>(() => {
-    const saved = localStorage.getItem('spotify_last_played');
-    return saved ? JSON.parse(saved) : null;
-  });
-
   useEffect(() => {
-    const listener = (s: PollState) => {
-      setState(s);
-      if (s.data?.listening_to_spotify && s.data.spotify) {
-        setLastPlayed(s.data.spotify);
-      }
-    };
-    listeners.add(listener);
-    listener(pollState);
+    listeners.add(setState);
+    setState(pollState);
     // First subscriber starts the shared poll
     if (pollTimer === null) {
       fetchStatus();
       pollTimer = setInterval(fetchStatus, 10000);
     }
     return () => {
-      listeners.delete(listener);
+      listeners.delete(setState);
       if (listeners.size === 0 && pollTimer !== null) {
         clearInterval(pollTimer);
         pollTimer = null;
@@ -137,38 +109,21 @@ const SpotifyStatus: React.FC = () => {
     );
   }
 
-  // Only show errors for real issues (not "not monitored" - that's handled silently)
   if (error) {
-    const is404 = error.includes('404') || error.includes('not found');
-    // Only show in development for debugging
-    if (!isDevelopment) {
-      return null; // Hide errors in production
-    }
+    // Hidden on the live site; a quiet marker locally, with the reason on hover.
     // Single row like every other state — this sits in the header, so a
     // two-line block here would shove the whole top bar around.
+    if (!isDevelopment) return null;
     return (
-      <div
-        className="flex items-center gap-2 py-1 px-1.5 min-w-0"
-        title={is404 ? `${error} — check https://api.lanyard.rest/v1/users/${DISCORD_ID}` : error}
-      >
+      <div className="flex items-center gap-2 py-1 px-1.5 min-w-0" title={error}>
         <div className="h-2 w-2 rounded-full bg-red-400 flex-shrink-0" />
-        <span className="hidden sm:inline text-[11px] text-ink-500 truncate">
-          {is404 ? 'lanyard: id not found' : 'lanyard: error'}
-        </span>
+        <span className="hidden sm:inline text-[11px] text-ink-500 truncate">spotify: error</span>
       </div>
     );
   }
 
-  // Show last played when not currently listening
-  if (!data?.listening_to_spotify || !data.spotify) {
-    if (lastPlayed) {
-      return (
-        <TrackLink track={lastPlayed} label="Last played">
-          <span className="w-1.5 h-1.5 rounded-full bg-ink-300 flex-shrink-0" />
-        </TrackLink>
-      );
-    }
-    // Show offline state with Spotify logo when no last played data
+  // Nothing playing and no history to fall back on
+  if (!data?.track) {
     return (
       <div className="flex items-center gap-2 py-1 px-1.5">
         <svg className="w-4 h-4 text-ink-300" viewBox="0 0 24 24" fill="currentColor">
@@ -180,11 +135,15 @@ const SpotifyStatus: React.FC = () => {
   }
 
   return (
-    <TrackLink track={data.spotify} label="Now playing">
-      <span className="flex h-1.5 w-1.5 relative flex-shrink-0">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500" />
-      </span>
+    <TrackLink track={data.track} label={LABEL[data.state]}>
+      {data.state === 'playing' ? (
+        <span className="flex h-1.5 w-1.5 relative flex-shrink-0">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500" />
+        </span>
+      ) : (
+        <span className="w-1.5 h-1.5 rounded-full bg-ink-300 flex-shrink-0" />
+      )}
     </TrackLink>
   );
 };

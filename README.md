@@ -111,22 +111,30 @@ each image's size plus a tiny blurred preview to `data/image-meta.json`. Commit 
 before anything loads, paint the blur at once, and sharpen in the real image. It only
 rebuilds what changed; until you run it, a new image falls back to its original file.
 
-## On repeat (Spotify)
+## Spotify (now playing + on repeat)
 
-The index shows my five most-played Spotify tracks over the past ~4 weeks as album covers
-([`components/OnRepeat.tsx`](components/OnRepeat.tsx)). They come from
-[`api/top-tracks.ts`](api/top-tracks.ts), a Vercel function the CDN caches for an hour, so
-the shelf updates by itself. Until it's configured the section simply doesn't show.
+Both come straight from Spotify's Web API through two Vercel functions, so the credentials
+never reach the browser:
 
-One-time setup:
+- **Now playing** (hero, [`components/SpotifyStatus.tsx`](components/SpotifyStatus.tsx)) —
+  [`api/now-playing.ts`](api/now-playing.ts) returns what's playing on any device (green
+  pulse), paused (grey dot), or otherwise the last track played. Each open page polls it
+  every 10 s; the CDN caches it for 10 s, so Spotify sees about one request per 10 s.
+- **On repeat** (index, [`components/OnRepeat.tsx`](components/OnRepeat.tsx)) — my five
+  most-played tracks over the past ~4 weeks, from [`api/top-tracks.ts`](api/top-tracks.ts),
+  cached for an hour, so the shelf updates by itself.
+
+Until Spotify is configured, both simply don't show.
+
+One-time setup (re-run step 2 whenever the scopes in `scripts/spotify-auth.mjs` change):
 1. In the [Spotify developer dashboard](https://developer.spotify.com/dashboard), create an
    app (Web API) and add the redirect URI `http://127.0.0.1:8888/callback`.
 2. Put the app's `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` in `.env.local`, then run
    `node --env-file=.env.local scripts/spotify-auth.mjs` (same in PowerShell, cmd or bash).
    Open the link it prints, approve, and add the `SPOTIFY_REFRESH_TOKEN` it prints to
    `.env.local` — `npm run dev` then serves `/api/*` from your own handlers, like Vercel
-   does. (Without those secrets, the dev server proxies `/api/*` to the live site, so the
-   shelf still shows your real tracks.)
+   does. (Without those secrets, the dev server proxies `/api/*` to the live site, so both
+   still show your real data.)
 3. Add the same three variables to the Vercel project's environment variables and redeploy.
 
 ## Where things render
@@ -134,7 +142,7 @@ One-time setup:
 | Section | Data | Component |
 |---|---|---|
 | Shell layout (zones, routes) + footer | — | [`App.tsx`](App.tsx) |
-| Hero — name, now playing, headshot, bio, links | inline | [`components/Hero.tsx`](components/Hero.tsx), [`components/SpotifyStatus.tsx`](components/SpotifyStatus.tsx) |
+| Hero — name, now playing, headshot, bio, links | inline, `/api/now-playing` | [`components/Hero.tsx`](components/Hero.tsx), [`components/SpotifyStatus.tsx`](components/SpotifyStatus.tsx), [`api/now-playing.ts`](api/now-playing.ts) |
 | Pages nav (➢ index / projects / work / gallery / resume) | — | [`components/PagesNav.tsx`](components/PagesNav.tsx) |
 | Back-to-top pill (appears past 260px) | — | [`components/ScrollTop.tsx`](components/ScrollTop.tsx) |
 | index → Closed-loop terrain + caption | — | [`components/ClosedLoopControlTerrain.tsx`](components/ClosedLoopControlTerrain.tsx) (canvas), [`pages/Home.tsx`](pages/Home.tsx) (sizing + caption) |
