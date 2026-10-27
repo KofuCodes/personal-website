@@ -37,6 +37,69 @@ const devApi = (): Plugin => ({
   },
 });
 
+const TAGS = path.resolve(__dirname, 'data/photo-tags.json');
+
+/** One photo per block, one tag per line, so edits diff cleanly. */
+const formatTags = (all: Record<string, unknown[]>) =>
+  `{\n${Object.keys(all)
+    .sort()
+    .map((url) => `  ${JSON.stringify(url)}: [\n${all[url].map((t) => `    ${JSON.stringify(t)}`).join(',\n')}\n  ]`)
+    .join(',\n')}\n}\n`;
+
+const percent = (v: unknown) => typeof v === 'number' && v >= 0 && v <= 100;
+
+/**
+ * Dev only: the gallery's tag editor (components/TagEditor.tsx) saves a
+ * photo's tags here, into data/photo-tags.json. The dev server listens on the
+ * network, so only requests from this machine may write.
+ */
+const tagEditor = (): Plugin => ({
+  name: 'tag-editor',
+  apply: 'serve',
+  configureServer(server) {
+    server.middlewares.use('/__tags', (req, res) => {
+      const local = ['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(req.socket.remoteAddress ?? '');
+      if (req.method !== 'PUT' || !local) {
+        res.statusCode = 403;
+        return res.end();
+      }
+      let body = '';
+      req.on('data', (chunk) => (body += chunk));
+      req.on('end', () => {
+        try {
+          const { url, tags } = JSON.parse(body);
+          const valid =
+            typeof url === 'string' &&
+            url.startsWith('/photography/') &&
+            Array.isArray(tags) &&
+            tags.every(
+              (t) =>
+                typeof t.label === 'string' &&
+                /^https?:\/\//.test(t.href) &&
+                percent(t.x) &&
+                percent(t.y) &&
+                (t.face === undefined || percent(t.face))
+            );
+          if (!valid) throw new Error('bad tags');
+          const all = JSON.parse(fs.readFileSync(TAGS, 'utf8'));
+          if (tags.length) all[url] = tags.map(({ label, href, x, y, face }) => ({ label, href, x, y, face }));
+          else delete all[url];
+          fs.writeFileSync(TAGS, formatTags(all));
+          res.end();
+        } catch (error) {
+          res.statusCode = 400;
+          res.end(String(error));
+        }
+      });
+    });
+  },
+  // The editor already shows its own changes; a hot update would remount the
+  // gallery and close the photo mid-tagging.
+  handleHotUpdate({ file }) {
+    if (path.resolve(file) === TAGS) return [];
+  },
+});
+
 export default defineConfig(({ mode }) => {
   // Expose .env.local to the dev API handlers (server side only — nothing here
   // is prefixed VITE_, so none of it reaches the browser bundle).
@@ -50,6 +113,6 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
       proxy: hasSecrets ? undefined : { '/api': { target: 'https://www.ethantran.ca', changeOrigin: true } },
     },
-    plugins: [react(), hasSecrets && devApi()],
+    plugins: [react(), hasSecrets && devApi(), tagEditor()],
   };
 });
