@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { createPortal, flushSync } from 'react-dom';
 import { photos as allPhotos, Photo } from '../data/photography';
 import Aperture from '../components/Aperture';
+import PhotoTags, { TagIcon } from '../components/PhotoTags';
 import QuietHeader from '../components/QuietHeader';
 import WebImage, { imageRatio, webCopy } from '../components/WebImage';
 
@@ -57,7 +58,7 @@ const Photography: React.FC = () => {
       (map[key] ||= []).push(photo);
     });
 
-    const priority = ['Vancouver & California', 'Waterloo, Ontario', 'San Francisco, California'];
+    const priority = ['Vancouver & California', 'Québec', 'Waterloo, Ontario', 'San Francisco, California'];
     const rank = (loc: string) => {
       const i = priority.indexOf(loc);
       return i === -1 ? priority.length : i;
@@ -196,7 +197,7 @@ const Photography: React.FC = () => {
         // Trap focus inside the lightbox
         const root = overlayRef.current;
         if (!root) return;
-        const focusables = root.querySelectorAll<HTMLElement>('button, [tabindex]:not([tabindex="-1"])');
+        const focusables = root.querySelectorAll<HTMLElement>('button, a[href], [tabindex]:not([tabindex="-1"])');
         if (!focusables.length) return;
         const first = focusables[0];
         const last = focusables[focusables.length - 1];
@@ -282,7 +283,7 @@ const Photography: React.FC = () => {
                       key={photo.id}
                       ref={tileRef(photo.id)}
                       onClick={() => open(indexOf.get(photo.id)!)}
-                      aria-label={`${photo.location}, ${photo.year} — open`}
+                      aria-label={`${photo.location}, ${photo.year}${photo.tags ? `, ${photo.tags.length} tagged` : ''} — open`}
                       // A touch of stagger across the row as they come in
                       style={{ aspectRatio: ratio(photo), transitionDelay: `${c * 70}ms` }}
                       className="tile group relative block w-full overflow-hidden rounded-lg bg-paper-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-beak focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
@@ -292,6 +293,11 @@ const Photography: React.FC = () => {
                         aria-hidden="true"
                         className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-black/5"
                       />
+                      {photo.tags && (
+                        <span className="pointer-events-none absolute bottom-2 left-2 grid h-6 w-6 place-items-center rounded-full bg-black/55 text-white">
+                          <TagIcon className="h-3 w-3" />
+                        </span>
+                      )}
                     </button>
                   ))}
                 </div>
@@ -353,6 +359,7 @@ const Photography: React.FC = () => {
                 className="relative overflow-hidden rounded-lg bg-white/5 shadow-2xl shadow-black/40"
               >
                 <WebImage src={current.url} size="lg" alt={current.location} />
+                {current.tags && <PhotoTags tags={current.tags} />}
               </div>
               <figcaption className="mt-4 text-center text-[13px] text-white/60" onClick={(e) => e.stopPropagation()}>
                 {current.location} · {current.year}
