@@ -78,11 +78,13 @@ const tagEditor = (): Plugin => ({
                 /^https?:\/\//.test(t.href) &&
                 percent(t.x) &&
                 percent(t.y) &&
-                (t.face === undefined || percent(t.face))
+                (t.face === undefined || percent(t.face)) &&
+                (t.above === undefined || typeof t.above === 'boolean')
             );
           if (!valid) throw new Error('bad tags');
           const all = JSON.parse(fs.readFileSync(TAGS, 'utf8'));
-          if (tags.length) all[url] = tags.map(({ label, href, x, y, face }) => ({ label, href, x, y, face }));
+          if (tags.length)
+            all[url] = tags.map(({ label, href, x, y, face, above }) => ({ label, href, x, y, face, above }));
           else delete all[url];
           fs.writeFileSync(TAGS, formatTags(all));
           res.end();

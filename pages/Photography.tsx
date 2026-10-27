@@ -414,7 +414,7 @@ const Photography: React.FC = () => {
               </div>
               <figcaption className="mt-4 text-center text-[13px] text-white/60" onClick={(e) => e.stopPropagation()}>
                 {tagging ? (
-                  'click someone to tag them · drag a tag to move it · × to remove'
+                  'click someone to tag them · drag a tag to move it · double-click to flip it · × to remove'
                 ) : (
                   <>
                     {current.location} · {current.year}

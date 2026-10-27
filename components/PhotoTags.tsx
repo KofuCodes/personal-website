@@ -12,8 +12,8 @@ export const TagIcon: React.FC<{ className?: string }> = ({ className }) => (
 export const bubble =
   'whitespace-nowrap rounded-md bg-black/80 px-2 py-1 text-[12px] leading-none text-white sm:px-2.5 sm:py-1.5 sm:text-[14px]';
 
-/** Tags near the bottom edge hang their label above the point by default. */
-const isAbove = (tag: PhotoTag) => tag.y > 80;
+/** Labels hang below their point, unless flipped in the editor or near the bottom edge. */
+export const isAbove = (tag: PhotoTag) => tag.above ?? tag.y > 80;
 /** How far along its label (%) a tag's caret sits. */
 const alongOf = (tag: PhotoTag) => Math.min(88, Math.max(12, tag.x));
 
@@ -102,7 +102,9 @@ const useUnstacked = (layer: React.RefObject<HTMLDivElement | null>, tags: Photo
       const boxes = tags.map((tag, i) => {
         const w = labels[i].offsetWidth;
         const left = (tag.x / 100) * W - (alongOf(tag) / 100) * w;
-        const lift = Math.round((faceOf(tag, tags) / 100) * H);
+        // A tag flipped in the editor already points where its caret should
+        // go; any other label moved above has to clear the face first
+        const lift = tag.above ? 0 : Math.round((faceOf(tag, tags) / 100) * H);
         return { left, right: left + w, h: labels[i].offsetHeight, y: (tag.y / 100) * H, lift };
       });
       const order = tags.map((_, i) => i).sort((a, b) => tags[a].y - tags[b].y);

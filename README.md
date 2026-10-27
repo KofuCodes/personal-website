@@ -102,7 +102,8 @@ can't show `.HEIC`, so convert those to JPG first. Albums are grouped by
 
 To tag people, run `npm run dev`, open a photo, and press **tag people** (top left).
 Click someone to drop a tag and pick who it is (or paste a new person's site), drag a
-tag to move it, × to remove it. Each change saves straight to
+tag to move it, double-click it to hang its label above the point (arrow pointing down)
+instead of below, × to remove it. Each change saves straight to
 [`data/photo-tags.json`](data/photo-tags.json) — commit that file to publish. The editor
 ([`components/TagEditor.tsx`](components/TagEditor.tsx)) exists only on the dev server:
 it isn't in the production bundle, and the dev server accepts saves only from this
