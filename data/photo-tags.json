@@ -12,7 +12,9 @@
   "/photography/Ethan_s bday - 2026/DSC04078.JPG": [
     {"label":"wcagas.com","href":"https://wcagas.com/","x":15,"y":60,"face":7},
     {"label":"chayanth.me","href":"https://chayanth.me/","x":67,"y":54,"face":7},
-    {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":77,"y":64,"face":7}
+    {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":77,"y":64,"face":7},
+    {"label":"aarondam.com","href":"https://www.aarondam.com/","x":38.1,"y":36.7,"face":7},
+    {"label":"mikael.codes","href":"https://www.mikael.codes/","x":85.1,"y":43.6,"face":7,"above":true}
   ],
   "/photography/Ethan_s bday - 2026/IMG_1161.jpg": [
     {"label":"wcagas.com","href":"https://wcagas.com/","x":42,"y":34,"face":10},

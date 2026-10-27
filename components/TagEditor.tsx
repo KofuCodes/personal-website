@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PhotoTag } from '../data/photography';
-import { TagPin, bubble } from './PhotoTags';
+import { TagPin, bubble, isAbove } from './PhotoTags';
 
 type Person = Pick<PhotoTag, 'label' | 'href'>;
 
@@ -19,8 +19,9 @@ const clampPct = (v: number) => Math.round(Math.min(100, Math.max(0, v)) * 10) /
 /**
  * Dev-only tag editor over a lightbox photo — the gallery loads it only under
  * `npm run dev`, so it never reaches the live site. Click the photo to drop a
- * tag and pick who it is, drag a tag to move it, × to remove it. Every change
- * goes through onChange, which saves it to data/photo-tags.json.
+ * tag and pick who it is, drag a tag to move it, double-click it to hang the
+ * label above its point instead of below, × to remove it. Every change goes
+ * through onChange, which saves it to data/photo-tags.json.
  */
 const TagEditor: React.FC<{
   tags: PhotoTag[];
@@ -70,6 +71,10 @@ const TagEditor: React.FC<{
             <span
               className={`${bubble} relative cursor-grab touch-none select-none ${drag?.i === i ? 'cursor-grabbing ring-2 ring-beak' : ''}`}
               onClick={(e) => e.stopPropagation()}
+              onDoubleClick={(e) => {
+                e.stopPropagation();
+                onChange(tags.map((t, j) => (j === i ? { ...t, above: !isAbove(t) } : t)));
+              }}
               onPointerDown={(e) => {
                 e.stopPropagation();
                 e.currentTarget.setPointerCapture(e.pointerId);

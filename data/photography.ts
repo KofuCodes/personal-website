@@ -9,6 +9,8 @@ export interface PhotoTag {
   y: number;
   /** Rough face height, as a percentage of the photo's height, so a label moved above clears the face */
   face?: number;
+  /** Hang the label above the point, caret pointing down at it (set by double-clicking in the editor) */
+  above?: boolean;
 }
 
 /**
