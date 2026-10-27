@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation, Link, Navigate } from 'react-router-dom';
+import { trackPageview } from './analytics';
 import { ready } from './boot';
 import GeeseSky from './components/GeeseSky';
 import WatercolorTrail from './components/WatercolorTrail';
@@ -27,6 +28,17 @@ const ScrollToTop: React.FC = () => {
   return null;
 };
 
+/** One analytics page view per route, the first load included. */
+const TrackPageviews: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    trackPageview(pathname);
+  }, [pathname]);
+
+  return null;
+};
+
 /**
  * Two zones, one column: the identity block and the pages nav are the shell
  * and never change — routes swap only what sits below them.
@@ -39,6 +51,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
+      <TrackPageviews />
       <div className="min-h-[100dvh] bg-paper text-ink-900">
         {/* The paper, back to front: the flock, the cursor's brush, then the
             grain over both so they read as painted into it. All fixed and
