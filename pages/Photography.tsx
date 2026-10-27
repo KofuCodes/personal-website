@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import React, { Suspense, lazy, useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { createPortal, flushSync } from 'react-dom';
-import { photos as allPhotos, Photo } from '../data/photography';
+import { photos as allPhotos, Photo, PhotoTag, tagsByUrl } from '../data/photography';
 import Aperture from '../components/Aperture';
 import PhotoTags, { TagIcon } from '../components/PhotoTags';
 import QuietHeader from '../components/QuietHeader';
@@ -17,6 +17,10 @@ import WebImage, { imageRatio, webCopy } from '../components/WebImage';
  */
 
 const ratio = (p: Photo) => imageRatio(p.url);
+
+// The tag editor exists only under `npm run dev`: in a build this is null and
+// its import is dropped, so the live site never ships it.
+const TagEditor = import.meta.env.DEV ? lazy(() => import('../components/TagEditor')) : null;
 
 const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const canMorph = () => 'startViewTransition' in document && !reduceMotion();
@@ -48,6 +52,27 @@ const balance = <T,>(items: T[], count: number, heightOf: (item: T) => number) =
 const Photography: React.FC = () => {
   const [active, setActive] = useState<number | null>(null);
   const columnCount = useColumnCount();
+
+  // Tags sit in state so the dev-only editor can change them in place; it
+  // also writes each change to data/photo-tags.json through the dev server.
+  const [tags, setTags] = useState(tagsByUrl);
+  const [tagging, setTagging] = useState(false);
+  const saveTags = (url: string, list: PhotoTag[]) => {
+    setTags((prev) => {
+      const next = { ...prev };
+      if (list.length) next[url] = list;
+      else delete next[url];
+      return next;
+    });
+    fetch('/__tags', { method: 'PUT', body: JSON.stringify({ url, tags: list }) }).then(
+      (res) => res.ok || console.error('Tags not saved:', res.status)
+    );
+  };
+  // Everyone tagged anywhere, offered when tagging the next photo
+  const people = useMemo(() => {
+    const byHref = new Map(Object.values(tags).flat().map((t) => [t.href, { label: t.label, href: t.href }]));
+    return [...byHref.values()].sort((a, b) => a.label.localeCompare(b.label));
+  }, [tags]);
 
   // Group by "location - year": newest year first; within a year the featured
   // places lead, in this order, then the rest alphabetically.
@@ -283,7 +308,7 @@ const Photography: React.FC = () => {
                       key={photo.id}
                       ref={tileRef(photo.id)}
                       onClick={() => open(indexOf.get(photo.id)!)}
-                      aria-label={`${photo.location}, ${photo.year}${photo.tags ? `, ${photo.tags.length} tagged` : ''} — open`}
+                      aria-label={`${photo.location}, ${photo.year}${tags[photo.url] ? `, ${tags[photo.url].length} tagged` : ''} — open`}
                       // A touch of stagger across the row as they come in
                       style={{ aspectRatio: ratio(photo), transitionDelay: `${c * 70}ms` }}
                       className="tile group relative block w-full overflow-hidden rounded-lg bg-paper-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-beak focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
@@ -293,7 +318,7 @@ const Photography: React.FC = () => {
                         aria-hidden="true"
                         className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-black/5"
                       />
-                      {photo.tags && (
+                      {tags[photo.url] && (
                         <span className="pointer-events-none absolute bottom-2 left-2 grid h-6 w-6 place-items-center rounded-full bg-black/55 text-white">
                           <TagIcon className="h-3 w-3" />
                         </span>
@@ -335,6 +360,22 @@ const Photography: React.FC = () => {
               </svg>
             </button>
 
+            {TagEditor && (
+              <button
+                className={`absolute top-4 left-4 z-10 flex items-center gap-1.5 rounded-full px-3 py-2 text-[13px] lowercase transition-colors ${
+                  tagging ? 'bg-beak text-white' : 'text-white/70 hover:bg-white/10 hover:text-white'
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setTagging((t) => !t);
+                }}
+                aria-pressed={tagging}
+              >
+                <TagIcon className="h-3.5 w-3.5" />
+                {tagging ? 'done tagging' : 'tag people'}
+              </button>
+            )}
+
             <button
               className="absolute left-2 sm:left-5 z-10 hidden sm:grid w-11 h-11 place-items-center rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors"
               onClick={(e) => { e.stopPropagation(); prev(); }}
@@ -359,11 +400,27 @@ const Photography: React.FC = () => {
                 className="relative overflow-hidden rounded-lg bg-white/5 shadow-2xl shadow-black/40"
               >
                 <WebImage src={current.url} size="lg" alt={current.location} />
-                {current.tags && <PhotoTags tags={current.tags} />}
+                {tagging && TagEditor ? (
+                  <Suspense fallback={null}>
+                    <TagEditor
+                      tags={tags[current.url] ?? []}
+                      people={people}
+                      onChange={(list) => saveTags(current.url, list)}
+                    />
+                  </Suspense>
+                ) : (
+                  tags[current.url] && <PhotoTags tags={tags[current.url]} />
+                )}
               </div>
               <figcaption className="mt-4 text-center text-[13px] text-white/60" onClick={(e) => e.stopPropagation()}>
-                {current.location} · {current.year}
-                <span className="ml-3 tabular-nums text-white/40">{active! + 1} / {flat.length}</span>
+                {tagging ? (
+                  'click someone to tag them · drag a tag to move it · × to remove'
+                ) : (
+                  <>
+                    {current.location} · {current.year}
+                    <span className="ml-3 tabular-nums text-white/40">{active! + 1} / {flat.length}</span>
+                  </>
+                )}
               </figcaption>
             </figure>
 

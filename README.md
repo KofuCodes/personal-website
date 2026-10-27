@@ -100,10 +100,20 @@ can't show `.HEIC`, so convert those to JPG first. Albums are grouped by
 `location — year`, newest year first; the `priority` list in
 [`pages/Photography.tsx`](pages/Photography.tsx) decides which places lead within a year.
 
-To tag people, give the photo `tags: [{ label, href, x, y }]`, where `x`/`y` are
-percentages of the photo's width and height pointing just under the person's chin. Tagged
-photos get a person badge on their tile; in the lightbox, tapping the photo shows the tags
-([`components/PhotoTags.tsx`](components/PhotoTags.tsx)).
+To tag people, run `npm run dev`, open a photo, and press **tag people** (top left).
+Click someone to drop a tag and pick who it is (or paste a new person's site), drag a
+tag to move it, × to remove it. Each change saves straight to
+[`data/photo-tags.json`](data/photo-tags.json) — commit that file to publish. The editor
+([`components/TagEditor.tsx`](components/TagEditor.tsx)) exists only on the dev server:
+it isn't in the production bundle, and the dev server accepts saves only from this
+machine. On the site, tagged photos get a person badge on their tile, and tapping the
+photo in the lightbox shows the tags ([`components/PhotoTags.tsx`](components/PhotoTags.tsx)).
+
+Place each tag just under the person's chin. Where labels would collide (a group shot on a
+phone), the lightbox rearranges them by itself: a label moves above the person's head with
+its arrow pointing down, or slides a little further out on a stem, whichever reaches less.
+To clear the face it uses each tag's `face` (rough face height, % of the photo's height);
+tags saved without one borrow the typical face size of the other tags in that photo.
 
 ## Images
 
