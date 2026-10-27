@@ -100,6 +100,11 @@ can't show `.HEIC`, so convert those to JPG first. Albums are grouped by
 `location — year`, newest year first; the `priority` list in
 [`pages/Photography.tsx`](pages/Photography.tsx) decides which places lead within a year.
 
+To tag people, give the photo `tags: [{ label, href, x, y }]`, where `x`/`y` are
+percentages of the photo's width and height pointing just under the person's chin. Tagged
+photos get a person badge on their tile; in the lightbox, tapping the photo shows the tags
+([`components/PhotoTags.tsx`](components/PhotoTags.tsx)).
+
 ## Images
 
 The originals (`public/photography/`, and each project's `buildImage`/`finishedImage`)

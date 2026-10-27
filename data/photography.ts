@@ -1,9 +1,20 @@
 
+export interface PhotoTag {
+  /** What the tag reads, like a handle */
+  label: string;
+  href: string;
+  /** Where it points, as a percentage of the photo's width and height */
+  x: number;
+  y: number;
+}
+
 export interface Photo {
   id: string;
   url: string;
   location: string;
   year: string;
+  /** People in the shot, shown Instagram-style in the lightbox */
+  tags?: PhotoTag[];
 }
 
 export const photos: Photo[] = [
@@ -593,7 +604,14 @@ export const photos: Photo[] = [
     id: '132',
     url: '/photography/Ethan_s bday - 2026/IMG_1184.JPG',
     location: 'Hamilton, Ontario',
-    year: '2026'
+    year: '2026',
+    tags: [
+      { label: 'chayanth.me', href: 'https://chayanth.me/', x: 4, y: 55 },
+      { label: 'aarondam.com', href: 'https://www.aarondam.com/', x: 13, y: 66 },
+      { label: 'mikael.codes', href: 'https://www.mikael.codes/', x: 40, y: 57 },
+      { label: 'ivyzhang.ca', href: 'https://www.ivyzhang.ca/', x: 61, y: 72 },
+      { label: 'wcagas.com', href: 'https://wcagas.com/', x: 81, y: 63 }
+    ]
   },
   {
     id: '133',
@@ -684,5 +702,54 @@ export const photos: Photo[] = [
     url: '/photography/vancali - 2026/IMG_4298.JPG',
     location: 'Vancouver & California',
     year: '2026'
+  },
+  {
+    id: '148',
+    url: '/photography/Quebec - 2026/IMG_4601.jpg',
+    location: 'Québec',
+    year: '2026'
+  },
+  {
+    id: '149',
+    url: '/photography/Quebec - 2026/IMG_4621.jpg',
+    location: 'Québec',
+    year: '2026'
+  },
+  {
+    id: '150',
+    url: '/photography/Quebec - 2026/IMG_4630.jpg',
+    location: 'Québec',
+    year: '2026'
+  },
+  {
+    id: '151',
+    url: '/photography/Quebec - 2026/IMG_4667.jpg',
+    location: 'Québec',
+    year: '2026'
+  },
+  {
+    id: '152',
+    url: '/photography/Quebec - 2026/IMG_4745.jpg',
+    location: 'Québec',
+    year: '2026'
+  },
+  {
+    id: '153',
+    url: '/photography/Quebec - 2026/IMG_4748.jpg',
+    location: 'Québec',
+    year: '2026'
+  },
+  {
+    id: '154',
+    url: '/photography/Quebec - 2026/IMG_4752.jpg',
+    location: 'Québec',
+    year: '2026'
+  },
+  {
+    id: '155',
+    url: '/photography/Quebec - 2026/IMG_4755.jpg',
+    location: 'Québec',
+    year: '2026',
+    tags: [{ label: 'oscarzhao.ca', href: 'https://www.oscarzhao.ca/', x: 49, y: 50 }]
   }
 ];
