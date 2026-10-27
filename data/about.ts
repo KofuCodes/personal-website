@@ -40,4 +40,10 @@ export const aboutItems: AboutItem[] = [
       '.',
     ],
   },
+  {
+    parts: [
+      'I want to work in San Francisco, New York, and somewhere on another continent ',
+      { emoji: '🌍' },
+    ],
+  },
 ];

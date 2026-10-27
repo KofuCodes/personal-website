@@ -58,8 +58,8 @@ const Hero: React.FC = () => (
           <Brand name="University of Waterloo" label="UWaterloo" domain="uwaterloo.ca" href="https://uwaterloo.ca" />
         </p>
         <p className="text-[14px] sm:text-[15px] leading-relaxed text-ink-600 mt-2">
-          from firmware to PCBs to shipped hackathon builds — I love building hardware that
-          feels like software and software that feels like hardware.
+          I like making things you can pick up and use — I write the firmware, design the
+          circuit boards, and ship most of them at hackathons.
         </p>
 
         {/* External links — underlined, unlike the pages nav below */}
