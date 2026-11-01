@@ -116,6 +116,34 @@ its arrow pointing down, or slides a little further out on a stem, whichever rea
 To clear the face it uses each tag's `face` (rough face height, % of the photo's height);
 tags saved without one borrow the typical face size of the other tags in that photo.
 
+## Add a friend
+
+The bottom of the index is a wall of 88x31 web buttons ([`components/Friends.tsx`](components/Friends.tsx)),
+mine first. Save the friend's button into `/public/buttons/` (a copy can't break when they
+redesign) and add one line to [`data/friends.ts`](data/friends.ts):
+
+```ts
+{ name: 'Jane Doe', url: 'https://jane.dev', button: '/buttons/jane.png' },
+// no button yet? leave `button` out and a text tile in the site's style stands in
+```
+
+To link back, a friend pastes this anywhere on their site — plain HTML, no script, works on
+any stack (`pixelated` keeps the pixel art sharp on retina screens):
+
+```html
+<a href="https://www.ethantran.ca"><img src="https://www.ethantran.ca/button.png" width="88" height="31" alt="Ethan Tran" style="image-rendering: pixelated"></a>
+```
+
+Or, on a React / Next.js site:
+
+```jsx
+<a href="https://www.ethantran.ca"><img src="https://www.ethantran.ca/button.png" width={88} height={31} alt="Ethan Tran" style={{ imageRendering: 'pixelated' }} /></a>
+```
+
+My button is pixel art drawn in code: edit [`scripts/button.mjs`](scripts/button.mjs) and
+run `npm run button` to redraw `public/button.png`. Keep that path, since other sites point
+straight at it.
+
 ## Images
 
 The originals (`public/photography/`, and each project's `buildImage`/`finishedImage`)
@@ -165,6 +193,7 @@ One-time setup (re-run step 2 whenever the scopes in `scripts/spotify-auth.mjs` 
 | Section headers ("x —") | — | [`components/QuietHeader.tsx`](components/QuietHeader.tsx) |
 | index → About | `data/about.ts` | [`pages/Home.tsx`](pages/Home.tsx), [`components/About.tsx`](components/About.tsx) |
 | index → On repeat (Spotify top 5) | `/api/top-tracks` | [`components/OnRepeat.tsx`](components/OnRepeat.tsx), [`api/top-tracks.ts`](api/top-tracks.ts) |
+| index → Friends (88x31 button wall) | `data/friends.ts` | [`components/Friends.tsx`](components/Friends.tsx) |
 | projects → cards + filters | `data/projects.ts` | [`pages/Projects.tsx`](pages/Projects.tsx), [`components/WorkCards.tsx`](components/WorkCards.tsx) |
 | Project detail modal | `data/projects.ts` | [`components/ProjectModal.tsx`](components/ProjectModal.tsx) |
 | work → experience (hover to expand) | `data/experience.ts` | [`pages/Work.tsx`](pages/Work.tsx), [`components/ExperienceTimeline.tsx`](components/ExperienceTimeline.tsx) |

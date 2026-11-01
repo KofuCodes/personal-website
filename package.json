@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "images": "node scripts/web-images.mjs"
+    "images": "node scripts/web-images.mjs",
+    "button": "node scripts/button.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

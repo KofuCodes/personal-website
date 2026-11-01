@@ -25,6 +25,14 @@ export interface Project {
   };
 }
 
+export interface Friend {
+  /** Shown as the alt text, the tooltip, and the label of a text tile. */
+  name: string;
+  url: string;
+  /** Their 88x31 button — a copy in /public/buttons/ (preferred) or a full URL. Omit for a text tile. */
+  button?: string;
+}
+
 export interface Experience {
   id: string;
   role: string;

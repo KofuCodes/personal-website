@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import About from '../components/About';
+import Friends from '../components/Friends';
 import OnRepeat from '../components/OnRepeat';
 import QuietHeader from '../components/QuietHeader';
 
@@ -9,7 +10,8 @@ const ClosedLoopControlTerrain = lazy(() => import('../components/ClosedLoopCont
 /**
  * Index: the about list, what's on repeat, then the closed-loop terrain. The
  * terrain is the flex child that absorbs whatever height is left over, so on
- * a tall enough screen the whole page lands inside one viewport.
+ * a tall enough screen the whole page lands inside one viewport. Friends sits
+ * below that screen, footer-style, so it never squeezes the terrain.
  */
 const Home: React.FC = () => (
   <section className="reveal flex flex-1 flex-col">
@@ -33,6 +35,8 @@ const Home: React.FC = () => (
     <p className="mt-2.5 text-center text-[13.5px] italic text-ink-500">
       I'm always self-adjusting to the targeted goal
     </p>
+
+    <Friends />
   </section>
 );
 
