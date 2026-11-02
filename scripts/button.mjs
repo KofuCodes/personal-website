@@ -1,16 +1,20 @@
 // Draws my 88x31 web button pixel by pixel, in the site's palette:
 //
-//   node scripts/button.mjs
+//   npm run button
 //
 // A watercolour sky (dithered, pooling into the darker rim a wash dries to at its
-// edge), geese from the painting crossing it, and my name in a small pixel serif.
-// Writes public/button.png. Friends' sites hotlink that path, so keep it.
+// edge), geese from the painting beating their wings across it, and my name in a
+// small pixel serif. Writes public/button.gif (animated) and public/button.png
+// (its first frame, for anyone who linked the still). Friends' sites hotlink
+// both paths, so keep them.
 
 import sharp from 'sharp';
 
 const W = 88;
 const H = 31;
-const OUT = 'public/button.png';
+const GIF = 'public/button.gif';
+const PNG = 'public/button.png';
+const FRAME_MS = 220; // a slow, soft wingbeat: one full stroke a little under a second
 
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 
@@ -29,7 +33,7 @@ const C = {
   beak: hex('#a3541a'),
 };
 
-const px = Buffer.alloc(W * H * 3);
+let px = Buffer.alloc(W * H * 3);
 const set = (x, y, c) => {
   if (x < 0 || y < 0 || x >= W || y >= H) return;
   px.set(c, (y * W + x) * 3);
@@ -57,33 +61,6 @@ for (let x = 1; x < W - 1; x++) {
   }
   set(x, b, C.rim);
 }
-
-// --- Geese --------------------------------------------------------------------
-// Flying right, after the painting: grey body, dark wingtips, neck and head, a
-// pale belly and an orange beak. Wings up and wings down, like a flock mid-beat.
-const GOOSE = { D: C.ink700, G: C.ink500, g: C.ink400, L: C.ink300, O: C.beak };
-const wingsUp = [
-  '...DD..........',
-  '....DGg........',
-  '....gGGg.......',
-  '.....GGGg...DD.',
-  '.gGGGGGGGGDDDDO',
-  '..GGGGGGGGG....',
-  '...LLLLLLL.....',
-];
-const wingsDown = [
-  '............DD.',
-  '.gGGGGGGGGDDDDO',
-  '..GGGGGGGGG....',
-  '...LLLGGGgL....',
-  '.....gGGg......',
-  '....gGGg.......',
-  '...DGg.........',
-];
-
-stamp(wingsUp, 7, 2, GOOSE);
-stamp(wingsDown, 35, 4, GOOSE);
-stamp(wingsUp, 63, 1, GOOSE);
 
 // --- Name ---------------------------------------------------------------------
 // A bold pixel serif standing in for Newsreader: 8px caps, 5px x-height,
@@ -114,5 +91,69 @@ text('Ethan Tran', 19, C.ink900);
 for (let x = 0; x < W; x++) set(x, 0, C.ink400), set(x, H - 1, C.ink400);
 for (let y = 0; y < H; y++) set(0, y, C.ink400), set(W - 1, y, C.ink400);
 
-await sharp(px, { raw: { width: W, height: H, channels: 3 } }).png({ compressionLevel: 9 }).toFile(OUT);
-console.log(`wrote ${OUT}`);
+// --- Geese --------------------------------------------------------------------
+// Flying right, after the painting: grey body, dark wingtips, neck and head, a
+// pale belly and an orange beak. Each pose records which row its body line is
+// on, so swapping poses beats the wings while the body holds still.
+const GOOSE = { D: C.ink700, G: C.ink500, g: C.ink400, L: C.ink300, O: C.beak };
+const POSES = {
+  up: {
+    body: 4,
+    rows: [
+      '...DD..........',
+      '....DGg........',
+      '....gGGg.......',
+      '.....GGGg...DD.',
+      '.gGGGGGGGGDDDDO',
+      '..GGGGGGGGG....',
+      '...LLLLLLL.....',
+    ],
+  },
+  level: {
+    body: 1,
+    rows: [
+      '...DGGGg....DD.',
+      '.gGGGGGGGGDDDDO',
+      '..GGGGGGGGG....',
+      '...LLLLLLL.....',
+    ],
+  },
+  down: {
+    body: 1,
+    rows: [
+      '............DD.',
+      '.gGGGGGGGGDDDDO',
+      '..GGGGGGGGG....',
+      '...LLLGGGgL....',
+      '.....gGGg......',
+      '....gGGg.......',
+      '...DGg.........',
+    ],
+  },
+};
+const BEAT = ['up', 'level', 'down', 'level'];
+
+// Body-line positions, each goose a different point in the beat so the flock
+// never flaps in unison
+const FLOCK = [
+  { x: 7, y: 6, phase: 0 },
+  { x: 35, y: 5, phase: 2 },
+  { x: 63, y: 5, phase: 1 },
+];
+
+const sky = Buffer.from(px);
+const frames = [];
+for (let f = 0; f < BEAT.length; f++) {
+  px = Buffer.from(sky);
+  for (const goose of FLOCK) {
+    const pose = POSES[BEAT[(f + goose.phase) % BEAT.length]];
+    stamp(pose.rows, goose.x, goose.y - pose.body, GOOSE);
+  }
+  frames.push(await sharp(px, { raw: { width: W, height: H, channels: 3 } }).png().toBuffer());
+}
+
+await sharp(frames, { join: { animated: true } })
+  .gif({ delay: frames.map(() => FRAME_MS), loop: 0, colours: 16, dither: 0, effort: 10 })
+  .toFile(GIF);
+await sharp(frames[0]).png({ compressionLevel: 9 }).toFile(PNG);
+console.log(`wrote ${GIF} (${frames.length} frames) and ${PNG}`);

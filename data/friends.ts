@@ -9,6 +9,7 @@ import { Friend } from '../types';
  * `button` out and a text tile in this site's style stands in.
  */
 export const friends: Friend[] = [
+  { name: 'William Cagas', url: 'https://www.wcagas.com', button: 'https://www.wcagas.com/assets/buttons/will.gif' },
   // { name: 'Jane Doe', url: 'https://jane.dev', button: '/buttons/jane.png' },
   // { name: 'Sam Lee', url: 'https://samlee.me' },  // no button → text tile
 ];
@@ -20,5 +21,5 @@ export const friends: Friend[] = [
 export const me: Friend = {
   name: 'Ethan Tran',
   url: 'https://www.ethantran.ca',
-  button: '/button.png',
+  button: '/button.gif',
 };

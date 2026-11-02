@@ -131,18 +131,19 @@ To link back, a friend pastes this anywhere on their site — plain HTML, no scr
 any stack (`pixelated` keeps the pixel art sharp on retina screens):
 
 ```html
-<a href="https://www.ethantran.ca"><img src="https://www.ethantran.ca/button.png" width="88" height="31" alt="Ethan Tran" style="image-rendering: pixelated"></a>
+<a href="https://www.ethantran.ca"><img src="https://www.ethantran.ca/button.gif" width="88" height="31" alt="Ethan Tran" style="image-rendering: pixelated"></a>
 ```
 
 Or, on a React / Next.js site:
 
 ```jsx
-<a href="https://www.ethantran.ca"><img src="https://www.ethantran.ca/button.png" width={88} height={31} alt="Ethan Tran" style={{ imageRendering: 'pixelated' }} /></a>
+<a href="https://www.ethantran.ca"><img src="https://www.ethantran.ca/button.gif" width={88} height={31} alt="Ethan Tran" style={{ imageRendering: 'pixelated' }} /></a>
 ```
 
-My button is pixel art drawn in code: edit [`scripts/button.mjs`](scripts/button.mjs) and
-run `npm run button` to redraw `public/button.png`. Keep that path, since other sites point
-straight at it.
+My button is animated pixel art drawn in code: edit [`scripts/button.mjs`](scripts/button.mjs)
+and run `npm run button` to redraw `public/button.gif` (and `public/button.png`, its first
+frame, kept for anyone who linked the still before the GIF existed). Keep both paths, since
+other sites point straight at them.
 
 ## Images
 
