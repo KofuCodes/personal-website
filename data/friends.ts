@@ -11,6 +11,7 @@ import { Friend } from '../types';
 export const friends: Friend[] = [
   { name: 'William Cagas', url: 'https://www.wcagas.com', button: 'https://www.wcagas.com/assets/buttons/button.gif' },
   { name: 'Mikael Gomez', url: 'https://www.mikael.codes/', button: 'https://www.mikael.codes/button.gif' },
+  { name: 'Oscar Zhao', url: 'https://www.oscarzhao.ca', button: 'https://www.oscarzhao.ca/button.gif' },
   // { name: 'Jane Doe', url: 'https://jane.dev', button: '/buttons/jane.png' },
   // { name: 'Sam Lee', url: 'https://samlee.me' },  // no button → text tile
 ];
