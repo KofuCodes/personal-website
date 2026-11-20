@@ -145,6 +145,12 @@ and run `npm run button` to redraw `public/button.gif` (and `public/button.png`,
 frame, kept for anyone who linked the still before the GIF existed). Keep both paths, since
 other sites point straight at them.
 
+Night's goose is made the same way: [`scripts/goose-night.mjs`](scripts/goose-night.mjs)
+lifts the painting (`scripts/art/goose.jpg`) off its paper. Bare paper goes transparent,
+the pale washes keep their colour as a light mist, and a hand-traced outline holds the
+goose itself opaque so its white cheek and chest survive. Run `npm run goose` to
+rewrite `public/goose-night.webp`.
+
 ## Images
 
 The originals (`public/photography/`, and each project's `buildImage`/`finishedImage`)
@@ -212,16 +218,35 @@ and only the movement goes: no lifts, zooms, blur, or photo fly-in.
 (`paper`) with a cool payne's-grey `ink-*` scale, Newsreader for all text (an editorial
 serif whose optical sizes keep small text sturdy and the name fine), and a
 single goose-beak orange accent (`beak`) — the ✦ about markers, active filter/nav page,
-focus rings, and the terrain's goal marker all wear it. Light only; all tokens live in
-[`tailwind.config.js`](tailwind.config.js), compiled at build time.
+focus rings, and the terrain's goal marker all wear it.
+
+There's a day and a night. The tokens are CSS variables in [`index.css`](index.css)
+(light on `:root`, dark on `.dark`), which [`tailwind.config.js`](tailwind.config.js)
+wraps, so every `paper`/`ink`/`beak` class flips on its own; reach for `dark:` only for
+things that aren't tokens. Night is deep blue-slate water with the ink scale turned over
+(text is the old paper colour) and an antique gold accent in place of the beak orange. The project modal and photo
+lightbox are always near-black, so they keep the light tokens. Every visit opens by day,
+whatever the system prefers; the toggle in the header's top-right corner, beside what's
+playing ([`ThemeToggle`](components/ThemeToggle.tsx)), switches to night for the rest of
+that visit, and nothing is saved ([`theme.ts`](theme.ts)). Switching dissolves the whole
+page through a view transition.
 
 Behind the page, back to front ([`App.tsx`](App.tsx)):
 - [`GeeseSky`](components/GeeseSky.tsx) — the flock (`public/geese.webp`, feathered so
   no edge shows). It blooms in on first load, then only floats softly (a few px of rise
   and sway, a faint lean from the cursor). It sits behind the header and scrolls away a
-  little slower than the page, so it never stays behind body text.
+  little slower than the page, so it never stays behind body text. Day only.
+- [`GooseNight`](components/GooseNight.tsx) — night's painting: one goose swimming,
+  pinned to the bottom-left corner of the screen (`public/goose-night.webp`). It's sized
+  to fill the gutter beside the column, faded well back like the flock; narrower, it
+  slips under the text and fades down to a ghost. It moves exactly as much as the flock
+  (the same rise and fall, sway and lean from the cursor), its sway pivoting at the
+  waterline, and where the flock hangs back on scroll, it rises off the bottom of the
+  screen instead. Its washes thin out along a ragged edge well inside the picture, so
+  no box edge shows.
 - [`WatercolorTrail`](components/WatercolorTrail.tsx) — the cursor is a damp brush: faint
   strokes with a darker drying rim that fade to nothing in ~3–4 s (mouse/pen only, off
-  under reduced motion).
-- `.paper-grain` — a fixed cold-press texture over both. `.brush-rule` is the painted
-  divider used in the hero and footer.
+  under reduced motion). Multiply by day; at night it blends with screen, so the
+  pigment lightens the dark page instead.
+- `.paper-grain` — a fixed cold-press texture over both (screen-blended at night).
+  `.brush-rule` is the painted divider used in the hero and footer.

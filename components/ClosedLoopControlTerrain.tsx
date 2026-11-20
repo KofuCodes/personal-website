@@ -3,6 +3,7 @@ import { Canvas, useFrame, RootState } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { ready } from '../boot';
+import { Theme, useTheme } from '../theme';
 
 /**
  * Closed-loop control with a real goal.
@@ -66,12 +67,27 @@ const detunedGains = () => ({
 const labelCls =
   'tabular-nums text-[10px] uppercase tracking-wider whitespace-nowrap select-none pointer-events-none';
 
+// Scene and readout colours per theme: payne's grey on paper by day, the old
+// paper colour on dark water by night. The goal wears the site's accent
+// (beak orange by day, gold by night).
+const PALETTE: Record<Theme, { ink: string; faint: string; wire: string; fill: string; accent: string }> = {
+  light: { ink: '#2a3035', faint: '#a3abb0', wire: '#9aa3a8', fill: '#1b1f22', accent: '#a3541a' },
+  dark: { ink: '#dcdad2', faint: '#5f686d', wire: '#8a959b', fill: '#e9e6dd', accent: '#d2ad64' },
+};
+const rgb = (hex: string) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(',');
+// The readout canvas wants bare channels for its rgba() strokes
+const GRAPH = Object.fromEntries(
+  Object.entries(PALETTE).map(([t, p]) => [t, { ink: rgb(p.ink), faint: rgb(p.faint), accent: rgb(p.accent) }])
+) as Record<Theme, { ink: string; faint: string; accent: string }>;
+
 function Scene({
   histRef,
   statusRef,
+  theme,
 }: {
   histRef: React.MutableRefObject<Hist>;
   statusRef: React.MutableRefObject<Status>;
+  theme: Theme;
 }) {
   // ── terrain geometry (positions updated each frame) ──
   const { geometry, baseXZ } = useMemo(() => {
@@ -161,7 +177,7 @@ function Scene({
     px: 0, pz: 0,
     cy: 0,
     prevErr: 0,
-    colored: false,
+    colored: null as Theme | null,
     // current run: start → (bezier ctrl) → goal
     sx: 0, sz: 0, gx: 0, gz: 0, cx: 0, cz: 0,
     t0: 0,
@@ -291,15 +307,13 @@ function Scene({
       m.cy = getTerrainHeight(0, 0, 0);
     }
 
-    // ── colors (once, on the first frame, when the materials exist) ──
-    if (!m.colored) {
-      m.colored = true;
-      const ink = '#2a3035';
-      const faint = '#a3abb0';
-      // The goal wears the site's beak-orange "target" accent
-      const accent = '#a3541a';
-      wireMat.current?.color.set('#9aa3a8');
-      fillMat.current?.color.set('#1b1f22');
+    // ── colors (on the first frame, when the materials exist, and again
+    //    whenever the theme turns) ──
+    if (m.colored !== theme) {
+      m.colored = theme;
+      const { ink, faint, wire, fill, accent } = PALETTE[theme];
+      wireMat.current?.color.set(wire);
+      fillMat.current?.color.set(fill);
       roverMat.current?.color.set(ink);
       haloMat.current?.color.set(ink);
       ringMat.current?.color.set(accent);
@@ -426,8 +440,15 @@ function Scene({
 }
 
 /** Error readout: signed tracking error over time, with the ±BAND goal zone. */
-const MiniGraph: React.FC<{ histRef: React.MutableRefObject<Hist>; className?: string }> = ({ histRef, className }) => {
+const MiniGraph: React.FC<{ histRef: React.MutableRefObject<Hist>; theme: Theme; className?: string }> = ({
+  histRef,
+  theme,
+  className,
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  // Read by the draw loop, so a theme change never restarts it
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
 
   useEffect(() => {
     const canvas = canvasRef.current!;
@@ -456,8 +477,7 @@ const MiniGraph: React.FC<{ histRef: React.MutableRefObject<Hist>; className?: s
 
     const draw = () => {
       if ((window.devicePixelRatio || 1) !== rawDpr) resize();
-      const ink = '42,48,53';
-      const faint = '163,171,176';
+      const { ink, faint, accent } = GRAPH[themeRef.current];
       ctx.clearRect(0, 0, W, H);
       if (W && H) {
         const pad = 3;
@@ -466,7 +486,7 @@ const MiniGraph: React.FC<{ histRef: React.MutableRefObject<Hist>; className?: s
         // goal zone: ±BAND — beak orange, matching the goal marker in the scene
         const bandTop = mapY(BAND);
         const bandBot = mapY(-BAND);
-        ctx.fillStyle = 'rgba(163,84,26,0.10)';
+        ctx.fillStyle = `rgba(${accent},${themeRef.current === 'dark' ? 0.16 : 0.1})`;
         ctx.fillRect(0, bandTop, W, bandBot - bandTop);
 
         // zero line
@@ -568,6 +588,7 @@ const Hud: React.FC<{ statusRef: React.MutableRefObject<Status> }> = ({ statusRe
 };
 
 const ClosedLoopControlTerrain: React.FC = () => {
+  const theme = useTheme();
   const histRef = useRef<Hist>({ err: [] });
   const statusRef = useRef<Status>({
     loop: 0,
@@ -614,11 +635,11 @@ const ClosedLoopControlTerrain: React.FC = () => {
         style={{ background: 'transparent' }}
         onCreated={onCreated}
       >
-        <Scene histRef={histRef} statusRef={statusRef} />
+        <Scene histRef={histRef} statusRef={statusRef} theme={theme} />
       </Canvas>
 
       <Hud statusRef={statusRef} />
-      <MiniGraph histRef={histRef} className="absolute top-2 right-1 z-10 w-36 hidden sm:block" />
+      <MiniGraph histRef={histRef} theme={theme} className="absolute top-2 right-1 z-10 w-36 hidden sm:block" />
     </div>
   );
 };

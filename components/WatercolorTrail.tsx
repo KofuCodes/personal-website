@@ -545,8 +545,9 @@ const WatercolorTrail: React.FC = () => {
   }, [on]);
 
   return on ? (
-    // multiply: the pigment darkens the paper (and the geese) like a glaze
-    <canvas ref={ref} className="fixed inset-0 h-full w-full pointer-events-none mix-blend-multiply print:hidden" aria-hidden="true" />
+    // multiply: the pigment darkens the paper (and the geese) like a glaze.
+    // At night, screen: the same pigments catch the light on the dark water.
+    <canvas ref={ref} className="fixed inset-0 h-full w-full pointer-events-none mix-blend-multiply dark:mix-blend-screen print:hidden" aria-hidden="true" />
   ) : null;
 };
 

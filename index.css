@@ -2,6 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme tokens as RGB channels (tailwind.config.js wraps them in rgb()).
+   Light is the painting's paper with payne's-grey ink. Dark is the same
+   painting at night: the page is deep water sampled from the shadow under the
+   goose, the ink scale turns over so text is the old paper colour, and the
+   accent turns from beak orange to an antique gold (~8:1) (ink-500 is ~5.3:1, ink-600 ~8:1).
+   The project modal and photo lightbox are always near-black, so they keep
+   the light tokens in both themes. */
+:root,
+.dark [role="dialog"] {
+  --paper: 251 250 246;
+  --paper-100: 243 241 234;
+  --paper-200: 233 229 218;
+  --ink-50: 246 247 247;
+  --ink-100: 236 238 239;
+  --ink-200: 221 225 227;
+  --ink-300: 197 203 206;
+  --ink-400: 150 158 163;
+  --ink-500: 98 105 110;
+  --ink-600: 72 79 84;
+  --ink-700: 60 66 70;
+  --ink-800: 39 44 48;
+  --ink-900: 27 31 34;
+  --ink-950: 17 20 22;
+  --beak: 163 84 26;
+}
+
+.dark {
+  --paper: 19 24 28;
+  --paper-100: 27 33 38;
+  --paper-200: 35 43 49;
+  --ink-50: 28 34 39;
+  --ink-100: 38 45 50;
+  --ink-200: 50 58 63;
+  --ink-300: 71 80 86;
+  --ink-400: 102 110 116;
+  --ink-500: 134 142 147;
+  --ink-600: 170 176 178;
+  --ink-700: 196 197 192;
+  --ink-800: 217 215 207;
+  --ink-900: 233 230 221;
+  --ink-950: 246 244 238;
+  --beak: 210 173 100;
+}
+
 body {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
@@ -10,8 +54,8 @@ body {
 }
 
 ::selection {
-  background-color: #1b1f22;
-  color: #fbfaf6;
+  background-color: rgb(var(--ink-900));
+  color: rgb(var(--paper));
 }
 
 [role="dialog"] ::selection {
@@ -37,6 +81,19 @@ body {
   opacity: 0.2;
 }
 
+/* The same paper at night. Multiply can't show on a dark page, so the grain
+   lightens instead (screen), and its two layers are re-weighted to keep
+   the day's character: the fine tooth leads as warm pale flecks, the slow
+   mottle stays faint. Brightest flecks lift ~5 L*, about what the darkest
+   pits sink by day, and the page's mean barely moves, so it stays dark. */
+.dark .paper-grain {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='t' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.86 0 0 0 0 0.84 0 0 0 0 0.79 1.1 0 0 0 -0.5'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23t)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='560'%3E%3Cfilter id='m' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007' numOctaves='3' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.53 0 0 0 0 0.55 0.5 0 0 0 -0.27'/%3E%3C/filter%3E%3Crect width='560' height='560' filter='url(%23m)'/%3E%3C/svg%3E");
+  mix-blend-mode: screen;
+  opacity: 0.1;
+}
+
 /* Hand-painted divider: one loose stroke (pale body, pooled core, dried
    edge), displaced for a ragged outline and streaked like a dry brush.
    Stretched to the box, so it reads the same at any column width. */
@@ -45,6 +102,11 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 12' preserveAspectRatio='none'%3E%3Cfilter id='b' x='-2%25' y='-40%25' width='104%25' height='180%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.018 0.35' numOctaves='3' seed='4' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='3.2' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.004 0.8' numOctaves='2' seed='11' result='s'/%3E%3CfeColorMatrix in='s' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.6 0 0 0 -0.55' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cg filter='url(%23b)' fill='%23c5cbce'%3E%3Cpath fill-opacity='0.7' stroke='%23969ea3' stroke-opacity='0.35' stroke-width='0.9' d='M4 6.9C50 4 150 2.7 250 3.5S420 4.3 500 3.3S582 3.7 597 5.5C581 8.3 500 9 420 8.4S280 8 200 9.2S62 9.5 4 6.9Z'/%3E%3Cpath fill-opacity='0.4' d='M46 6.3C120 4.8 220 4.5 330 5.1S500 4.7 562 5.5C500 7.1 400 7.3 320 6.9S140 7.7 46 6.3Z'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 100% 100%;
   background-repeat: no-repeat;
+}
+
+/* The same stroke in a pigment that sits low on the dark page */
+.dark .brush-rule {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 12' preserveAspectRatio='none'%3E%3Cfilter id='b' x='-2%25' y='-40%25' width='104%25' height='180%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.018 0.35' numOctaves='3' seed='4' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='3.2' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.004 0.8' numOctaves='2' seed='11' result='s'/%3E%3CfeColorMatrix in='s' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.6 0 0 0 -0.55' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cg filter='url(%23b)' fill='%23404a50'%3E%3Cpath fill-opacity='0.7' stroke='%23626c72' stroke-opacity='0.35' stroke-width='0.9' d='M4 6.9C50 4 150 2.7 250 3.5S420 4.3 500 3.3S582 3.7 597 5.5C581 8.3 500 9 420 8.4S280 8 200 9.2S62 9.5 4 6.9Z'/%3E%3Cpath fill-opacity='0.4' d='M46 6.3C120 4.8 220 4.5 330 5.1S500 4.7 562 5.5C500 7.1 400 7.3 320 6.9S140 7.7 46 6.3Z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* No visible scrollbars anywhere — panels still scroll normally */
@@ -190,6 +252,13 @@ body {
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 0.35s;
+}
+
+/* Day ⇄ night (theme.ts): a slower dissolve, like light going off the water */
+.theme-fade::view-transition-old(root),
+.theme-fade::view-transition-new(root) {
+  animation-duration: 0.7s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media print {

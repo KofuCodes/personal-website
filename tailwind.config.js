@@ -1,5 +1,11 @@
+// Theme tokens live as RGB channels in index.css (light on :root, dark on
+// .dark), so every paper/ink/beak utility, opacity modifiers included, flips
+// with the theme without needing a dark: variant at each use.
+const token = (name) => `rgb(var(--${name}) / <alpha-value>)`;
+
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./index.html', './*.tsx', './components/**/*.tsx', './pages/**/*.tsx'],
   theme: {
     extend: {
@@ -11,22 +17,13 @@ export default {
       // Watercolour palette, sampled from the geese painting. ink is a cool
       // payne's-grey neutral standing in for stone; 500/600 hold >= 4.5:1
       // on paper. beak is the accent, a burnt orange from the goose beaks.
+      // The values for both themes are in index.css.
       colors: {
-        paper: { DEFAULT: '#fbfaf6', 100: '#f3f1ea', 200: '#e9e5da' },
-        ink: {
-          50: '#f6f7f7',
-          100: '#eceeef',
-          200: '#dde1e3',
-          300: '#c5cbce',
-          400: '#969ea3',
-          500: '#62696e',
-          600: '#484f54',
-          700: '#3c4246',
-          800: '#272c30',
-          900: '#1b1f22',
-          950: '#111416',
-        },
-        beak: '#a3541a',
+        paper: { DEFAULT: token('paper'), 100: token('paper-100'), 200: token('paper-200') },
+        ink: Object.fromEntries(
+          [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map((k) => [k, token(`ink-${k}`)])
+        ),
+        beak: token('beak'),
       },
     },
   },

@@ -4,6 +4,7 @@ import Brand from './Brand';
 import FadeImg from './FadeImg';
 import LinkPreview from './LinkPreview';
 import SpotifyStatus from './SpotifyStatus';
+import ThemeToggle from './ThemeToggle';
 
 const quietLink =
   'text-[14px] lowercase text-ink-500 underline decoration-ink-300 underline-offset-[3px] hover:text-ink-900 hover:decoration-ink-500 transition-colors';
@@ -31,7 +32,9 @@ const Hero: React.FC = () => (
         </Link>
       </h1>
 
-      <div className="flex shrink-0 items-center gap-1 self-end sm:self-auto">
+      <div className="flex shrink-0 items-center gap-2 self-end sm:self-auto">
+        {/* Day/night sits ahead of the fixed slot, so it never moves either */}
+        <ThemeToggle />
         {/* Fixed slot: the cluster is right-aligned, so letting the widget size
             to the track title would slide the row on every song. */}
         <div className="flex w-[46px] shrink-0 justify-start sm:w-[184px]">

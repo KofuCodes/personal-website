@@ -114,7 +114,7 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
       <span
         aria-hidden="true"
         style={shift ? { marginLeft: shift } : undefined}
-        className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 w-60 origin-top -translate-x-1/2 overflow-hidden rounded-xl border border-ink-200 bg-paper shadow-lg shadow-black/5 opacity-0 scale-95 transition-[opacity,transform] duration-200 ease-out group-hover/lp:opacity-100 group-hover/lp:scale-100 group-focus-within/lp:opacity-100 group-focus-within/lp:scale-100"
+        className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 w-60 origin-top -translate-x-1/2 overflow-hidden rounded-xl border border-ink-200 bg-paper shadow-lg shadow-black/5 dark:bg-paper-100 dark:shadow-black/30 opacity-0 scale-95 transition-[opacity,transform] duration-200 ease-out group-hover/lp:opacity-100 group-hover/lp:scale-100 group-focus-within/lp:opacity-100 group-focus-within/lp:scale-100"
       >
         {wantShot && !shotFailed && (
           <span
@@ -141,7 +141,7 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
               src={favicon}
               alt=""
               onError={() => setFaviconFailed(true)}
-              className="h-4 w-4 shrink-0 rounded-[3px]"
+              className="h-4 w-4 shrink-0 rounded-[3px] dark:bg-ink-800 dark:p-px"
             />
           )}
           <span className="flex min-w-0 flex-col leading-tight">

@@ -22,8 +22,10 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ name, domain, src, classNa
   const favicon = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : undefined;
   const [current, setCurrent] = useState<string | undefined>(src || favicon);
 
+  // Logos are drawn for white pages (GitHub's is black), so the chip stays
+  // light at night too
   const base =
-    'inline-block shrink-0 rounded-[4px] object-contain bg-ink-100 ' +
+    'inline-block shrink-0 rounded-[4px] object-contain bg-ink-100 dark:bg-ink-800 ' +
     'ring-1 ring-inset ring-black/5';
 
   if (current) {
