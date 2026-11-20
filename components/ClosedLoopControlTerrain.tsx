@@ -72,7 +72,7 @@ const labelCls =
 // (beak orange by day, gold by night).
 const PALETTE: Record<Theme, { ink: string; faint: string; wire: string; fill: string; accent: string }> = {
   light: { ink: '#2a3035', faint: '#a3abb0', wire: '#9aa3a8', fill: '#1b1f22', accent: '#a3541a' },
-  dark: { ink: '#dcdad2', faint: '#5f686d', wire: '#8a959b', fill: '#e9e6dd', accent: '#d2ad64' },
+  dark: { ink: '#dcdad2', faint: '#626262', wire: '#939393', fill: '#e9e6dd', accent: '#d2ad64' },
 };
 const rgb = (hex: string) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(',');
 // The readout canvas wants bare channels for its rgba() strokes

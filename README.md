@@ -150,11 +150,11 @@ and run `npm run button` to redraw `public/button.gif` (and `public/button.png`,
 frame, kept for anyone who linked the still before the GIF existed). Keep both paths, since
 other sites point straight at them.
 
-Night's goose is made the same way: [`scripts/goose-night.mjs`](scripts/goose-night.mjs)
-lifts the painting (`scripts/art/goose.jpg`) off its paper. Bare paper goes transparent,
-the pale washes keep their colour as a light mist, and a hand-traced outline holds the
-goose itself opaque so its white cheek and chest survive. Run `npm run goose` to
-rewrite `public/goose-night.webp`.
+The night flock is made the same way: [`scripts/geese-night.mjs`](scripts/geese-night.mjs)
+takes the painting (`scripts/art/geese-night.jpg`, white geese on black), mirrors it so
+the flock flies right to left, eases its brightest whites, and feathers its edges out
+along a ragged line. It prints the painting's black, which is dark mode's `--paper`. Run
+`npm run night` to rewrite `public/geese-night.webp`.
 
 ## Images
 
@@ -229,8 +229,9 @@ focus rings, and the terrain's goal marker all wear it.
 There's a day and a night. The tokens are CSS variables in [`index.css`](index.css)
 (light on `:root`, dark on `.dark`), which [`tailwind.config.js`](tailwind.config.js)
 wraps, so every `paper`/`ink`/`beak` class flips on its own; reach for `dark:` only for
-things that aren't tokens. Night is deep blue-slate water with the ink scale turned over
-(text is the old paper colour) and an antique gold accent in place of the beak orange. The project modal and photo
+things that aren't tokens. Night is the night flock's own black (`#161616`) with neutral
+greys, the ink scale turned over (text is the old paper colour), and an antique gold
+accent in place of the beak orange. The project modal and photo
 lightbox are always near-black, so they keep the light tokens. Every visit opens by day,
 whatever the system prefers; the toggle in the header's top-right corner, beside what's
 playing ([`ThemeToggle`](components/ThemeToggle.tsx)), switches to night for the rest of
@@ -241,15 +242,9 @@ Behind the page, back to front ([`App.tsx`](App.tsx)):
 - [`GeeseSky`](components/GeeseSky.tsx) — the flock (`public/geese.webp`, feathered so
   no edge shows). It blooms in on first load, then only floats softly (a few px of rise
   and sway, a faint lean from the cursor). It sits behind the header and scrolls away a
-  little slower than the page, so it never stays behind body text. Day only.
-- [`GooseNight`](components/GooseNight.tsx) — night's painting: one goose swimming,
-  pinned to the bottom-left corner of the screen (`public/goose-night.webp`). It's sized
-  to fill the gutter beside the column, faded well back like the flock; narrower, it
-  slips under the text and fades down to a ghost. It moves exactly as much as the flock
-  (the same rise and fall, sway and lean from the cursor), its sway pivoting at the
-  waterline, and where the flock hangs back on scroll, it rises off the bottom of the
-  screen instead. Its washes thin out along a ragged edge well inside the picture, so
-  no box edge shows.
+  little slower than the page, so it never stays behind body text. By night the same
+  spot holds a second painting, white geese on black (`public/geese-night.webp`),
+  mirrored to fly right to left and fading into the dark page, which is its own black.
 - [`WatercolorTrail`](components/WatercolorTrail.tsx) — the cursor is a damp brush: faint
   strokes with a darker drying rim that fade to nothing in ~3–4 s (mouse/pen only, off
   under reduced motion). Multiply by day; at night it blends with screen, so the

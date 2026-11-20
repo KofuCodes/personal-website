@@ -3,7 +3,6 @@ import { HashRouter as Router, Routes, Route, useLocation, Link, Navigate } from
 import { trackPageview } from './analytics';
 import { ready } from './boot';
 import GeeseSky from './components/GeeseSky';
-import GooseNight from './components/GooseNight';
 import WatercolorTrail from './components/WatercolorTrail';
 import { useTheme } from './theme';
 import Hero from './components/Hero';
@@ -57,12 +56,12 @@ const App: React.FC = () => {
       <ScrollToTop />
       <TrackPageviews />
       <div className="min-h-[100dvh] bg-paper text-ink-900">
-        {/* The paper, back to front: the painting (the flock by day, the
-            swimming goose by night), the cursor's brush, then the grain over
-            both so they read as painted into it. All fixed and z-auto in this
-            one stacking context — a wrapper with its own z-index would isolate
-            the trail's and grain's blend modes from the page. */}
-        {theme === 'dark' ? <GooseNight /> : <GeeseSky />}
+        {/* The paper, back to front: the flock (white geese on black by
+            night), the cursor's brush, then the grain over both so they read
+            as painted into it. All fixed and z-auto in this one stacking
+            context — a wrapper with its own z-index would isolate the trail's
+            and grain's blend modes from the page. */}
+        <GeeseSky night={theme === 'dark'} />
         <WatercolorTrail />
         <div className="paper-grain" aria-hidden="true" />
 

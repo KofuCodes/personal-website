@@ -16,7 +16,33 @@ import { ready } from '../boot';
  * It's big, so it rides at the top of the page behind the header and scrolls
  * away rather than sitting behind body text all the way down. It scrolls a
  * little slower than the page, so it still reads as far off.
+ *
+ * By night (`night`) the same spot holds a second painting, white geese on
+ * black, mirrored so they fly right to left (scripts/geese-night.mjs); the
+ * dark page is that painting's own black, so it fades into where it came from.
+ * Same motion, same place; the bloom plays once per load, by day.
  */
+
+/** Each painting, with its size on the page and how far back it sits. */
+const PAINTINGS = {
+  day: {
+    src: '/geese.webp',
+    width: 1080,
+    height: 610,
+    // The opacity is the highest that keeps the bio (ink-600) >= 4.5:1 over
+    // the darkest wing — the image's darks are pre-softened to make that possible
+    className: 'w-[clamp(300px,64vw,840px)] opacity-[0.38]',
+  },
+  night: {
+    src: '/geese-night.webp',
+    width: 1140,
+    height: 912,
+    // Smaller than the day flock, tucked into the corner so it crosses less of
+    // the header; its brightest whites are eased in the image, as the day
+    // flock's darks are
+    className: 'w-[clamp(240px,45vw,600px)] opacity-[0.5]',
+  },
+};
 
 // Parallax reach, in px. Small on purpose: the flock should feel far away.
 const CURSOR_REACH = 5;
@@ -26,7 +52,8 @@ const EASE = 0.025; // per-frame catch-up toward the parallax target — slow an
 
 let bloomed = false; // once per page load, not per remount
 
-const GeeseSky: React.FC = () => {
+const GeeseSky: React.FC<{ night?: boolean }> = ({ night = false }) => {
+  const painting = PAINTINGS[night ? 'night' : 'day'];
   const paintRef = useRef<HTMLDivElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
   const bobRef = useRef<HTMLDivElement>(null);
@@ -168,12 +195,10 @@ const GeeseSky: React.FC = () => {
 
   return (
     // Upper right, across the header. The image carries its own clear margin
-    // and feathered edges, so no box edge shows at any size. The opacity is the
-    // highest that keeps the bio (ink-600) >= 4.5:1 over the darkest wing — the
-    // image's darks are pre-softened to make that possible.
+    // and feathered edges, so no box edge shows at any size.
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute right-0 top-[clamp(20px,5vh,72px)] w-[clamp(300px,64vw,840px)] select-none opacity-[0.38] print:hidden"
+      className={`pointer-events-none absolute right-0 top-[clamp(20px,5vh,72px)] select-none print:hidden ${painting.className}`}
     >
       <div ref={parallaxRef} className="h-full w-full will-change-transform">
         <div ref={bobRef} className="h-full w-full">
@@ -181,10 +206,10 @@ const GeeseSky: React.FC = () => {
             <div ref={paintRef} className="h-full w-full" style={{ opacity: bloomed ? 1 : 0 }}>
               <img
                 ref={imgRef}
-                src="/geese.webp"
+                src={painting.src}
                 alt=""
-                width={1080}
-                height={610}
+                width={painting.width}
+                height={painting.height}
                 draggable={false}
                 decoding="async"
                 onLoad={tryBloom}

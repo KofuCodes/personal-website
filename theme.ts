@@ -8,16 +8,16 @@ import { flushSync } from 'react-dom';
  *
  * A switch runs inside a view transition, so the whole page dissolves from one
  * palette to the other instead of every colour snapping at once. React's half
- * (the toggle's icon, the flock ⇄ goose swap) is flushed inside the same
+ * (the toggle's icon, the day ⇄ night flock) is flushed inside the same
  * callback so it lands in the new snapshot too.
  */
 
 export type Theme = 'light' | 'dark';
 
 // Keep in step with --paper in index.css and the theme-color meta in index.html
-const BG: Record<Theme, string> = { light: '#fbfaf6', dark: '#13181c' };
+const BG: Record<Theme, string> = { light: '#fbfaf6', dark: '#161616' };
 // The painting each theme hangs, so a hover on the toggle can warm the cache
-export const ART: Record<Theme, string> = { light: '/geese.webp', dark: '/goose-night.webp' };
+export const ART: Record<Theme, string> = { light: '/geese.webp', dark: '/geese-night.webp' };
 
 const root = document.documentElement;
 const listeners = new Set<() => void>();
