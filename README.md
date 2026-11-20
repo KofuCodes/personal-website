@@ -199,6 +199,7 @@ One-time setup (re-run step 2 whenever the scopes in `scripts/spotify-auth.mjs` 
 | index → Closed-loop terrain + caption | — | [`components/ClosedLoopControlTerrain.tsx`](components/ClosedLoopControlTerrain.tsx) (canvas), [`pages/Home.tsx`](pages/Home.tsx) (sizing + caption) |
 | Section headers ("x —") | — | [`components/QuietHeader.tsx`](components/QuietHeader.tsx) |
 | index → About | `data/about.ts` | [`pages/Home.tsx`](pages/Home.tsx), [`components/About.tsx`](components/About.tsx) |
+| index → About's "gallery" link, which peeks at a carousel of gallery photos on hover | `data/photography.ts` | [`components/GalleryPeek.tsx`](components/GalleryPeek.tsx) |
 | index → On repeat (Spotify top 5) | `/api/top-tracks` | [`components/OnRepeat.tsx`](components/OnRepeat.tsx), [`api/top-tracks.ts`](api/top-tracks.ts) |
 | index → Friends (88x31 button wall) | `data/friends.ts` | [`components/Friends.tsx`](components/Friends.tsx) |
 | projects → cards + filters | `data/projects.ts` | [`pages/Projects.tsx`](pages/Projects.tsx), [`components/WorkCards.tsx`](components/WorkCards.tsx) |

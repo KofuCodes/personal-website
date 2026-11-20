@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { aboutItems } from '../data/about';
 import { AboutPart } from '../types';
 import Brand from './Brand';
+import GalleryPeek from './GalleryPeek';
 
 const Part: React.FC<{ part: AboutPart }> = ({ part }) => {
   if (typeof part === 'string') return <>{part}</>;
@@ -13,12 +14,18 @@ const Part: React.FC<{ part: AboutPart }> = ({ part }) => {
 
   if ('to' in part) {
     // Page links wear the beak accent (like the pages nav) — external links
-    // elsewhere keep the quiet ink underline.
+    // elsewhere keep the quiet ink underline. The gallery link peeks at the
+    // photos on hover.
+    const cls = 'font-medium text-beak no-underline hover:underline underline-offset-[3px] transition-colors';
+    if (part.to === '/photography') {
+      return (
+        <GalleryPeek to={part.to} className={cls}>
+          {part.text}
+        </GalleryPeek>
+      );
+    }
     return (
-      <Link
-        to={part.to}
-        className="font-medium text-beak no-underline hover:underline underline-offset-[3px] transition-colors"
-      >
+      <Link to={part.to} className={cls}>
         {part.text}
       </Link>
     );
