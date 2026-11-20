@@ -1,17 +1,18 @@
-// Draws the browser-tab icon from the goose taking off:
+// Draws the browser-tab icon from the goose portrait (a head in profile on pink):
 //
 //   npm run favicon
 //
-// A square crop around the goose, wingtips to tail, tight so it still reads at 16px, resampled
-// with a touch of sharpening (watercolour goes soft when shrunk). The tab icon
+// A square crop of the whole head, beak tip included, so its black head and
+// white cheek still read as a goose at 16px, resampled with a touch of
+// sharpening (brushwork goes soft when shrunk this far). The tab icon
 // gets rounded corners (public/favicon.png); the home-screen icon stays square
 // (public/apple-touch-icon.png), since iOS rounds icons itself and would fill
 // transparent corners with black.
 
 import sharp from 'sharp';
 
-const SRC = 'scripts/art/favicon.webp';
-const CROP = { left: 140, top: 35, width: 450, height: 450 }; // source px: wingtips, head and tail all in
+const SRC = 'scripts/art/favicon.jpg';
+const CROP = { left: 130, top: 104, width: 1100, height: 1100 }; // source px: crown to the bottom edge, back of the neck to the beak tip
 const RADIUS = 0.22; // corner radius, as a share of the side
 
 const square = (size) =>

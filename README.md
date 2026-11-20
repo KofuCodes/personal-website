@@ -156,8 +156,9 @@ the flock flies right to left, eases its brightest whites, and feathers its edge
 along a ragged line. It prints the painting's black, which is dark mode's `--paper`. Run
 `npm run night` to rewrite `public/geese-night.webp`.
 
-The tab icon is a painting of a goose taking off (`scripts/art/favicon.webp`), cropped
-tight around it, wingtips to tail, so it reads at 16px: `npm run favicon`
+The tab icon is a portrait of a goose's head in profile on pink (`scripts/art/favicon.jpg`),
+cropped to the whole head, beak tip included, so its black head and white cheek read at
+16px: `npm run favicon`
 ([`scripts/favicon.mjs`](scripts/favicon.mjs)) writes `public/favicon.png` with rounded
 corners, and a square `public/apple-touch-icon.png` for iOS, which rounds icons itself.
 
