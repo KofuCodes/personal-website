@@ -403,6 +403,8 @@ const Photography: React.FC = () => {
                 {tagging && TagEditor ? (
                   <Suspense fallback={null}>
                     <TagEditor
+                      // Fresh per photo, so paging away drops a half-placed tag
+                      key={current.url}
                       tags={tags[current.url] ?? []}
                       people={people}
                       onChange={(list) => saveTags(current.url, list)}
@@ -414,7 +416,7 @@ const Photography: React.FC = () => {
               </div>
               <figcaption className="mt-4 text-center text-[13px] text-white/60" onClick={(e) => e.stopPropagation()}>
                 {tagging ? (
-                  'click someone to tag them · drag a tag to move it · double-click to flip it · × to remove'
+                  'click someone to tag them · click a tag to place it again · × removes'
                 ) : (
                   <>
                     {current.location} · {current.year}

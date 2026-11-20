@@ -79,12 +79,28 @@ const tagEditor = (): Plugin => ({
                 percent(t.x) &&
                 percent(t.y) &&
                 (t.face === undefined || percent(t.face)) &&
-                (t.above === undefined || typeof t.above === 'boolean')
+                (t.above === undefined || typeof t.above === 'boolean') &&
+                // A placed label: both coordinates or neither
+                ((t.lx === undefined && t.ly === undefined) || (percent(t.lx) && percent(t.ly))) &&
+                // Its arrow: an edge, and how far along it
+                (t.side === undefined || ['top', 'right', 'bottom', 'left'].includes(t.side)) &&
+                (t.at === undefined || (typeof t.at === 'number' && t.at >= 0 && t.at <= 1))
             );
           if (!valid) throw new Error('bad tags');
           const all = JSON.parse(fs.readFileSync(TAGS, 'utf8'));
           if (tags.length)
-            all[url] = tags.map(({ label, href, x, y, face, above }) => ({ label, href, x, y, face, above }));
+            all[url] = tags.map(({ label, href, x, y, face, above, lx, ly, side, at }) => ({
+              label,
+              href,
+              x,
+              y,
+              face,
+              above,
+              lx,
+              ly,
+              side,
+              at,
+            }));
           else delete all[url];
           fs.writeFileSync(TAGS, formatTags(all));
           res.end();

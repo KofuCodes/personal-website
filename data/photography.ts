@@ -11,6 +11,21 @@ export interface PhotoTag {
   face?: number;
   /** Hang the label above the point, caret pointing down at it (set by double-clicking in the editor) */
   above?: boolean;
+  /**
+   * Where the label sits (its centre), as a percentage of the photo's width and
+   * height, once it's been placed in the editor. A placed label shows exactly
+   * where it was put. Without these it hangs right below (or above) the point,
+   * and the gallery keeps crowded labels apart on its own.
+   */
+  lx?: number;
+  ly?: number;
+  /**
+   * A placed label's arrow: which edge it sits snug against, and how far along
+   * that edge (0–1). Set by aiming it in the editor; a placed label without one
+   * points its arrow toward x, y.
+   */
+  side?: 'top' | 'right' | 'bottom' | 'left';
+  at?: number;
 }
 
 /**
@@ -18,7 +33,8 @@ export interface PhotoTag {
  * lightbox. Placed with the gallery's tag editor under `npm run dev`, which
  * writes data/photo-tags.json.
  */
-export const tagsByUrl: Record<string, PhotoTag[]> = photoTags;
+// JSON imports type `side` as any string; the tag editor's save check (vite.config.ts) only lets through the four edges
+export const tagsByUrl = photoTags as Record<string, PhotoTag[]>;
 
 export interface Photo {
   id: string;

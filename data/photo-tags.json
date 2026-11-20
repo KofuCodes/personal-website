@@ -4,7 +4,8 @@
     {"label":"mikael.codes","href":"https://www.mikael.codes/","x":24,"y":39,"face":9},
     {"label":"chayanth.me","href":"https://chayanth.me/","x":41,"y":49,"face":9},
     {"label":"aarondam.com","href":"https://www.aarondam.com/","x":66,"y":39,"face":9},
-    {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":74.9,"y":47.3,"face":9}
+    {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":74.9,"y":47.3,"face":9},
+    {"label":"possiblyselena.ca","href":"https://www.possiblyselena.ca/","x":84.1,"y":32.4,"lx":84.1,"ly":28.7}
   ],
   "/photography/Ethan_s bday - 2026/DSC04062.JPG": [
     {"label":"mikael.codes","href":"https://www.mikael.codes/","x":92.7,"y":34.7,"face":18}
@@ -25,7 +26,8 @@
     {"label":"aarondam.com","href":"https://www.aarondam.com/","x":13,"y":66,"face":14},
     {"label":"mikael.codes","href":"https://www.mikael.codes/","x":40,"y":57,"face":14},
     {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":61,"y":72,"face":14},
-    {"label":"wcagas.com","href":"https://wcagas.com/","x":81,"y":63,"face":14}
+    {"label":"wcagas.com","href":"https://wcagas.com/","x":81,"y":63,"face":14},
+    {"label":"possiblyselena.ca","href":"https://www.possiblyselena.ca/","x":29.5,"y":83.1}
   ],
   "/photography/Ethan_s bday - 2026/IMG_2596.jpg": [
     {"label":"mikael.codes","href":"https://www.mikael.codes/","x":47,"y":43,"face":15},
@@ -33,7 +35,12 @@
   ],
   "/photography/Hamilton - 2025/001456560015.jpeg": [
     {"label":"mikael.codes","href":"https://www.mikael.codes/","x":31.3,"y":38.2,"face":13},
-    {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":15.6,"y":68,"face":15}
+    {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":15.6,"y":68,"face":15},
+    {"label":"chayanth.me","href":"https://chayanth.me/","x":46.5,"y":65.3}
+  ],
+  "/photography/Hamilton - 2025/001456570007.jpeg": [
+    {"label":"possiblyselena.ca","href":"https://www.possiblyselena.ca/","x":41.9,"y":40.4,"lx":41.8,"ly":36.6},
+    {"label":"chayanth.me","href":"https://chayanth.me/","x":60.1,"y":34.2,"lx":60.1,"ly":30.3}
   ],
   "/photography/Hamilton - 2025/0DE1EF72-6747-412C-8701-B77443A831FA.jpg": [
     {"label":"chayanth.me","href":"https://chayanth.me/","x":36.5,"y":47.2,"face":7},
@@ -52,13 +59,18 @@
     {"label":"mikael.codes","href":"https://www.mikael.codes/","x":38.2,"y":51.6,"face":6}
   ],
   "/photography/Hamilton - 2025/IMG_2999.jpg": [
-    {"label":"aarondam.com","href":"https://www.aarondam.com/","x":14.9,"y":46.1,"face":4},
-    {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":28.8,"y":53.6,"face":4}
+    {"label":"aarondam.com","href":"https://www.aarondam.com/","x":14.9,"y":38.6,"face":4,"lx":14.9,"ly":34.8},
+    {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":28.9,"y":47.2,"face":4,"lx":28.9,"ly":43.4},
+    {"label":"possiblyselena.ca","href":"https://www.possiblyselena.ca/","x":85.1,"y":46.3,"lx":85.1,"ly":42.6}
+  ],
+  "/photography/Hamilton - 2025/IMG_3153.jpg": [
+    {"label":"possiblyselena.ca","href":"https://www.possiblyselena.ca/","x":34.7,"y":45.3,"lx":34.6,"ly":41.5}
   ],
   "/photography/Hamilton - 2025/IMG_4073.jpg": [
     {"label":"wcagas.com","href":"https://wcagas.com/","x":32.6,"y":71.2,"face":14},
-    {"label":"aarondam.com","href":"https://www.aarondam.com/","x":74.2,"y":39.8,"face":4},
-    {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":63.5,"y":38.3,"face":4}
+    {"label":"aarondam.com","href":"https://www.aarondam.com/","x":73.9,"y":30.6,"face":4,"lx":80.5,"ly":27.1},
+    {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":64.7,"y":34.1,"face":4,"lx":60.5,"ly":30.7},
+    {"label":"possiblyselena.ca","href":"https://www.possiblyselena.ca/","x":67.6,"y":41.9,"lx":66.8,"ly":38.5}
   ],
   "/photography/Quebec - 2026/IMG_4630.jpg": [
     {"label":"oscarzhao.ca","href":"https://www.oscarzhao.ca/","x":70.5,"y":59.8,"face":14},
@@ -91,6 +103,11 @@
   "/photography/San Francisco - 2025/DSCN3792.JPG": [
     {"label":"wcagas.com","href":"https://wcagas.com/","x":24.3,"y":66.1,"face":7}
   ],
+  "/photography/San Francisco - 2025/DSCN3864.JPG": [
+    {"label":"possiblyselena.ca","href":"https://www.possiblyselena.ca/","x":52.4,"y":32.9,"lx":52.4,"ly":29.1},
+    {"label":"wcagas.com","href":"https://wcagas.com/","x":92.3,"y":28.7},
+    {"label":"aarondam.com","href":"https://www.aarondam.com/","x":77,"y":26.9,"lx":77,"ly":23.2}
+  ],
   "/photography/San Francisco - 2025/DSCN3873.JPG": [
     {"label":"wcagas.com","href":"https://wcagas.com/","x":43.4,"y":42,"face":11},
     {"label":"mikael.codes","href":"https://www.mikael.codes/","x":67,"y":61.4,"face":11},
@@ -102,27 +119,34 @@
   "/photography/San Francisco - 2025/IMG_3430.jpg": [
     {"label":"wcagas.com","href":"https://wcagas.com/","x":30.3,"y":41.6,"face":5},
     {"label":"aarondam.com","href":"https://www.aarondam.com/","x":47.2,"y":53.1,"face":5},
-    {"label":"mikael.codes","href":"https://www.mikael.codes/","x":59.9,"y":50.8,"face":5}
+    {"label":"mikael.codes","href":"https://www.mikael.codes/","x":59.9,"y":50.8,"face":5},
+    {"label":"possiblyselena.ca","href":"https://www.possiblyselena.ca/","x":83.2,"y":57.4,"lx":83.2,"ly":53.5}
+  ],
+  "/photography/Selena_s Bday/DSC03909.JPG": [
+    {"label":"possiblyselena.ca","href":"https://www.possiblyselena.ca/","x":49.8,"y":19.7,"lx":49.7,"ly":15.9,"side":"bottom","at":0.505}
   ],
   "/photography/Selena_s Bday/DSC03911.JPG": [
     {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":14.2,"y":72.8,"face":15},
     {"label":"mikael.codes","href":"https://www.mikael.codes/","x":61,"y":54.6,"face":11}
   ],
   "/photography/Selena_s Bday/beauty_1758412825422.JPG": [
-    {"label":"wcagas.com","href":"https://wcagas.com/","x":14.3,"y":51.3,"face":4},
     {"label":"mikael.codes","href":"https://www.mikael.codes/","x":52,"y":62.4,"face":4},
-    {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":42.1,"y":48.8,"face":4},
-    {"label":"aarondam.com","href":"https://www.aarondam.com/","x":23.5,"y":43.3,"face":4},
-    {"label":"chayanth.me","href":"https://chayanth.me/","x":33.7,"y":41.1,"face":4}
+    {"label":"possiblyselena.ca","href":"https://www.possiblyselena.ca/","x":36.1,"y":63.7,"lx":36,"ly":60,"side":"bottom","at":0.502},
+    {"label":"ivyzhang.ca","href":"https://www.ivyzhang.ca/","x":42.8,"y":44,"face":4,"lx":43.1,"ly":47.8,"side":"top","at":0.476},
+    {"label":"chayanth.me","href":"https://chayanth.me/","x":33.2,"y":29.1,"face":4,"lx":32.8,"ly":25.3,"side":"bottom","at":0.538},
+    {"label":"aarondam.com","href":"https://www.aarondam.com/","x":25.1,"y":37.2,"face":4,"lx":25.2,"ly":41,"side":"top","at":0.494},
+    {"label":"wcagas.com","href":"https://wcagas.com/","x":16.3,"y":25.2,"face":4,"lx":14.3,"ly":21.4,"side":"bottom","at":0.684}
   ],
   "/photography/Toronto - 2024/DDCC80F7-F3EA-4DBD-961E-EC18ECE19DCC.jpg": [
-    {"label":"mikael.codes","href":"https://www.mikael.codes/","x":17,"y":63.4,"face":4},
-    {"label":"chayanth.me","href":"https://chayanth.me/","x":93.5,"y":62.1,"face":4}
+    {"label":"mikael.codes","href":"https://www.mikael.codes/","x":19,"y":53.3,"face":4,"lx":19.9,"ly":49.5,"side":"bottom","at":0.47},
+    {"label":"chayanth.me","href":"https://chayanth.me/","x":87.6,"y":50.3,"face":4,"lx":84.3,"ly":46.5,"side":"bottom","at":0.605},
+    {"label":"possiblyselena.ca","href":"https://www.possiblyselena.ca/","x":59.2,"y":89,"lx":58.3,"ly":92.8,"side":"top","at":0.524}
   ],
   "/photography/Toronto - 2024/IMG_9419.jpg": [
-    {"label":"wcagas.com","href":"https://wcagas.com/","x":24.7,"y":68.5,"face":2},
-    {"label":"mikael.codes","href":"https://www.mikael.codes/","x":39.1,"y":73.9,"face":2},
-    {"label":"chayanth.me","href":"https://chayanth.me/","x":61.5,"y":72.2,"face":2}
+    {"label":"wcagas.com","href":"https://wcagas.com/","x":26.2,"y":62.7,"face":2,"lx":26.1,"ly":58.9,"side":"bottom","at":0.505},
+    {"label":"mikael.codes","href":"https://www.mikael.codes/","x":39,"y":82.3,"face":2,"lx":39.2,"ly":86,"side":"top","at":0.493},
+    {"label":"chayanth.me","href":"https://chayanth.me/","x":59.9,"y":61,"face":2,"lx":57.6,"ly":57.2,"side":"bottom","at":0.582},
+    {"label":"possiblyselena.ca","href":"https://www.possiblyselena.ca/","x":79.7,"y":79.1,"lx":80.2,"ly":82.9,"side":"top","at":0.487}
   ],
   "/photography/Will_s bday/DSC03277.JPG": [
     {"label":"wcagas.com","href":"https://wcagas.com/","x":66.5,"y":55.2,"face":13}

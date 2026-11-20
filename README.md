@@ -101,9 +101,14 @@ can't show `.HEIC`, so convert those to JPG first. Albums are grouped by
 [`pages/Photography.tsx`](pages/Photography.tsx) decides which places lead within a year.
 
 To tag people, run `npm run dev`, open a photo, and press **tag people** (top left).
-Click someone to drop a tag and pick who it is (or paste a new person's site), drag a
-tag to move it, double-click it to hang its label above the point (arrow pointing down)
-instead of below, × to remove it. Each change saves straight to
+Tagging someone is three clicks: click the photo and pick who it is (or paste a new
+person's site); the label then follows the mouse, so click to set it down; then its
+arrow, snug against the label, travels round the label's edge toward the mouse, so click
+to set that too. Esc drops a tag mid-placement. Click a tag that's already there to place
+it again the same way; × removes it. Placed labels show exactly where you put them, arrow
+on the edge you picked (stored as `side` and `at`, how far along it); older tags placed
+with only an arrow tip get the snug arrow on the edge facing it, and tags never placed
+still hang off their point and are nudged apart automatically. Each change saves straight to
 [`data/photo-tags.json`](data/photo-tags.json) — commit that file to publish. The editor
 ([`components/TagEditor.tsx`](components/TagEditor.tsx)) exists only on the dev server:
 it isn't in the production bundle, and the dev server accepts saves only from this
