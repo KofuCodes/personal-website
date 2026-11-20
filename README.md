@@ -174,8 +174,12 @@ never reach the browser:
 
 - **Now playing** (hero, [`components/SpotifyStatus.tsx`](components/SpotifyStatus.tsx)) —
   [`api/now-playing.ts`](api/now-playing.ts) returns what's playing on any device (green
-  pulse), paused (grey dot), or otherwise the last track played. Each open page polls it
-  every 10 s; the CDN caches it for 10 s, so Spotify sees about one request per 10 s.
+  pulse), paused (grey dot), or otherwise the last track played. Spotify can't push changes
+  the way Lanyard did, so each open page asks every 4 s, straight away when the tab comes
+  back into view, and again just as the song playing should end, so track changes land on
+  time. The CDN keeps each answer for 2 s (never staler), so Spotify sees at most one
+  request per 2 s, and a warm function reuses its access token instead of fetching one
+  every time.
 - **On repeat** (index, [`components/OnRepeat.tsx`](components/OnRepeat.tsx)) — my five
   most-played tracks over the past ~4 weeks, from [`api/top-tracks.ts`](api/top-tracks.ts),
   cached for an hour, so the shelf updates by itself.

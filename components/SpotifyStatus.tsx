@@ -12,6 +12,9 @@ interface Track {
 interface NowPlaying {
   state: 'playing' | 'paused' | 'recent';
   track: Track | null;
+  /** While something's loaded: how far in, and how long the song is */
+  progressMs?: number | null;
+  durationMs?: number | null;
 }
 
 interface PollState {
@@ -27,27 +30,77 @@ const LABEL: Record<NowPlaying['state'], string> = {
 };
 
 /**
- * Module-level refcounted poller: exactly one interval polls /api/now-playing and
+ * Module-level refcounted poller: exactly one loop polls /api/now-playing and
  * every mounted instance subscribes to it. Only one instance mounts today (the
  * shell header), but the refcount keeps StrictMode's dev double-invoke — and any
- * future second mount — from starting a second interval.
+ * future second mount — from starting a second loop.
+ *
+ * Spotify can't push changes (Lanyard could, through Discord), so it asks: every
+ * POLL_MS while the tab is in view, straight away when the tab or window comes
+ * back, and again just after the song playing should end, so a track change
+ * lands on time instead of up to a whole poll late. The API's CDN copy is at
+ * most 2 s old (api/now-playing.ts).
  */
+const POLL_MS = 4000;
+const END_SLACK_MS = 1200; // after a song's end, for Spotify to move on to the next one
+
 let pollState: PollState = { loading: true, error: null, data: null };
 const listeners = new Set<(s: PollState) => void>();
-let pollTimer: ReturnType<typeof setInterval> | null = null;
+let pollTimer: ReturnType<typeof setTimeout> | null = null;
+let polling = false;
+let inFlight = false;
+
+/** The next check: the regular poll, or sooner if the song playing is about to end. */
+const nextCheck = () => {
+  const d = pollState.data;
+  if (d?.state === 'playing' && d.durationMs && d.progressMs != null) {
+    return Math.min(POLL_MS, Math.max(500, d.durationMs - d.progressMs + END_SLACK_MS));
+  }
+  return POLL_MS;
+};
+
+const schedule = (ms: number) => {
+  if (pollTimer !== null) clearTimeout(pollTimer);
+  pollTimer = polling ? setTimeout(poll, ms) : null;
+};
+
+const poll = async () => {
+  if (!inFlight) await fetchStatus();
+  schedule(nextCheck());
+};
+
+/**
+ * Back in view: don't wait out the rest of a poll. At most every BACK_MS, since
+ * some hosts (embedded views) fire these events far more often than a real
+ * tab switch.
+ */
+const BACK_MS = 2000;
+let lastAsked = 0;
+const checkNow = () => {
+  if (!document.hidden && Date.now() - lastAsked > BACK_MS) schedule(0);
+};
 
 const fetchStatus = async () => {
   // A background tab skips its turns; the first poll always runs.
   if (document.hidden && !pollState.loading) return;
+  inFlight = true;
+  lastAsked = Date.now();
   try {
-    const response = await fetch('/api/now-playing');
+    // The CDN decides how fresh; the browser keeps no copy of its own
+    const response = await fetch('/api/now-playing', { cache: 'no-store' });
     const json = await response.json().catch(() => null);
     if (!response.ok || !json) {
       throw new Error(json?.error || `HTTP ${response.status}`);
     }
     pollState = { loading: false, error: null, data: json };
   } catch (error) {
-    pollState = { loading: false, error: error instanceof Error ? error.message : 'Unknown error', data: null };
+    // A failed check (a network blip, at this rate of asking) keeps the last
+    // good answer on screen; the error only shows if there's never been one
+    pollState = pollState.data
+      ? { ...pollState, loading: false }
+      : { loading: false, error: error instanceof Error ? error.message : 'Unknown error', data: null };
+  } finally {
+    inFlight = false;
   }
   listeners.forEach((l) => l(pollState));
 };
@@ -85,15 +138,19 @@ const SpotifyStatus: React.FC = () => {
     listeners.add(setState);
     setState(pollState);
     // First subscriber starts the shared poll
-    if (pollTimer === null) {
-      fetchStatus();
-      pollTimer = setInterval(fetchStatus, 10000);
+    if (!polling) {
+      polling = true;
+      document.addEventListener('visibilitychange', checkNow);
+      window.addEventListener('focus', checkNow);
+      schedule(0);
     }
     return () => {
       listeners.delete(setState);
-      if (listeners.size === 0 && pollTimer !== null) {
-        clearInterval(pollTimer);
-        pollTimer = null;
+      if (listeners.size === 0 && polling) {
+        polling = false;
+        schedule(0); // clears the timer now that polling is off
+        document.removeEventListener('visibilitychange', checkNow);
+        window.removeEventListener('focus', checkNow);
       }
     };
   }, []);
