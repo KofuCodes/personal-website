@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "images": "node scripts/web-images.mjs",
     "button": "node scripts/button.mjs",
-    "night": "node scripts/geese-night.mjs"
+    "night": "node scripts/geese-night.mjs",
+    "favicon": "node scripts/favicon.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
